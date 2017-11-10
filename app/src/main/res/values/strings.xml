@@ -1,8 +1,20 @@
 <resources>
     <string name="app_name">CoreSample</string>
+    <string name="coppernic">Coppernic</string>
+    <string name="coppernic_email">support@coppernic.fr</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <string name="nav_title_hdk">Hdk</string>
+    <string name="nav_hdk_cone">Hdk C-One</string>
+    <string name="nav_hdk_cizi">Hdk C-izi</string>
+    <string name="nav_title_power">Power management</string>
+    <string name="nav_power">API power</string>
+    <string name="nav_powermgmt">API powermgmt</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

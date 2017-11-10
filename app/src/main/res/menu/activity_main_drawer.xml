@@ -3,7 +3,7 @@
       xmlns:tools="http://schemas.android.com/tools"
       tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <!--group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_camera"
             android:icon="@drawable/ic_menu_camera"
@@ -20,18 +20,27 @@
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
             android:title="Tools"/>
-    </group>
+    </group-->
 
-    <item android:title="Communicate">
+    <item android:title="@string/nav_title_hdk">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share"/>
+                android:id="@+id/nav_hdk_cone"
+                android:title="@string/nav_hdk_cone"/>
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send"/>
+                android:id="@+id/nav_hdk_cizi"
+                android:title="@string/nav_hdk_cizi"/>
+        </menu>
+    </item>
+
+    <item android:title="@string/nav_title_power">
+        <menu>
+            <item
+                android:id="@+id/nav_power"
+                android:title="@string/nav_power"/>
+            <item
+                android:id="@+id/nav_powermgmt"
+                android:title="@string/nav_powermgmt"/>
         </menu>
     </item>
 
