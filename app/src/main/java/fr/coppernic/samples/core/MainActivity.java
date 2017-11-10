@@ -15,6 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.coppernic.samples.core.ui.HdkCiziFragment;
 import fr.coppernic.samples.core.ui.HdkConeFragment;
+import fr.coppernic.sdk.utils.helpers.CpcOs;
 
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
@@ -71,6 +72,16 @@ public class MainActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (CpcOs.isCone()) {
+            displayFragment(getHdkConeFragment(), HdkConeFragment.TAG);
+        } else if (CpcOs.isCizi()) {
+            displayFragment(getHdkCiziFragment(), HdkCiziFragment.TAG);
+        }
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

@@ -17,4 +17,38 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="cone_gpio">Gpio</string>
+    <string name="toggle_on_pin1">Pin 1 on</string>
+    <string name="toggle_off_pin1">Pin 1 off</string>
+    <string name="toggle_on_pin2">Pin 2 on</string>
+    <string name="toggle_off_pin2">Pin 2 off</string>
+    <string name="toggle_on_pin3">Pin 3 on</string>
+    <string name="toggle_off_pin3">Pin 3 off</string>
+    <string name="toggle_on_pin4">Pin 4 on</string>
+    <string name="toggle_off_pin4">Pin 4 off</string>
+    <string name="title_input">Input</string>
+    <string name="input4">Input 4</string>
+    <string name="toggle_on_polling">Polling on</string>
+    <string name="toggle_off_polling">Polling off</string>
+    <string name="barcode_title">Barcode</string>
+    <string name="power_off">Power off</string>
+    <string name="power_on">Power on</string>
+    <string name="wake_down">Wake down</string>
+    <string name="wake_up">Wake up</string>
+    <string name="trig_down">Trig down</string>
+    <string name="trig">Trig</string>
+    <string name="usb_gpio_title">Usb Gpio</string>
+    <string name="usb1_off">Usb 1 off</string>
+    <string name="usb1_on">Usb 1 on</string>
+    <string name="usb2_off">Usb 2 off</string>
+    <string name="usb2_on">Usb 2 on</string>
+    <string name="usb3_off">Usb 3 off</string>
+    <string name="usb3_on">Usb 3 on</string>
+    <string name="usb4_off">Usb 4 off</string>
+    <string name="usb4_on">Usb 4 on</string>
+    <string name="usb_perm_title">Usb permissions</string>
+    <string name="vid">vid :</string>
+    <string name="pid">pid :</string>
+    <string name="ask">Ask</string>
 </resources>
