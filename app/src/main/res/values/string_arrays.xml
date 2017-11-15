@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="power_cone_enum">
+        <item>FP_IB_COLOMBO_USB</item>
+        <item>RFID_ELYCTIS_LF214_USB</item>
+        <item>PCSC_GEMALTO_CR30_USB</item>
+        <item>PCSC_GEMALTO_CR20_USB</item>
+        <item>OCR_ACCESSIS_AI310E_USB</item>
+        <item>RFID_HID_ICLASSPROX_USB</item>
+        <item>RFID_HID_ICLASSPROX_GPIO</item>
+        <item>RFID_HID_LFX10_USB</item>
+        <item>RFID_HID_LFX10_GPIO</item>
+        <item>RFID_HID_OK5127CKMINI_USB</item>
+        <item>RFID_AGRIDENT_ABR200_GPIO</item>
+        <item>RFID_ASK_UCM108_GPIO</item>
+        <item>RFID_CAEN_R1270C_GPIO</item>
+        <item>MASTER_ASKEY_CONE_GPIO</item>
+        <item>LED1_ASKEY_CONE_GPIO</item>
+        <item>LED2_ASKEY_CONE_GPIO</item>
+        <item>BARCODE_HONEYWELL_N6603DECODED_GPIO</item>
+        <item>BARCODE_OPTICON_MDI3100_GPIO</item>
+    </string-array>
+    <string-array name="power_idplatform_enum">
+        <item>FP_IB_COLOMBO_USB</item>
+        <item>RFID_ELYCTIS_LF214_USB</item>
+        <item>PCSC_GEMALTO_CR30_USB</item>
+        <item>PCSC_GEMALTO_CR20_USB</item>
+        <item>OCR_ACCESSIS_AI310E_USB</item>
+        <item>RFID_HID_ICLASSPROX_USB</item>
+        <item>RFID_HID_ICLASSPROX_GPIO</item>
+        <item>RFID_HID_LFX10_USB</item>
+        <item>RFID_HID_LFX10_GPIO</item>
+        <item>RFID_HID_OK5127CKMINI_USB</item>
+        <item>RFID_AGRIDENT_ABR200_GPIO</item>
+        <item>RFID_ASK_UCM108_GPIO</item>
+        <item>RFID_CAEN_R1270C_GPIO</item>
+        <item>MASTER_ASKEY_CONE_GPIO</item>
+        <item>LED1_ASKEY_CONE_GPIO</item>
+        <item>LED2_ASKEY_CONE_GPIO</item>
+        <item>BARCODE_HONEYWELL_N6603DECODED_GPIO</item>
+        <item>BARCODE_OPTICON_MDI3100_GPIO</item>
+    </string-array>
+</resources>
