@@ -3,7 +3,7 @@ Sample for CpcCore use
 
 ## Prerequisites
 
-App **CpcSystemServices** at version 2.1.0 or above needs to be installed on device. Please contact Coppernic support team in case of difficulties. 
+App **CpcSystemServices** at version 2.1.0 or above needs to be installed on device. Please contact Coppernic support team in case of difficulties.
 
 ## Build
 
@@ -18,8 +18,8 @@ repositories {
 
 ```groovy
 dependencies {
-    implementation(group: 'fr.coppernic.sdk.cpcutils', name: 'CpcUtilsLib', version: '6.12.0', ext: 'aar')
-    implementation(group: 'fr.coppernic.sdk.core', name: 'CpcCore', version: '1.2.0', ext: 'aar') {
+    implementation(group: 'fr.coppernic.sdk.cpcutils', name: 'CpcUtilsLib', version: '6.13.0', ext: 'aar')
+    implementation(group: 'fr.coppernic.sdk.core', name: 'CpcCore', version: '1.3.0', ext: 'aar') {
         transitive = true
     }
 }
