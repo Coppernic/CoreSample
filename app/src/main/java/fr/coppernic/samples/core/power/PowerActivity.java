@@ -46,7 +46,6 @@ public class PowerActivity extends AppCompatActivity {
             }, 1000);
         }
     };
-    private Peripheral peripheral;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +58,7 @@ public class PowerActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         PowerManager.get().registerListener(powerListener);
-        peripheral = getPeripheralFromIntent();
+        Peripheral peripheral = getPeripheralFromIntent();
         if (peripheral != null) {
             tvName.setText(peripheral.toString());
             tvStatus.setText("Powering up...");
@@ -70,8 +69,7 @@ public class PowerActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        PowerManager.get().unregisterAll();
-        PowerManager.get().releaseResources();
+        PowerManager.get().releaseAndUnregister();
     }
 
     private Peripheral getPeripheralFromIntent() {

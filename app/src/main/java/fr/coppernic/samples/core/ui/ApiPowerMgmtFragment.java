@@ -1,13 +1,18 @@
 package fr.coppernic.samples.core.ui;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import fr.coppernic.samples.core.R;
+import fr.coppernic.samples.core.power.PowerMgmtActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,4 +31,24 @@ public class ApiPowerMgmtFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_api_powermgmt, container, false);
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        ButterKnife.bind(this, view);
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    @OnClick(R.id.button)
+    void lauchPowerMgmtActivity(){
+        startActivity(new Intent(getContext(), PowerMgmtActivity.class));
+    }
 }
