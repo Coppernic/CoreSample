@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvPowerName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintEnd_toStartOf="@id/togglePower"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ToggleButton
+        android:id="@+id/togglePower"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
+        android:textOff="@string/off"
+        android:textOn="@string/on"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvPowerName"
+        app:layout_constraintEnd_toStartOf="@id/btnLaunchPowerAct"
+        app:layout_constraintStart_toEndOf="@+id/tvPowerName"/>
+
+    <ImageButton
+        android:id="@+id/btnLaunchPowerAct"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/togglePower"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/togglePower"
+        app:srcCompat="@drawable/launch_colored"/>
+
+</android.support.constraint.ConstraintLayout>

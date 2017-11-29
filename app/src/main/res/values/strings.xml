@@ -52,4 +52,6 @@
     <string name="pid">pid :</string>
     <string name="ask">Ask</string>
     <string name="launch_activity">Launch activity</string>
+    <string name="off">Off</string>
+    <string name="on">On</string>
 </resources>

@@ -116,3 +116,7 @@ android-support-v4.jar
 *.iml
 
 .idea/
+**/dependencies
+CpcCore/
+CpcUtilsLib/
+.gradletasknamecache

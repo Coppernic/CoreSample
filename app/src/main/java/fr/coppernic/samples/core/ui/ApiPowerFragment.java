@@ -1,25 +1,22 @@
 package fr.coppernic.samples.core.ui;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import fr.coppernic.samples.core.R;
-import fr.coppernic.samples.core.power.PowerActivity;
-import fr.coppernic.samples.core.utils.Definitions;
+import fr.coppernic.samples.core.ui.adapters.PowerAdapter;
 import fr.coppernic.sdk.power.api.peripheral.Peripheral;
 import fr.coppernic.sdk.power.impl.cizi.CiziPeripheral;
 import fr.coppernic.sdk.power.impl.cone.ConePeripheral;
@@ -32,13 +29,12 @@ import fr.coppernic.sdk.utils.helpers.CpcOs;
 public class ApiPowerFragment extends Fragment {
     public static final String TAG = "ApiPowerFragment";
 
-    @BindView(R.id.spinPower)
-    Spinner spinPower;
+    @BindView(R.id.listPower)
+    ListView lvPower;
 
     public ApiPowerFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,55 +46,25 @@ public class ApiPowerFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         ButterKnife.bind(this, view);
-        setAdapterToPowerSpinner();
+        //setAdapterToPowerSpinner();
+        setAdapterToList();
         super.onViewCreated(view, savedInstanceState);
     }
 
-    private void setAdapterToPowerSpinner() {
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
-                                                          android.R.layout.simple_list_item_1,
-                                                          getPeripheralList());
-        spinPower.setAdapter(adapter);
+    private void setAdapterToList(){
+        PowerAdapter powerAdapter = new PowerAdapter(getContext(), getPeripheralList());
+        lvPower.setAdapter(powerAdapter);
     }
 
-    private String[] getPeripheralList() {
-        List<String> list = new ArrayList<>();
+    private List<Peripheral> getPeripheralList(){
+        List<Peripheral> list = new ArrayList<>();
         if (CpcOs.isCone()) {
-            for (ConePeripheral p : ConePeripheral.values()) {
-                list.add(p.toString());
-            }
+            list.addAll(Arrays.asList(ConePeripheral.values()));
         } else if (CpcOs.isCizi()) {
-            for (CiziPeripheral p : CiziPeripheral.values()) {
-                list.add(p.toString());
-            }
+            list.addAll(Arrays.asList(CiziPeripheral.values()));
         } else if (CpcOs.isIdPlatform()) {
-            for (IdPlatformPeripheral p : IdPlatformPeripheral.values()) {
-                list.add(p.toString());
-            }
+            list.addAll(Arrays.asList(IdPlatformPeripheral.values()));
         }
-        return list.toArray(new String[]{});
-    }
-
-    private Peripheral peripheralFromString(String s) {
-        if (CpcOs.isCone()) {
-            return ConePeripheral.valueOf(s);
-        } else if (CpcOs.isCizi()) {
-            return CiziPeripheral.valueOf(s);
-        } else if (CpcOs.isIdPlatform()) {
-            return IdPlatformPeripheral.valueOf(s);
-        }
-        return null;
-    }
-
-    @OnClick(R.id.btnActivityLaunch)
-    void launchActivity() {
-        String s = (String) spinPower.getSelectedItem();
-        Peripheral p = peripheralFromString(s);
-        //Log.v(TAG, p.toString());
-        if (p != null) {
-            Intent intent = new Intent(getContext(), PowerActivity.class);
-            intent.putExtra(Definitions.KEY_PERIPHERAL, p);
-            startActivity(intent);
-        }
+        return list;
     }
 }

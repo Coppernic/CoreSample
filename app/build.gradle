@@ -1,4 +1,26 @@
+buildscript {
+    repositories {
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+
+    dependencies {
+        classpath "gradle.plugin.coppernic:android-config:0.0.3"
+    }
+}
+
+plugins {
+    id "fr.coppernic.versioning" version "3.1.2"
+}
+
 apply plugin: 'com.android.application'
+apply plugin: 'fr.coppernic.extensions'
+apply plugin: 'fr.coppernic.android'
+
+repositories {
+    google()
+    jcenter()
+    maven { url 'http://arti-01:8081/artifactory/libs-release' }
+}
 
 android {
     compileSdkVersion 26
@@ -6,13 +28,16 @@ android {
         applicationId "fr.coppernic.samples.core"
         minSdkVersion 17
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode versioning.info.versionCode
+        versionName versioning.info.display
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
-            minifyEnabled false
+            shrinkResources true
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
