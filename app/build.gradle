@@ -24,6 +24,7 @@ apply plugin: 'fr.coppernic.android'
 repositories {
     google()
     jcenter()
+    maven { url 'https://artifactory.coppernic.fr/artifactory/libs-release' }
 }
 
 android {
@@ -61,7 +62,7 @@ dependencies {
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 
     implementation(group: 'fr.coppernic.sdk.cpcutils', name: 'CpcUtilsLib', version: '6.17.0', ext: 'aar')
-    implementation(group: 'fr.coppernic.sdk.core', name: 'CpcCore', version: '1.6.1', ext: 'aar') {
+    implementation(group: 'fr.coppernic.sdk.core', name: 'CpcCore', version: '1.6.2', ext: 'aar') {
         transitive = true
     }
 

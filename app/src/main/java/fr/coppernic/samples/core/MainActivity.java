@@ -16,6 +16,7 @@ import butterknife.ButterKnife;
 import fr.coppernic.samples.core.ui.ApiPowerFragment;
 import fr.coppernic.samples.core.ui.ApiPowerMgmtFragment;
 import fr.coppernic.samples.core.ui.HdkCiziFragment;
+import fr.coppernic.samples.core.ui.HdkCone2Fragment;
 import fr.coppernic.samples.core.ui.HdkConeFragment;
 import fr.coppernic.sdk.utils.helpers.CpcOs;
 
@@ -96,7 +97,9 @@ public class MainActivity extends AppCompatActivity
     protected void onStart() {
         super.onStart();
         if (lastTag.isEmpty()) {
-            if (CpcOs.isCone()) {
+            if (CpcOs.isConeN()) {
+                displayFragment(getFragmentFromTag(HdkCone2Fragment.TAG), HdkCone2Fragment.TAG);
+            } else if (CpcOs.isCone()) {
                 displayFragment(getFragmentFromTag(HdkConeFragment.TAG), HdkConeFragment.TAG);
             } else if (CpcOs.isCizi()) {
                 displayFragment(getFragmentFromTag(HdkCiziFragment.TAG), HdkCiziFragment.TAG);
@@ -114,6 +117,8 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_hdk_cone) {
             displayFragment(getFragmentFromTag(HdkConeFragment.TAG), HdkConeFragment.TAG);
+        } else if (id == R.id.nav_hdk_cone_2) {
+            displayFragment(getFragmentFromTag(HdkCone2Fragment.TAG), HdkCone2Fragment.TAG);
         } else if (id == R.id.nav_hdk_cizi) {
             displayFragment(getFragmentFromTag(HdkCiziFragment.TAG), HdkCiziFragment.TAG);
         } else if (id == R.id.nav_power) {
@@ -154,6 +159,9 @@ public class MainActivity extends AppCompatActivity
                 break;
             case ApiPowerMgmtFragment.TAG:
                 ret = new ApiPowerMgmtFragment();
+                break;
+            case HdkCone2Fragment.TAG:
+                ret = new HdkCone2Fragment();
                 break;
             default:
                 ret = null;

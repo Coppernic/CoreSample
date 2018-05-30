@@ -21,6 +21,7 @@ import butterknife.OnClick;
 import fr.coppernic.samples.core.R;
 import fr.coppernic.sdk.hdk.cone.GpioPort;
 import fr.coppernic.sdk.hdk.cone.UsbGpioPort;
+import fr.coppernic.sdk.power.impl.cone.ConePeripheral;
 import fr.coppernic.sdk.utils.core.CpcResult.RESULT;
 import fr.coppernic.sdk.utils.debug.L;
 import fr.coppernic.sdk.utils.usb.RxUsbHelper;
@@ -32,43 +33,49 @@ import io.reactivex.observers.DisposableSingleObserver;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HdkConeFragment extends Fragment {
-    public static final String TAG = "HdkConeFragment";
+public class HdkCone2Fragment extends Fragment {
+    public static final String TAG = "HdkCone2Fragment";
     private final RxUsbHelper rxUsbHelper = new RxUsbHelper();
-    @BindView(R.id.togglePin1)
+    @BindView(R.id.toggle2Pin1)
     ToggleButton tbPin1;
-    @BindView(R.id.togglePin2)
+    @BindView(R.id.toggle2Pin2)
     ToggleButton tbPin2;
-    @BindView(R.id.togglePin3)
+    @BindView(R.id.toggle2Pin3)
     ToggleButton tbPin3;
-    @BindView(R.id.togglePin4)
+    @BindView(R.id.toggle2Pin4)
     ToggleButton tbPin4;
-    @BindView(R.id.togglePolling)
+    @BindView(R.id.togglePolling2)
     ToggleButton tbPolling;
-    @BindView(R.id.radioInput4)
+    @BindView(R.id.radio2Input4)
     RadioButton radioInput4;
-    @BindView(R.id.toggleBarcodePower)
+    @BindView(R.id.toggleBarcodePower2)
     ToggleButton tbBarcodePower;
-    @BindView(R.id.toggleWakeUp)
+    @BindView(R.id.toggleWakeUp2)
     ToggleButton tbBarcodeWakeUp;
-    @BindView(R.id.toggleTrigger)
+    @BindView(R.id.toggleTrigger2)
     ToggleButton tbBarcodeTrigger;
-    @BindView(R.id.toggleUsb1)
+    @BindView(R.id.toggle2Usb1)
     ToggleButton tbUsb1;
-    @BindView(R.id.toggleUsb2)
+    @BindView(R.id.toggle2Usb2)
     ToggleButton tbUsb2;
-    @BindView(R.id.toggleUsb3)
+    @BindView(R.id.toggle2Usb3)
     ToggleButton tbUsb3;
-    @BindView(R.id.toggleUsb4)
+    @BindView(R.id.toggle2Usb4)
     ToggleButton tbUsb4;
-    @BindView(R.id.edtVid)
+    @BindView(R.id.edtVid2)
     EditText edtVid;
-    @BindView(R.id.edtPid)
+    @BindView(R.id.edtPid2)
     EditText edtPid;
+    @BindView(R.id.toggleButtonExternalEn)
+    ToggleButton tbExternalEn;
+    @BindView(R.id.toggleButtonUsbEn)
+    ToggleButton tbUsbEn;
+    @BindView(R.id.toggleButtonUsbId)
+    ToggleButton tbUsbId;
     private Disposable inputDisposable;
     private GpioPort gpioPort;
 
-    public HdkConeFragment() {
+    public HdkCone2Fragment() {
         // Required empty public constructor
     }
 
@@ -76,7 +83,7 @@ public class HdkConeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_hdk_cone, container, false);
+        return inflater.inflate(R.layout.fragment_hdk_cone_2, container, false);
     }
 
     @Override
@@ -88,7 +95,7 @@ public class HdkConeFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        RxUsbHelper.disableUsbDialog(getContext());
+       // RxUsbHelper.disableUsbDialog(getContext());
         GpioPort.GpioManager.get()
             .getGpioSingle(getContext())
             .observeOn(AndroidSchedulers.mainThread())
@@ -106,7 +113,7 @@ public class HdkConeFragment extends Fragment {
         super.onStop();
     }
 
-    @OnClick(R.id.togglePolling)
+    @OnClick(R.id.togglePolling2)
     void togglePolling() {
         if (tbPolling.isChecked()) {
             inputDisposable = GpioPort.observeInputPin4(getContext(), 200, TimeUnit.MILLISECONDS)
@@ -125,79 +132,104 @@ public class HdkConeFragment extends Fragment {
         }
     }
 
-    @OnClick(R.id.togglePin1)
+    @OnClick(R.id.toggle2Pin1)
     void togglePin1() {
         if (gpioPort != null) {
             showErr(gpioPort.setPin1(tbPin1.isChecked()));
         }
     }
 
-    @OnClick(R.id.togglePin2)
+    @OnClick(R.id.toggle2Pin2)
     void togglePin2() {
         if (gpioPort != null) {
             showErr(gpioPort.setPin2(tbPin2.isChecked()));
         }
     }
 
-    @OnClick(R.id.togglePin3)
+    @OnClick(R.id.toggle2Pin3)
     void togglePin3() {
         if (gpioPort != null) {
-            showErr(gpioPort.setPinEn(tbPin3.isChecked()));
             showErr(gpioPort.setPin3(tbPin3.isChecked()));
-            showErr(gpioPort.setPinUsbEn(tbPin3.isChecked()));
         }
     }
 
-    @OnClick(R.id.togglePin4)
+    @OnClick(R.id.toggle2Pin4)
     void togglePin4() {
         if (gpioPort != null) {
             showErr(gpioPort.setPin4(tbPin4.isChecked()));
         }
     }
 
-    @OnClick(R.id.toggleBarcodePower)
-    void toggleBarcodePower() {
+    @OnClick(R.id.toggleButtonExternalEn)
+    void toggleExternalEn(){
         if (gpioPort != null) {
-            showErr(gpioPort.setBarcodeScanPower(tbBarcodePower.isChecked()));
+            showErr(gpioPort.setPinEn(tbExternalEn.isChecked()));
         }
     }
 
-    @OnClick(R.id.toggleWakeUp)
+    @OnClick(R.id.toggleButtonUsbEn)
+    void toggleUsbEn(){
+        if (gpioPort != null) {
+            showErr(gpioPort.setPinUsbEn(tbUsbEn.isChecked()));
+        }
+    }
+
+    @OnClick(R.id.toggleButtonUsbId)
+    void toggleUsbId(){
+        if (gpioPort != null) {
+            showErr(gpioPort.setPinUsbIdSw(tbUsbId.isChecked()));
+        }
+    }
+
+    @OnClick(R.id.toggleBarcodePower2)
+    void toggleBarcodePower() {
+        if (gpioPort != null) {
+            if(tbBarcodePower.isChecked()){
+                ConePeripheral.FP_IB_COLOMBO_USB.on(getContext());
+            }
+            else{
+                ConePeripheral.FP_IB_COLOMBO_USB.off(getContext());
+            }
+            //showErr(gpioPort.setBarcodeScanPower(tbBarcodePower.isChecked()));
+        }
+    }
+
+    @OnClick(R.id.toggleWakeUp2)
     void toggleBarcodeWakeUp() {
         if (gpioPort != null) {
             showErr(gpioPort.setBarcodeScanWakeup(tbBarcodeWakeUp.isChecked()));
         }
     }
 
-    @OnClick(R.id.toggleTrigger)
+    @OnClick(R.id.toggleTrigger2)
     void toggleBarcodeTrigger() {
         if (gpioPort != null) {
             showErr(gpioPort.setBarcodeScanTrigger(tbBarcodeTrigger.isChecked()));
         }
     }
 
-    @OnClick(R.id.toggleUsb1)
+    @OnClick(R.id.toggle2Usb1)
     void toggleUsb1() {
         showErr(UsbGpioPort.get().setUsbPin1(getContext(), tbUsb1.isChecked()));
     }
 
-    @OnClick(R.id.toggleUsb2)
+    @OnClick(R.id.toggle2Usb2)
     void toggleUsb2() {
         showErr(UsbGpioPort.get().setUsbPin2(getContext(), tbUsb2.isChecked()));
 
     }
 
-    @OnClick(R.id.toggleUsb3)
+    @OnClick(R.id.toggle2Usb3)
     void toggleUsb3() {
         showErr(UsbGpioPort.get().setUsbPin3(getContext(), tbUsb3.isChecked()));
     }
 
-    @OnClick(R.id.toggleUsb4)
+    @OnClick(R.id.toggle2Usb4)
     void toggleUsb4() {
         showErr(UsbGpioPort.get().setUsbPin4(getContext(), tbUsb4.isChecked()));
     }
 
-    @OnClick(R.id.btnAskUsbPerm)
+    @OnClick(R.id.btnAskUsbPerm2)
     void askUsbAuth() {
         int vid = integerFromCS(edtVid.getText(), -1);
         int pid = integerFromCS(edtPid.getText(), -1);

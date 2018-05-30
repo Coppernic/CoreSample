@@ -28,6 +28,9 @@
                 android:id="@+id/nav_hdk_cone"
                 android:title="@string/nav_hdk_cone"/>
             <item
+                android:id="@+id/nav_hdk_cone_2"
+                android:title="@string/nav_hdk_cone_2"/>
+            <item
                 android:id="@+id/nav_hdk_cizi"
                 android:title="@string/nav_hdk_cizi"/>
         </menu>

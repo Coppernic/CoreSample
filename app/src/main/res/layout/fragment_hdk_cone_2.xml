@@ -1,0 +1,302 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             tools:context="fr.coppernic.samples.core.ui.HdkCone2Fragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/tvGpio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/cone_gpio"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ToggleButton
+        android:id="@+id/toggle2Pin1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textOff="@string/toggle_off_pin1"
+        android:textOn="@string/toggle_on_pin1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvGpio"/>
+
+    <ToggleButton
+        android:id="@+id/toggle2Pin2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textOff="@string/toggle_off_pin2"
+        android:textOn="@string/toggle_on_pin2"
+        app:layout_constraintStart_toEndOf="@+id/toggle2Pin1"
+        app:layout_constraintTop_toBottomOf="@+id/tvGpio"/>
+
+    <ToggleButton
+        android:id="@+id/toggle2Pin3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textOff="@string/toggle_off_pin3"
+        android:textOn="@string/toggle_on_pin3"
+        app:layout_constraintStart_toEndOf="@+id/toggle2Pin2"
+        app:layout_constraintTop_toBottomOf="@+id/tvGpio"/>
+
+    <ToggleButton
+        android:id="@+id/toggle2Pin4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textOff="@string/toggle_off_pin4"
+        android:textOn="@string/toggle_on_pin4"
+        app:layout_constraintStart_toEndOf="@+id/toggle2Pin3"
+        app:layout_constraintTop_toBottomOf="@+id/tvGpio"/>
+
+    <ToggleButton
+        android:id="@+id/toggleButtonExternalEn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textOff="@string/toggle_off_external_en"
+        android:textOn="@string/toggle_on_external_en"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggle2Pin1" />
+
+    <ToggleButton
+        android:id="@+id/toggleButtonUsbEn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textOff="@string/toggle_off_usb_en"
+        android:textOn="@string/toggle_on_usb_en"
+        app:layout_constraintStart_toEndOf="@+id/toggleButtonExternalEn"
+        app:layout_constraintTop_toBottomOf="@+id/toggle2Pin2" />
+
+    <ToggleButton
+        android:id="@+id/toggleButtonUsbId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textOff="@string/toggle_off_usb_id"
+        android:textOn="@string/toggle_on_usb_id"
+        app:layout_constraintStart_toEndOf="@+id/toggleButtonUsbEn"
+        app:layout_constraintTop_toBottomOf="@+id/toggle2Pin4" />
+
+    <TextView
+        android:id="@+id/tvInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/title_input"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggleBarcodePower2"/>
+
+    <RadioButton
+        android:id="@+id/radio2Input4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/input4"
+        app:layout_constraintStart_toEndOf="@+id/togglePolling2"
+        app:layout_constraintTop_toBottomOf="@+id/tvInput"/>
+
+    <ToggleButton
+        android:id="@+id/togglePolling2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textOff="@string/toggle_off_polling"
+        android:textOn="@string/toggle_on_polling"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvInput"/>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/barcode_title"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggleButtonExternalEn" />
+
+    <ToggleButton
+        android:id="@+id/toggleBarcodePower2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textOff="@string/power_off"
+        android:textOn="@string/power_on"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"/>
+
+    <ToggleButton
+        android:id="@+id/toggleWakeUp2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textOff="@string/wake_down"
+        android:textOn="@string/wake_up"
+        app:layout_constraintStart_toEndOf="@+id/toggleBarcodePower2"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"/>
+
+    <ToggleButton
+        android:id="@+id/toggleTrigger2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textOff="@string/trig_down"
+        android:textOn="@string/trig"
+        app:layout_constraintStart_toEndOf="@+id/toggleWakeUp2"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"/>
+
+    <TextView
+        android:id="@+id/tvUsbGpio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/usb_gpio_title"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/togglePolling2"/>
+
+    <ToggleButton
+        android:id="@+id/toggle2Usb1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textOff="@string/usb1_off"
+        android:textOn="@string/usb1_on"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvUsbGpio"/>
+
+    <ToggleButton
+        android:id="@+id/toggle2Usb2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textOff="@string/usb2_off"
+        android:textOn="@string/usb2_on"
+        app:layout_constraintStart_toEndOf="@+id/toggle2Usb1"
+        app:layout_constraintTop_toBottomOf="@+id/tvUsbGpio"/>
+
+    <ToggleButton
+        android:id="@+id/toggle2Usb3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textOff="@string/usb3_off"
+        android:textOn="@string/usb3_on"
+        app:layout_constraintStart_toEndOf="@+id/toggle2Usb2"
+        app:layout_constraintTop_toBottomOf="@+id/tvUsbGpio"/>
+
+    <ToggleButton
+        android:id="@+id/toggle2Usb4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textOff="@string/usb4_off"
+        android:textOn="@string/usb4_on"
+        app:layout_constraintStart_toEndOf="@+id/toggle2Usb3"
+        app:layout_constraintTop_toBottomOf="@+id/tvUsbGpio"/>
+
+    <TextView
+        android:id="@+id/tvUsbPermissions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/usb_perm_title"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvUsbGpio"/>
+
+    <EditText
+        android:id="@+id/edtVid2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/tbVid"
+        app:layout_constraintStart_toEndOf="@+id/tbVid"
+        app:layout_constraintTop_toTopOf="@+id/tbVid"/>
+
+    <TextView
+        android:id="@+id/tbVid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/vid"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvUsbPermissions"/>
+
+    <TextView
+        android:id="@+id/tvPid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/pid"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tbVid"/>
+
+    <EditText
+        android:id="@+id/edtPid2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/tvPid"
+        app:layout_constraintStart_toEndOf="@+id/tvPid"
+        app:layout_constraintTop_toTopOf="@+id/tvPid"/>
+
+    <Button
+        android:id="@+id/btnAskUsbPerm2"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/ask"
+        app:layout_constraintBottom_toBottomOf="@+id/edtPid2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/edtPid2"
+        app:layout_constraintTop_toTopOf="@+id/edtVid"/>
+
+
+</android.support.constraint.ConstraintLayout>

@@ -54,4 +54,11 @@
     <string name="launch_activity">Launch activity</string>
     <string name="off">Off</string>
     <string name="on">On</string>
+    <string name="toggle_off_external_en">External En off</string>
+    <string name="toggle_on_external_en">External En on</string>
+    <string name="toggle_off_usb_en">Usb en off</string>
+    <string name="toggle_on_usb_en">Usb En on</string>
+    <string name="nav_hdk_cone_2">Hdk C-One 2</string>
+    <string name="toggle_off_usb_id">Usb Id off</string>
+    <string name="toggle_on_usb_id">Usb Id on</string>
 </resources>
