@@ -1,4 +1,5 @@
 # CoreSample
+
 Sample for CpcCore use
 
 ## Prerequisites
@@ -18,8 +19,8 @@ repositories {
 
 ```groovy
 dependencies {
-    implementation(group: 'fr.coppernic.sdk.cpcutils', name: 'CpcUtilsLib', version: '6.13.0', ext: 'aar')
-    implementation(group: 'fr.coppernic.sdk.core', name: 'CpcCore', version: '1.3.0', ext: 'aar') {
+    implementation(group: 'fr.coppernic.sdk.cpcutils', name: 'CpcUtilsLib', version: '6.17.0', ext: 'aar')
+    implementation(group: 'fr.coppernic.sdk.core', name: 'CpcCore', version: '1.6.1', ext: 'aar') {
         transitive = true
     }
 }
