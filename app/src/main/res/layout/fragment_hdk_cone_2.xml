@@ -26,6 +26,8 @@
         android:layout_marginTop="8dp"
         android:textOff="@string/toggle_off_pin1"
         android:textOn="@string/toggle_on_pin1"
+        app:layout_constraintEnd_toStartOf="@+id/toggle2Pin2"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvGpio"/>
 
@@ -37,6 +39,8 @@
         android:layout_marginTop="8dp"
         android:textOff="@string/toggle_off_pin2"
         android:textOn="@string/toggle_on_pin2"
+        app:layout_constraintEnd_toStartOf="@+id/toggle2Pin3"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/toggle2Pin1"
         app:layout_constraintTop_toBottomOf="@+id/tvGpio"/>
 
@@ -48,6 +52,8 @@
         android:layout_marginTop="8dp"
         android:textOff="@string/toggle_off_pin3"
         android:textOn="@string/toggle_on_pin3"
+        app:layout_constraintEnd_toStartOf="@+id/toggle2Pin4"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/toggle2Pin2"
         app:layout_constraintTop_toBottomOf="@+id/tvGpio"/>
 
@@ -55,10 +61,13 @@
         android:id="@+id/toggle2Pin4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:textOff="@string/toggle_off_pin4"
         android:textOn="@string/toggle_on_pin4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/toggle2Pin3"
         app:layout_constraintTop_toBottomOf="@+id/tvGpio"/>
 
@@ -70,8 +79,10 @@
         android:layout_marginTop="8dp"
         android:textOff="@string/toggle_off_external_en"
         android:textOn="@string/toggle_on_external_en"
+        app:layout_constraintEnd_toStartOf="@+id/toggleButtonUsbEn"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toggle2Pin1" />
+        app:layout_constraintTop_toBottomOf="@+id/toggle2Pin1"/>
 
     <ToggleButton
         android:id="@+id/toggleButtonUsbEn"
@@ -81,8 +92,10 @@
         android:layout_marginTop="8dp"
         android:textOff="@string/toggle_off_usb_en"
         android:textOn="@string/toggle_on_usb_en"
+        app:layout_constraintEnd_toStartOf="@+id/toggleButtonUsbId"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/toggleButtonExternalEn"
-        app:layout_constraintTop_toBottomOf="@+id/toggle2Pin2" />
+        app:layout_constraintTop_toBottomOf="@+id/toggle2Pin2"/>
 
     <ToggleButton
         android:id="@+id/toggleButtonUsbId"
@@ -92,8 +105,11 @@
         android:layout_marginTop="8dp"
         android:textOff="@string/toggle_off_usb_id"
         android:textOn="@string/toggle_on_usb_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintRight_toLeftOf="parent"
         app:layout_constraintStart_toEndOf="@+id/toggleButtonUsbEn"
-        app:layout_constraintTop_toBottomOf="@+id/toggle2Pin4" />
+        app:layout_constraintTop_toBottomOf="@+id/toggle2Pin4"/>
 
     <TextView
         android:id="@+id/tvInput"
@@ -136,7 +152,7 @@
         android:text="@string/barcode_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toggleButtonExternalEn" />
+        app:layout_constraintTop_toBottomOf="@+id/toggleButtonExternalEn"/>
 
     <ToggleButton
         android:id="@+id/toggleBarcodePower2"
@@ -190,6 +206,8 @@
         android:layout_marginTop="8dp"
         android:textOff="@string/usb1_off"
         android:textOn="@string/usb1_on"
+        app:layout_constraintEnd_toStartOf="@+id/toggle2Usb2"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvUsbGpio"/>
 
@@ -201,6 +219,8 @@
         android:layout_marginTop="8dp"
         android:textOff="@string/usb2_off"
         android:textOn="@string/usb2_on"
+        app:layout_constraintEnd_toStartOf="@+id/toggle2Usb3"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/toggle2Usb1"
         app:layout_constraintTop_toBottomOf="@+id/tvUsbGpio"/>
 
@@ -212,6 +232,8 @@
         android:layout_marginTop="8dp"
         android:textOff="@string/usb3_off"
         android:textOn="@string/usb3_on"
+        app:layout_constraintEnd_toStartOf="@+id/toggle2Usb4"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/toggle2Usb2"
         app:layout_constraintTop_toBottomOf="@+id/tvUsbGpio"/>
 
@@ -219,10 +241,13 @@
         android:id="@+id/toggle2Usb4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:textOff="@string/usb4_off"
         android:textOn="@string/usb4_on"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/toggle2Usb3"
         app:layout_constraintTop_toBottomOf="@+id/tvUsbGpio"/>
 
@@ -235,7 +260,7 @@
         android:text="@string/usb_perm_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvUsbGpio"/>
+        app:layout_constraintTop_toBottomOf="@+id/toggle2Usb1"/>
 
     <EditText
         android:id="@+id/edtVid2"

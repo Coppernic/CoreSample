@@ -78,19 +78,19 @@ public class PowerAdapter extends ArrayAdapter<Peripheral> {
             update(peripheral);
         }
 
-        void update(@NonNull Peripheral peripheral){
+        void update(@NonNull Peripheral peripheral) {
             this.peripheral = peripheral;
             tv.setText(peripheral.toString());
-            PowerManager.get().registerListener(this , peripheral);
+            PowerManager.get().registerListener(this, peripheral);
         }
 
         @OnClick(R.id.togglePower)
-        void toggle(){
+        void toggle() {
             PowerManager.get().power(tg.getContext(), peripheral, tg.isChecked());
         }
 
         @OnClick(R.id.btnLaunchPowerAct)
-        void launch(){
+        void launch() {
             Context context = btn.getContext();
             Intent intent = new Intent(context, PowerActivity.class);
             intent.putExtra(Definitions.KEY_PERIPHERAL, peripheral);
@@ -100,7 +100,7 @@ public class PowerAdapter extends ArrayAdapter<Peripheral> {
         @Override
         public void onPowerUp(RESULT res, Peripheral peripheral) {
             L.m(TAG, DEBUG, res.toString());
-            if(res != RESULT.OK){
+            if (res != RESULT.OK) {
                 tg.setChecked(false);
             }
         }

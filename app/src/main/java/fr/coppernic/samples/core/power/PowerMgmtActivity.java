@@ -22,13 +22,6 @@ public class PowerMgmtActivity extends AppCompatActivity {
 
     @BindView(R.id.textView10)
     TextView tvStatus;
-    @BindView(R.id.tgFp)
-    ToggleButton tgFp;
-    @BindView(R.id.tgElyctis)
-    ToggleButton tgElyctis;
-    @BindView(R.id.tgCr30)
-    ToggleButton tgCr30;
-
     private final PowerUtilsNotifier notifier = new PowerUtilsNotifier() {
         @Override
         public void onPowerUp(final RESULT res, int vid, int pid) {
@@ -50,7 +43,12 @@ public class PowerMgmtActivity extends AppCompatActivity {
             });
         }
     };
-
+    @BindView(R.id.tgFp)
+    ToggleButton tgFp;
+    @BindView(R.id.tgElyctis)
+    ToggleButton tgElyctis;
+    @BindView(R.id.tgCr30)
+    ToggleButton tgCr30;
     private PowerMgmt powerMgmt;
 
     @Override
@@ -73,7 +71,7 @@ public class PowerMgmtActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.tgFp)
-    void clickFp(){
+    void clickFp() {
         powerMgmt.setPower(PeripheralTypesCone.FingerPrintReader,
                            ManufacturersCone.IntegratedBiometrics,
                            ModelsCone.Columbo,
@@ -83,7 +81,7 @@ public class PowerMgmtActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.tgElyctis)
-    void clickElyctis(){
+    void clickElyctis() {
         powerMgmt.setPower(PeripheralTypesCone.FingerPrintReader,
                            ManufacturersCone.IntegratedBiometrics,
                            ModelsCone.Columbo,
@@ -93,7 +91,7 @@ public class PowerMgmtActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.tgCr30)
-    void clickCr30(){
+    void clickCr30() {
         powerMgmt.setPower(PeripheralTypesCone.RfidSc,
                            ManufacturersCone.Gemalto,
                            ModelsCone.Cr30,
@@ -102,8 +100,8 @@ public class PowerMgmtActivity extends AppCompatActivity {
         updateStatus(tgCr30);
     }
 
-    private void updateStatus(ToggleButton tg){
-        tvStatus.setText("Powering " + (tg.isChecked()?"Up":"Down") + "...");
+    private void updateStatus(ToggleButton tg) {
+        tvStatus.setText("Powering " + (tg.isChecked() ? "Up" : "Down") + "...");
     }
 
 }

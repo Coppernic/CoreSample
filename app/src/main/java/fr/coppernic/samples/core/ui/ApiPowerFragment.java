@@ -51,12 +51,12 @@ public class ApiPowerFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    private void setAdapterToList(){
+    private void setAdapterToList() {
         PowerAdapter powerAdapter = new PowerAdapter(getContext(), getPeripheralList());
         lvPower.setAdapter(powerAdapter);
     }
 
-    private List<Peripheral> getPeripheralList(){
+    private List<Peripheral> getPeripheralList() {
         List<Peripheral> list = new ArrayList<>();
         if (CpcOs.isCone()) {
             list.addAll(Arrays.asList(ConePeripheral.values()));

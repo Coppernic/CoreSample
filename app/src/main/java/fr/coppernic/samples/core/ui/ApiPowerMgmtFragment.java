@@ -48,7 +48,7 @@ public class ApiPowerMgmtFragment extends Fragment {
     }
 
     @OnClick(R.id.button)
-    void lauchPowerMgmtActivity(){
+    void lauchPowerMgmtActivity() {
         startActivity(new Intent(getContext(), PowerMgmtActivity.class));
     }
 }

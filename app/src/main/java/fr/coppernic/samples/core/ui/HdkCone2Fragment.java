@@ -95,7 +95,7 @@ public class HdkCone2Fragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-       // RxUsbHelper.disableUsbDialog(getContext());
+        // RxUsbHelper.disableUsbDialog(getContext());
         GpioPort.GpioManager.get()
             .getGpioSingle(getContext())
             .observeOn(AndroidSchedulers.mainThread())
@@ -161,21 +161,21 @@ public class HdkCone2Fragment extends Fragment {
     }
 
     @OnClick(R.id.toggleButtonExternalEn)
-    void toggleExternalEn(){
+    void toggleExternalEn() {
         if (gpioPort != null) {
             showErr(gpioPort.setPinEn(tbExternalEn.isChecked()));
         }
     }
 
     @OnClick(R.id.toggleButtonUsbEn)
-    void toggleUsbEn(){
+    void toggleUsbEn() {
         if (gpioPort != null) {
             showErr(gpioPort.setPinUsbEn(tbUsbEn.isChecked()));
         }
     }
 
     @OnClick(R.id.toggleButtonUsbId)
-    void toggleUsbId(){
+    void toggleUsbId() {
         if (gpioPort != null) {
             showErr(gpioPort.setPinUsbIdSw(tbUsbId.isChecked()));
         }
@@ -184,10 +184,9 @@ public class HdkCone2Fragment extends Fragment {
     @OnClick(R.id.toggleBarcodePower2)
     void toggleBarcodePower() {
         if (gpioPort != null) {
-            if(tbBarcodePower.isChecked()){
+            if (tbBarcodePower.isChecked()) {
                 ConePeripheral.FP_IB_COLOMBO_USB.on(getContext());
-            }
-            else{
+            } else {
                 ConePeripheral.FP_IB_COLOMBO_USB.off(getContext());
             }
             //showErr(gpioPort.setBarcodeScanPower(tbBarcodePower.isChecked()));
