@@ -96,7 +96,7 @@ public class HdkCone2Fragment extends Fragment {
     public void onStart() {
         super.onStart();
         // RxUsbHelper.disableUsbDialog(getContext());
-        GpioPort.GpioManager.get()
+        Disposable subscribe = GpioPort.GpioManager.get()
             .getGpioSingle(getContext())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(new Consumer<GpioPort>() {
@@ -215,7 +215,6 @@ public class HdkCone2Fragment extends Fragment {
     @OnClick(R.id.toggle2Usb2)
     void toggleUsb2() {
         showErr(UsbGpioPort.get().setUsbPin2(getContext(), tbUsb2.isChecked()));
-
     }
 
     @OnClick(R.id.toggle2Usb3)
