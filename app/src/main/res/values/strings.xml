@@ -61,4 +61,6 @@
     <string name="nav_hdk_cone_2">Hdk C-One 2</string>
     <string name="toggle_off_usb_id">Usb Id off</string>
     <string name="toggle_on_usb_id">Usb Id on</string>
+    <string name="error">Error</string>
+    <string name="error_service_not_found">Please install System Services application available on F-Droid. You can contact support@coppernic.fr.</string>
 </resources>

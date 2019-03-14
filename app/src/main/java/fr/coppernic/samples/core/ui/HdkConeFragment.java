@@ -13,6 +13,8 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
@@ -21,6 +23,7 @@ import butterknife.OnClick;
 import fr.coppernic.samples.core.R;
 import fr.coppernic.sdk.hdk.cone.GpioPort;
 import fr.coppernic.sdk.hdk.cone.UsbGpioPort;
+import fr.coppernic.sdk.utils.core.CpcResult;
 import fr.coppernic.sdk.utils.core.CpcResult.RESULT;
 import fr.coppernic.sdk.utils.debug.L;
 import fr.coppernic.sdk.utils.usb.RxUsbHelper;
@@ -68,6 +71,22 @@ public class HdkConeFragment extends Fragment {
     private Disposable inputDisposable;
     private GpioPort gpioPort;
 
+    private final Consumer<Throwable> onError = new Consumer<Throwable>() {
+        @Override
+        public void accept(Throwable throwable) {
+            if(throwable instanceof CpcResult.ResultException) {
+                CpcResult.ResultException e = (CpcResult.ResultException) throwable;
+                if(e.getResult() == RESULT.SERVICE_NOT_FOUND) {
+                    MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
+                        .title(R.string.error)
+                        .content(R.string.error_service_not_found)
+                        .build();
+                    dialog.show();
+                }
+            }
+        }
+    };
+
     public HdkConeFragment() {
         // Required empty public constructor
     }
@@ -89,7 +108,7 @@ public class HdkConeFragment extends Fragment {
     public void onStart() {
         super.onStart();
         RxUsbHelper.disableUsbDialog(getContext());
-        GpioPort.GpioManager.get()
+        Disposable d = GpioPort.GpioManager.get()
             .getGpioSingle(getContext())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(new Consumer<GpioPort>() {
@@ -97,12 +116,14 @@ public class HdkConeFragment extends Fragment {
                 public void accept(GpioPort g) throws Exception {
                     gpioPort = g;
                 }
-            });
+            }, onError);
     }
 
     @Override
     public void onStop() {
-        gpioPort.close();
+        if(gpioPort != null) {
+            gpioPort.close();
+        }
         super.onStop();
     }
 
@@ -117,7 +138,7 @@ public class HdkConeFragment extends Fragment {
                     public void accept(Boolean aBoolean) throws Exception {
                         radioInput4.setChecked(aBoolean);
                     }
-                });
+                }, onError);
         } else {
             if (inputDisposable != null && !inputDisposable.isDisposed()) {
                 inputDisposable.dispose();

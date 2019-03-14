@@ -13,6 +13,10 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+
+import org.jetbrains.annotations.NotNull;
+
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
@@ -23,6 +27,7 @@ import fr.coppernic.sdk.hdk.cone.GpioPort;
 import fr.coppernic.sdk.hdk.cone.UsbGpioPort;
 import fr.coppernic.sdk.power.impl.cone.ConePeripheral;
 import fr.coppernic.sdk.utils.core.CpcResult.RESULT;
+import fr.coppernic.sdk.utils.core.CpcResult.ResultException;
 import fr.coppernic.sdk.utils.debug.L;
 import fr.coppernic.sdk.utils.usb.RxUsbHelper;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -75,19 +80,35 @@ public class HdkCone2Fragment extends Fragment {
     private Disposable inputDisposable;
     private GpioPort gpioPort;
 
+    private final Consumer<Throwable> onError = new Consumer<Throwable>() {
+        @Override
+        public void accept(Throwable throwable) {
+            if(throwable instanceof ResultException) {
+                ResultException e = (ResultException) throwable;
+                if(e.getResult() == RESULT.SERVICE_NOT_FOUND) {
+                    MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
+                        .title(R.string.error)
+                        .content(R.string.error_service_not_found)
+                        .build();
+                    dialog.show();
+                }
+            }
+        }
+    };
+
     public HdkCone2Fragment() {
         // Required empty public constructor
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_hdk_cone_2, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NotNull View view, @Nullable Bundle savedInstanceState) {
         ButterKnife.bind(this, view);
         super.onViewCreated(view, savedInstanceState);
     }
@@ -101,15 +122,17 @@ public class HdkCone2Fragment extends Fragment {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(new Consumer<GpioPort>() {
                 @Override
-                public void accept(GpioPort g) throws Exception {
+                public void accept(GpioPort g) {
                     gpioPort = g;
                 }
-            });
+            }, onError);
     }
 
     @Override
     public void onStop() {
-        gpioPort.close();
+        if(gpioPort != null) {
+            gpioPort.close();
+        }
         super.onStop();
     }
 
@@ -121,10 +144,10 @@ public class HdkCone2Fragment extends Fragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Boolean>() {
                     @Override
-                    public void accept(Boolean aBoolean) throws Exception {
+                    public void accept(Boolean aBoolean) {
                         radioInput4.setChecked(aBoolean);
                     }
-                });
+                }, onError);
         } else {
             if (inputDisposable != null && !inputDisposable.isDisposed()) {
                 inputDisposable.dispose();
@@ -256,8 +279,8 @@ public class HdkCone2Fragment extends Fragment {
         int ret = def;
         try {
             ret = Integer.parseInt(s.toString());
-        } catch (NumberFormatException ignore) {
-            ignore.printStackTrace();
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
         }
         return ret;
     }
