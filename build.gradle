@@ -9,9 +9,9 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath "gradle.plugin.coppernic:android-config:0.3.2"
-        classpath 'com.android.tools.build:gradle:3.2.0'
-        classpath 'com.noveogroup.android:check:1.2.4'
+        classpath "gradle.plugin.coppernic:android-config:0.3.6"
+        classpath 'com.android.tools.build:gradle:3.3.2'
+        classpath 'com.noveogroup.android:check:1.2.5'
     }
 }
 
