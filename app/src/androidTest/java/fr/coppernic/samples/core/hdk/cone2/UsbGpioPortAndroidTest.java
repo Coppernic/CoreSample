@@ -1,7 +1,7 @@
 package fr.coppernic.samples.core.hdk.cone2;
 
 import android.content.Context;
-import android.support.test.InstrumentationRegistry;
+import androidx.test.InstrumentationRegistry;
 
 import org.junit.After;
 import org.junit.Before;
