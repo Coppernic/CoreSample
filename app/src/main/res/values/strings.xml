@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">CoreSample</string>
     <string name="coppernic">Coppernic</string>
+    <string name="version">version %1$s</string>
     <string name="coppernic_email">support@coppernic.fr</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -63,4 +64,12 @@
     <string name="toggle_on_usb_id">Usb Id on</string>
     <string name="error">Error</string>
     <string name="error_service_not_found">Please install System Services application available on F-Droid. You can contact support@coppernic.fr.</string>
+    <string name="nav_other">Other</string>
+    <string name="nav_net">Net</string>
+    <string name="hint_ip">IP</string>
+    <string name="hint_mask">Mask</string>
+    <string name="hint_gateway">Gateway</string>
+    <string name="hint_dns1">Dns1</string>
+    <string name="hint_dn2">Dns2</string>
+    <string name="btn_go">Go</string>
 </resources>

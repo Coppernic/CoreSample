@@ -2,26 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:tools="http://schemas.android.com/tools"
       tools:showIn="navigation_view">
-
-    <!--group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import"/>
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery"/>
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow"/>
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools"/>
-    </group-->
-
     <item android:title="@string/nav_title_hdk">
         <menu>
             <item
@@ -47,4 +27,11 @@
         </menu>
     </item>
 
+    <item android:title="@string/nav_other">
+        <menu>
+            <item
+                android:id="@+id/nav_net"
+                android:title="@string/nav_net"/>
+        </menu>
+    </item>
 </menu>
