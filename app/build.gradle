@@ -3,6 +3,10 @@ plugins {
 }
 
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
 apply plugin: 'fr.coppernic.extensions'
 
 copper {
@@ -45,13 +49,15 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
     implementation "com.android.support:support-v4:$support"
     implementation "com.android.support:appcompat-v7:$support"
     implementation "com.android.support:design:$support"
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.jakewharton:butterknife:8.8.1'
 
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    kapt 'com.jakewharton:butterknife-compiler:8.8.1'
 
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
