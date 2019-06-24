@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/hint_mask"
             android:imeOptions="actionNext"
-            android:inputType="textNoSuggestions|number"/>
+            android:inputType="textNoSuggestions|number|numberDecimal"/>
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -103,7 +103,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_dn2"
-            android:imeOptions="actionNext"
+            android:imeOptions="actionGo"
             android:inputType="textNoSuggestions|numberDecimal"/>
     </android.support.design.widget.TextInputLayout>
 

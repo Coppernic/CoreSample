@@ -7,7 +7,9 @@ buildscript {
         gradlePluginPortal()
         google()
         jcenter()
+        mavenLocal()
     }
+
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
@@ -22,6 +24,7 @@ allprojects {
         jcenter()
         mavenCentral()
         maven { url "https://artifactory.coppernic.fr/artifactory/libs-release" }
+        mavenLocal()
     }
 }
 
