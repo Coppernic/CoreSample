@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                                             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".ui.NetFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.NetFragment">
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:counterMaxLength="10"
+        app:errorEnabled="false"
+        app:errorTextAppearance="@style/ErrorTextAppearance"
+        app:hintTextAppearance="@style/HintInputTextAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -24,16 +28,20 @@
             android:hint="@string/hint_ip"
             android:imeOptions="actionNext"
             android:inputType="textNoSuggestions|number|numberDecimal"
-            android:singleLine="true"/>
+            android:singleLine="true" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayout2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:counterMaxLength="10"
+        app:errorEnabled="false"
+        app:errorTextAppearance="@style/ErrorTextAppearance"
+        app:hintTextAppearance="@style/HintInputTextAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
@@ -44,16 +52,20 @@
             android:layout_height="wrap_content"
             android:hint="@string/hint_mask"
             android:imeOptions="actionNext"
-            android:inputType="textNoSuggestions|number|numberDecimal"/>
+            android:inputType="textNoSuggestions|number|numberDecimal" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayout3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:counterMaxLength="10"
+        app:errorEnabled="false"
+        app:errorTextAppearance="@style/ErrorTextAppearance"
+        app:hintTextAppearance="@style/HintInputTextAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
@@ -64,16 +76,20 @@
             android:layout_height="wrap_content"
             android:hint="@string/hint_gateway"
             android:imeOptions="actionNext"
-            android:inputType="textNoSuggestions|numberDecimal"/>
+            android:inputType="textNoSuggestions|numberDecimal" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayout4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:errorEnabled="false"
+        app:counterMaxLength="10"
+        app:errorTextAppearance="@style/ErrorTextAppearance"
+        app:hintTextAppearance="@style/HintInputTextAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
@@ -84,16 +100,20 @@
             android:layout_height="wrap_content"
             android:hint="@string/hint_dns1"
             android:imeOptions="actionNext"
-            android:inputType="textNoSuggestions|numberDecimal"/>
+            android:inputType="textNoSuggestions|numberDecimal" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayout5"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:errorEnabled="false"
+        app:counterMaxLength="10"
+        app:errorTextAppearance="@style/ErrorTextAppearance"
+        app:hintTextAppearance="@style/HintInputTextAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
@@ -104,7 +124,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/hint_dn2"
             android:imeOptions="actionGo"
-            android:inputType="textNoSuggestions|numberDecimal"/>
+            android:inputType="textNoSuggestions|numberDecimal" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
@@ -112,13 +132,13 @@
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/btn_go"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout5"/>
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout5" />
 </android.support.constraint.ConstraintLayout>
