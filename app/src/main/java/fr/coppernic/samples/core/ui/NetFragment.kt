@@ -55,3 +55,4 @@ class NetFragment : Fragment() {
         return android.util.Patterns.IP_ADDRESS.matcher(etdIp.text.toString()).matches()
     }
 }
+
