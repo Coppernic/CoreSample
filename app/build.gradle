@@ -68,6 +68,7 @@ dependencies {
     implementation 'com.jakewharton:butterknife:8.8.1'
     implementation 'com.jakewharton.timber:timber:4.7.1'
     implementation 'com.android.support:support-v4:27.1.1'
+    implementation "com.wajahatkarim3.easyvalidation:easyvalidation-core:1.0.1"
     kapt 'com.jakewharton:butterknife-compiler:8.8.1'
 
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
