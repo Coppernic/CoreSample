@@ -87,6 +87,4 @@ class NetFragment : Fragment() {
 
         return ipField && maskfield && gatewayField && dns1Field && dns2Field
     }
-
-
 }
