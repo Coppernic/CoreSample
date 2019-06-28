@@ -62,5 +62,13 @@ class NetPresenter() {
             return Integer.reverseBytes(value)
         }
     }
+    @Throws(IllegalArgumentException::class)
 
+    fun prefixLengthToNetmaskInt(prefixLength: Int): Int {
+        if (prefixLength < 0 || prefixLength > 32) {
+            throw IllegalArgumentException("Invalid prefix length (0 <= prefix <= 32)")
+        }
+        val value = -0x1 shl 32 - prefixLength //ou val value = -0x1 shl 32 - prefixLength
+        return Integer.reverseBytes(value)
+    }
 }
