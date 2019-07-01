@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import butterknife.ButterKnife
 
 import fr.coppernic.samples.core.R
 import fr.coppernic.sdk.net.cone2.StaticIpConfig
@@ -18,7 +19,10 @@ import kotlinx.android.synthetic.main.fragment_net.*
  *
  */
 
-class NetFragment : Fragment() {
+abstract class NetFragment : Fragment()  {
+
+    protected lateinit var presenter: NetPresenter
+    abstract fun createPresenter(): NetPresenter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -28,6 +32,9 @@ class NetFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        presenter = createPresenter()
+        presenter.initialized()
 
         etdIp.addTextChangedListener(textWatcher)
         edtMask.addTextChangedListener(textWatcher)
@@ -74,6 +81,11 @@ class NetFragment : Fragment() {
                 edtDns2.setError(R.string.alert_wrong_DNS2.toString())
             }
         }
+    }
+
+    override fun onDestroyView() {
+        presenter.cleanup()
+        super.onDestroyView()
     }
 
     private fun isFieldValid(): Boolean {
