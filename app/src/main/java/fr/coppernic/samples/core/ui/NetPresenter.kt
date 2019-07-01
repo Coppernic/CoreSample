@@ -5,13 +5,6 @@ import android.text.Editable
 import android.text.TextWatcher
 
 class NetPresenter (private var netFragment: NetFragment?) {
-    fun initialized() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    fun cleanup() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
 
     val textWatcher = object : TextWatcher {
