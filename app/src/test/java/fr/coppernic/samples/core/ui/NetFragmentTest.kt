@@ -13,10 +13,6 @@ class NetFragmentTest {
 
     @Before
     fun before() {
-
-        val regexMask = Regex(pattern = "([1-9]|[1-9]\\d|1\\d{2}|2[0-4]\\d|25[0-5])(\\.(\\d|[1-9]\\d|1\\d{2}|2[0-4]\\d|25[0-5])){3}\\/\\d+")
-        val mask = "255.255.255.255"
-        val maskfield = regexMask.matches(mask)
     }
 
     @After
