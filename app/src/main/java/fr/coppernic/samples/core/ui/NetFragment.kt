@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import butterknife.ButterKnife
 
 import fr.coppernic.samples.core.R
 import fr.coppernic.sdk.net.cone2.StaticIpConfig
