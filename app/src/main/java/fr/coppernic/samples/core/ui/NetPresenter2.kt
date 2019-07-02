@@ -1,5 +1,8 @@
 package fr.coppernic.samples.core.ui
 
+import android.support.design.widget.TextInputLayout
+import android.text.Editable
+import android.text.TextWatcher
 
 class NetPresenter2 {
 
