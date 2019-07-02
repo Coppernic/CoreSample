@@ -4,7 +4,6 @@ import android.support.design.widget.TextInputLayout
 import android.text.Editable
 import android.text.TextWatcher
 
-
 class NetPresenter2 {
 
     private val regexIp: Regex = android.util.Patterns.IP_ADDRESS.toRegex()
