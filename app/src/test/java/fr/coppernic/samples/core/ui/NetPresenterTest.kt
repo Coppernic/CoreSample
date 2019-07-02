@@ -1,15 +1,9 @@
 package fr.coppernic.samples.core.ui
 
-import android.support.design.widget.TextInputLayout
-import android.widget.EditText
 import fr.coppernic.test.robolectric.RobolectricTest
-import org.hamcrest.CoreMatchers.equalTo
 import org.junit.Test
-
 import org.junit.Assert.*
 import org.junit.Before
-import org.robolectric.Robolectric
-import timber.log.Timber
 
 class NetPresenterTest : RobolectricTest() {
 
