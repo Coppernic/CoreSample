@@ -1,10 +1,7 @@
 package fr.coppernic.samples.core.ui
 
 import android.os.Bundle
-import android.support.design.widget.TextInputLayout
 import android.support.v4.app.Fragment
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,8 +30,8 @@ class NetFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        etdIp.addTextChangedListener(RegexTextWatcher(regex =  android.util.Patterns.IP_ADDRESS.toRegex(), message = "Error", layout = textInputLayout))
-        edtMask.addTextChangedListener(RegexTextWatcher(regex ="[0-9]{1,16}".toRegex(), message = "Error", layout = textInputLayout2))
+        etdIp.addTextChangedListener(RegexTextWatcher(regex = android.util.Patterns.IP_ADDRESS.toRegex(), message = "Error", layout = textInputLayout))
+        edtMask.addTextChangedListener(RegexTextWatcher(regex = "[0-9]{1,16}".toRegex(), message = "Error", layout = textInputLayout2))
         edtGateway.addTextChangedListener(RegexTextWatcher(regex = android.util.Patterns.IP_ADDRESS.toRegex(), message = "Error", layout = textInputLayout3))
         edtDns1.addTextChangedListener(RegexTextWatcher(regex = android.util.Patterns.IP_ADDRESS.toRegex(), message = "Error", layout = textInputLayout4))
         edtDns2.addTextChangedListener(RegexTextWatcher(regex = android.util.Patterns.IP_ADDRESS.toRegex(), message = "Error", layout = textInputLayout5))
