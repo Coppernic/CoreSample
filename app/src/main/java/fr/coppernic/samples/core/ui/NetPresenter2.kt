@@ -7,6 +7,7 @@ class NetPresenter2 {
     private val regexIp: Regex = IP_ADDRESS.toRegex()
     private val regexMask: Regex = "[0-9]{1,3}".toRegex()
 
+
     fun isValidIp(ip: String): Boolean = ip.matches(regexIp)
 
     /**
