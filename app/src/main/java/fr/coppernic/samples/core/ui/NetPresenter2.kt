@@ -1,6 +1,9 @@
 package fr.coppernic.samples.core.ui
 
 import android.util.Patterns.*
+import timber.log.Timber
+import java.math.BigDecimal
+import java.math.BigInteger
 
 class NetPresenter2 {
 
@@ -34,19 +37,18 @@ class NetPresenter2 {
     fun fromMasktoPrefix(mask: String): Int? {
         val m = IP_ADDRESS.matcher(mask)
         if (m.find()) for (i in 0..m.groupCount()) {
-            //Timber.v(m.group(i))
-            val digitMask = digitsAndPlusOnly(m).toInt()
-            val binaryPrefix = decimalToBinary(digitMask)
-            val prefix = Integer.bitCount(binaryPrefix.toInt())
-            return prefix
+            val myPrefix = digitsAndPlusOnly(m)
+            val binaryPrefix = decimalToBinary(myPrefix.toInt())
+            val prefixInt = Integer.parseInt(binaryPrefix.replace("0", ""))
+            return prefixInt.toString().length
         }
         return null
     }
 
-    fun decimalToBinary(decimalNumber: Int, binaryString: String = "") : String {
+    private fun decimalToBinary(decimalNumber: Int, binaryString: String = ""): String {
         while (decimalNumber > 0) {
-            val temp = "${binaryString}${decimalNumber%2}"
-            return decimalToBinary(decimalNumber/2, temp)
+            val temp = "${binaryString}${decimalNumber % 2}"
+            return decimalToBinary(decimalNumber / 2, temp)
         }
         return binaryString.reversed()
     }
