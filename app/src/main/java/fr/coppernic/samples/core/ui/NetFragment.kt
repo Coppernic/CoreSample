@@ -31,7 +31,7 @@ class NetFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         etdIp.addTextChangedListener(RegexTextWatcher(regex = android.util.Patterns.IP_ADDRESS.toRegex(), message = "Error", layout = textInputLayout))
-        edtMask.addTextChangedListener(RegexTextWatcher(regex = "[0-9]{1,16}".toRegex(), message = "Error", layout = textInputLayout2))
+        edtMask.addTextChangedListener(RegexTextWatcher(regex = "[0-9]{1,3}".toRegex(), message = "Error", layout = textInputLayout2))
         edtGateway.addTextChangedListener(RegexTextWatcher(regex = android.util.Patterns.IP_ADDRESS.toRegex(), message = "Error", layout = textInputLayout3))
         edtDns1.addTextChangedListener(RegexTextWatcher(regex = android.util.Patterns.IP_ADDRESS.toRegex(), message = "Error", layout = textInputLayout4))
         edtDns2.addTextChangedListener(RegexTextWatcher(regex = android.util.Patterns.IP_ADDRESS.toRegex(), message = "Error", layout = textInputLayout5))
