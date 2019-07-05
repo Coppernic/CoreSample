@@ -42,18 +42,13 @@ class NetPresenter2 {
     fun fromMasktoPrefix(mask: String): Int? {
         val m = IP_ADDRESS.matcher(mask)
         if (m.find()) for (i in 0..m.groupCount()) {
-            val g1 = m.group(2).toInt()
-            val g2 = m.group(3).toInt()
-            val g3 = m.group(4).toInt()
-            val g4 = m.group(5).toInt()
+            val g1 = Integer.bitCount(m.group(2).toInt())
+            val g2 = Integer.bitCount(m.group(3).toInt())
+            val g3 = Integer.bitCount(m.group(4).toInt())
+            val g4 = Integer.bitCount(m.group(5).toInt())
+            
+            return g1 + g2 + g3 + g4;
 
-            val g1Count = Integer.bitCount(g1)
-            val g2Count = Integer.bitCount(g2)
-            val g3Count = Integer.bitCount(g3)
-            val g4Count = Integer.bitCount(g4)
-
-            val prefix = g1Count + g2Count + g3Count + g4Count
-            return prefix
         }
         return null
     }
