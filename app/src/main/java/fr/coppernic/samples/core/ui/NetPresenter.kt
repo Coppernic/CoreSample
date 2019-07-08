@@ -1,65 +1,56 @@
 package fr.coppernic.samples.core.ui
 
-import android.support.design.widget.TextInputLayout
-import android.text.Editable
-import android.text.TextWatcher
-
-class NetPresenter (private var netFragment: NetFragment?) {
+import android.util.Patterns.*
 
 
-    val textWatcher = object : TextWatcher {
+class NetPresenter {
 
-        override
-        fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
+    private val regexIp: Regex = IP_ADDRESS.toRegex()
+    private val regexMask: Regex = ("(((255\\.){3}(255|254|252|248|240|224|192|128|0+))|" +
+            "((255\\.){2}(255|254|252|248|240|224|192|128|0+)\\.0)|" +
+            "((255\\.)(255|254|252|248|240|224|192|128|0+)(\\.0+){2})|" +
+            "((255|254|252|248|240|224|192|128|0+)(\\.0+){3}" +
+            "|(([0-9])|(1[0-9])|(2[0-4]))))").toRegex()
+    private val regexPrefix: Regex = "[0-9]|^[0-9]{2}\$".toRegex()
+
+    fun isValidIp(ip: String): Boolean = ip.matches(regexIp)
+
+    /**
+     * Check if Mask is valid
+     * @return true if Mask is valid, false if not
+     * Check if Mask is Int
+     * @return true if value of Mask Int is between 1 and 24
+     */
+
+    fun isValidMask(mask: String): Boolean = when {
+        mask.matches(regexIp) -> true
+        mask.matches(regexMask) -> {
+            val maskValue = mask.toInt()
+            maskValue in 1..24
         }
-
-        override
-        fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-        }
-
-        override
-        fun afterTextChanged(editable: Editable) {
-
-            if (editable.length != 7 || editable.length != 15) {
-                afterTextChanged(editable)
-            } else error("You need at least 8 characters")
-        }
-
-        fun isEmptyField(editText: String?, layout: TextInputLayout, message: String): Boolean {
-            if (editText != null && !editText.trim().isEmpty()) {
-                layout.error = message
-                layout.isErrorEnabled = true
-            } else layout.isErrorEnabled = false
-            return false
-        }
-
-        fun isValidIp(editText: String): Boolean {
-            val regexIp = android.util.Patterns.IP_ADDRESS.toRegex()
-            if (editText.matches(regexIp)) {
-                isValidIp(editText)
-            }
-            return false
-        }
-
-        fun isValidMask(editText: String, regex: Regex): Boolean {
-            if (editText.matches(regex)) {
-                return true
-            }
-            return false
-        }
-
-        fun fromMasktoPrefix(editTexT: String): Int {
-            return Integer.bitCount(editTexT.toInt())
-        }
-
-        /**@Throws(IllegalArgumentException::class)
-        fun prefixLengthToNetmaskInt(prefixLength: Int): Int {
-        if (prefixLength < 0 || prefixLength > 32) {
-        throw IllegalArgumentException("Invalid prefix length (0 <= prefix <= 32)")
-        }
-        val value = -0x1 shl 32 - prefixLength //ou val value = -0x1 shr 32 - prefixLength
-        return Integer.reverseBytes(value)
-        }
-        }*/
+        else -> false
     }
+
+    /**
+     *
+     * @return Mask String to Prefix Int
+     */
+
+    fun fromMasktoPrefix(mask: String): Int? {
+        val m = IP_ADDRESS.matcher(mask)
+        if (m.find()) {
+            for (i in 0..m.groupCount()) {
+                val g1 = Integer.bitCount(m.group(2).toInt())
+                val g2 = Integer.bitCount(m.group(3).toInt())
+                val g3 = Integer.bitCount(m.group(4).toInt())
+                val g4 = Integer.bitCount(m.group(5).toInt())
+
+                return g1 + g2 + g3 + g4
+            }
+        } else if (mask.matches(regexPrefix)) {
+            return mask.toInt()
+        }
+        return null
+    }
+
 }
