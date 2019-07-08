@@ -83,13 +83,13 @@ public class HdkCone2Fragment extends Fragment {
     private final Consumer<Throwable> onError = new Consumer<Throwable>() {
         @Override
         public void accept(Throwable throwable) {
-            if(throwable instanceof ResultException) {
+            if (throwable instanceof ResultException) {
                 ResultException e = (ResultException) throwable;
-                if(e.getResult() == RESULT.SERVICE_NOT_FOUND) {
+                if (e.getResult() == RESULT.SERVICE_NOT_FOUND) {
                     MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
-                        .title(R.string.error)
-                        .content(R.string.error_service_not_found)
-                        .build();
+                            .title(R.string.error)
+                            .content(R.string.error_service_not_found)
+                            .build();
                     dialog.show();
                 }
             }
@@ -118,19 +118,19 @@ public class HdkCone2Fragment extends Fragment {
         super.onStart();
         // RxUsbHelper.disableUsbDialog(getContext());
         Disposable subscribe = GpioPort.GpioManager.get()
-            .getGpioSingle(getContext())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(new Consumer<GpioPort>() {
-                @Override
-                public void accept(GpioPort g) {
-                    gpioPort = g;
-                }
-            }, onError);
+                .getGpioSingle(getContext())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<GpioPort>() {
+                    @Override
+                    public void accept(GpioPort g) {
+                        gpioPort = g;
+                    }
+                }, onError);
     }
 
     @Override
     public void onStop() {
-        if(gpioPort != null) {
+        if (gpioPort != null) {
             gpioPort.close();
         }
         super.onStop();
@@ -140,14 +140,14 @@ public class HdkCone2Fragment extends Fragment {
     void togglePolling() {
         if (tbPolling.isChecked()) {
             inputDisposable = GpioPort.observeInputPin4(getContext(), 200, TimeUnit.MILLISECONDS)
-                .distinctUntilChanged()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Boolean>() {
-                    @Override
-                    public void accept(Boolean aBoolean) {
-                        radioInput4.setChecked(aBoolean);
-                    }
-                }, onError);
+                    .distinctUntilChanged()
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Consumer<Boolean>() {
+                        @Override
+                        public void accept(Boolean aBoolean) {
+                            radioInput4.setChecked(aBoolean);
+                        }
+                    }, onError);
         } else {
             if (inputDisposable != null && !inputDisposable.isDisposed()) {
                 inputDisposable.dispose();
@@ -255,18 +255,18 @@ public class HdkCone2Fragment extends Fragment {
         int vid = integerFromCS(edtVid.getText(), -1);
         int pid = integerFromCS(edtPid.getText(), -1);
         rxUsbHelper.getUsbPermission(getContext(), vid, pid)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(new DisposableSingleObserver<UsbDevice>() {
-                @Override
-                public void onSuccess(UsbDevice usbDevice) {
-                    Toast.makeText(getContext(), "Permission gotten for " + usbDevice, Toast.LENGTH_SHORT).show();
-                }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableSingleObserver<UsbDevice>() {
+                    @Override
+                    public void onSuccess(UsbDevice usbDevice) {
+                        Toast.makeText(getContext(), "Permission gotten for " + usbDevice, Toast.LENGTH_SHORT).show();
+                    }
 
-                @Override
-                public void onError(Throwable e) {
-                    Toast.makeText(getContext(), "Permission error : " + e, Toast.LENGTH_SHORT).show();
-                }
-            });
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(getContext(), "Permission error : " + e, Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void showErr(RESULT res) {

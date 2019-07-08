@@ -47,16 +47,6 @@ android {
     }
 }
 
-configurations.all {
-    resolutionStrategy {
-        eachDependency { DependencyResolveDetails details ->
-            if (details.requested.group == 'fr.coppernic.sdk.core') {
-                details.useVersion "ClementFix"
-            }
-        }
-    }
-}
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -85,7 +75,6 @@ dependencies {
     testImplementation 'org.awaitility:awaitility:3.0.0'
     testImplementation 'org.mockito:mockito-core:2.23.4'
     testImplementation 'org.robolectric:robolectric:3.8'
-
 
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

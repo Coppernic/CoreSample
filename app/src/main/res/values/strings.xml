@@ -74,11 +74,15 @@
     <string name="btn_go">Go</string>
     <string name="alert_wrong_device">Wrong Device Detected</string>
     <string name="alert_device_message">This feature is unavailable on C-One2</string>
-    <string name="alert_field">Field Limit Reach</string>
-    <string name="alert_field_message">You need to enter 10 character maximum per field</string>
+    <string name="alert_field">Please use correct format</string>
     <string name="alert_wrong_Ip">Please enter valid Ip</string>
     <string name="alert_wrong_Mask">Please enter valid Mask</string>
     <string name="alert_wrong_Gateway">Please enter valid Gateway</string>
     <string name="alert_wrong_DNS1">Please enter valid DNS1</string>
     <string name="alert_wrong_DNS2">Please enter valid DNS2</string>
+    <string name="error_Edt">You must complete the field</string>
+    <string name="wrong_Device">Wrong device</string>
+    <string name="static_ip">StaticIp is set</string>
+
+
 </resources>
