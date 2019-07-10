@@ -1,6 +1,9 @@
 package fr.coppernic.samples.core.ui
 
+import android.text.Editable
+import android.widget.EditText
 import fr.coppernic.test.robolectric.RobolectricTest
+import org.intellij.lang.annotations.JdkConstants
 import org.junit.Test
 import org.junit.Assert.*
 import org.junit.Before
