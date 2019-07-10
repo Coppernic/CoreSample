@@ -37,11 +37,7 @@ class NetFragment : Fragment() {
                 message = getString(R.string.alert_field),
                 layout = textInputLayout))
         edtMask.addTextChangedListener(RegexTextWatcher(
-                regex = ("(((255\\.){3}(255|254|252|248|240|224|192|128|0+))|" +
-                        "((255\\.){2}(255|254|252|248|240|224|192|128|0+)\\.0)|" +
-                        "((255\\.)(255|254|252|248|240|224|192|128|0+)(\\.0+){2})|" +
-                        "((255|254|252|248|240|224|192|128|0+)(\\.0+){3}" +
-                        "|(([0-9])|(1[0-9])|(2[0-4]))))").toRegex(),
+                regex = presenter.regexPrefix,
                 message = getString(R.string.alert_field),
                 layout = textInputLayout2))
         edtGateway.addTextChangedListener(RegexTextWatcher(
