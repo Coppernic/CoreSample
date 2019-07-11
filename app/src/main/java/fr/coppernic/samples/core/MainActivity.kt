@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import fr.coppernic.samples.core.ui.*
 import fr.coppernic.sdk.utils.helpers.CpcOs
+import fr.coppernic.sdk.utils.helpers.OsHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.nav_header_main.view.*
@@ -16,6 +17,7 @@ import kotlinx.android.synthetic.main.nav_header_main.view.*
 private const val KEY_LAST_TAG = "last_tag"
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
 
     private var lastTag = ""
 
@@ -58,9 +60,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onStart()
         if (lastTag.isEmpty()) {
             when {
-                CpcOs.isConeN() -> displayFragment(HdkCone2Fragment::class.java.name)
-                CpcOs.isCone() -> displayFragment(HdkConeFragment::class.java.name)
-                CpcOs.isCizi() -> displayFragment(HdkCiziFragment::class.java.name)
+                OsHelper.isConeV2() -> displayFragment(HdkCone2Fragment::class.java.name)
+                OsHelper.isCone() -> displayFragment(HdkConeFragment::class.java.name)
+                OsHelper.isCizi() -> displayFragment(HdkCiziFragment::class.java.name)
             }
         } else {
             displayFragment(lastTag)
