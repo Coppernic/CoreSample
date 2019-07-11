@@ -37,7 +37,7 @@ class NetFragment : Fragment() {
                 message = getString(R.string.alert_field),
                 layout = textInputLayout))
         edtMask.addTextChangedListener(RegexTextWatcher(
-                regex = presenter.regexPrefix,
+                regex = presenter.regexMask,
                 message = getString(R.string.alert_field),
                 layout = textInputLayout2))
         edtGateway.addTextChangedListener(RegexTextWatcher(
