@@ -28,6 +28,7 @@ repositories {
 
 android {
     compileSdkVersion 27
+
     defaultConfig {
         applicationId "fr.coppernic.samples.core"
         minSdkVersion 17
@@ -38,12 +39,18 @@ android {
 
         vectorDrawables.useSupportLibrary = true
     }
+
     buildTypes {
         release {
             shrinkResources false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/main.kotlin_module'
+        exclude 'META-INF/lib_release.kotlin_module'
     }
 }
 
@@ -67,8 +74,8 @@ dependencies {
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 
-    implementation 'fr.coppernic.sdk.cpcutils:CpcUtilsLib:6.18.1'
-    implementation 'fr.coppernic.sdk.core:CpcCore:1.8.10'
+    implementation 'fr.coppernic.sdk.cpcutils:CpcUtilsLib:6.18.4'
+    implementation "fr.coppernic.sdk.core:CpcCore:1.8.16"
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.hamcrest:hamcrest-all:1.3'
