@@ -7,8 +7,8 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import android.view.View
 import fr.coppernic.samples.core.ui.*
-import fr.coppernic.sdk.utils.helpers.CpcOs
 import fr.coppernic.sdk.utils.helpers.OsHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*

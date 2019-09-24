@@ -83,6 +83,9 @@
     <string name="error_Edt">You must complete the field</string>
     <string name="wrong_Device">Wrong device</string>
     <string name="static_ip">StaticIp is set</string>
+    <string name="ethernet_cradle">Cradle</string>
+    <string name="ethernet">Ethernet</string>
+    <string name="network_error">No Network available</string>
 
 
 </resources>

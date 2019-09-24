@@ -11,14 +11,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         app:counterMaxLength="10"
         app:errorEnabled="false"
         app:errorTextAppearance="@style/ErrorTextAppearance"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/toggleEthernet">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/edtIp"
@@ -40,6 +41,7 @@
         app:errorEnabled="false"
         app:errorTextAppearance="@style/ErrorTextAppearance"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
@@ -62,6 +64,7 @@
         app:errorEnabled="false"
         app:errorTextAppearance="@style/ErrorTextAppearance"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
 
@@ -84,6 +87,7 @@
         app:errorEnabled="false"
         app:errorTextAppearance="@style/ErrorTextAppearance"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
 
@@ -106,6 +110,7 @@
         app:counterMaxLength="10"
         app:errorTextAppearance="@style/ErrorTextAppearance"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
 
@@ -130,6 +135,34 @@
         android:text="@string/btn_go"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout5" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout5"
+        app:layout_constraintVertical_bias="0.311" />
+
+    <Switch
+        android:id="@+id/toggleEthernet"
+        android:layout_width="106dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/ethernet"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/toggleCradleEthernet"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/toggleCradleEthernet"
+        android:layout_width="106dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="72dp"
+        android:text="@string/ethernet_cradle"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/toggleEthernet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
 </android.support.constraint.ConstraintLayout>

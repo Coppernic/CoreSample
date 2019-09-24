@@ -6,12 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-
 import fr.coppernic.samples.core.R
+import fr.coppernic.samples.core.utils.ConnectivityHelper
 import fr.coppernic.sdk.net.cone2.StaticIpConfig
 import fr.coppernic.sdk.utils.helpers.OsHelper
 import kotlinx.android.synthetic.main.fragment_net.*
 import fr.coppernic.samples.core.utils.RegexTextWatcher
+import fr.coppernic.sdk.utils.net.ethernet.EthernetManager
 
 
 /**
@@ -21,7 +22,10 @@ import fr.coppernic.samples.core.utils.RegexTextWatcher
 
 class NetFragment : Fragment() {
 
+
     private val presenter = NetPresenter()
+    private val connectivityHelper = ConnectivityHelper()
+    private var ethernetManager: android.net.ethernet.EthernetManager? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -31,6 +35,12 @@ class NetFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        toggleEthernet.isChecked = false
+        toggleEthernet.isEnabled = false
+        toggleCradleEthernet.isChecked = false
+        toggleCradleEthernet.isEnabled = false
+        btnIp.isEnabled = false
 
         edtIp.addTextChangedListener(RegexTextWatcher(
                 regex = android.util.Patterns.IP_ADDRESS.toRegex(),
@@ -81,6 +91,31 @@ class NetFragment : Fragment() {
             }
         } else {
             Toast.makeText(context, R.string.wrong_Device, Toast.LENGTH_SHORT).show()
+        }
+        if (connectivityHelper.isNetworkConnected(context)) {
+            toggleEthernet.isEnabled = true
+            toggleEthernet.setOnCheckedChangeListener { _, isEthernetChecked ->
+                if (isEthernetChecked) {
+                    ethernetManager?.setEnabled(true)
+                    toggleCradleEthernet.isEnabled = true
+                    btnIp.isEnabled = true
+                } else {
+                    ethernetManager?.setEnabled(false)
+                    btnIp.isEnabled = false
+                    toggleCradleEthernet.isChecked = false
+                    toggleCradleEthernet.isEnabled = false
+                }
+            }
+            toggleCradleEthernet.setOnCheckedChangeListener { _, isCradleChecked ->
+                if (isCradleChecked) {
+                    connectivityHelper.turnOnEthernetCradle(context)
+                } else {
+
+                    connectivityHelper.turnOffEthernetCradle(context)
+                }
+            }
+        } else {
+            Toast.makeText(context, getString(R.string.network_error), Toast.LENGTH_SHORT).show()
         }
     }
 }

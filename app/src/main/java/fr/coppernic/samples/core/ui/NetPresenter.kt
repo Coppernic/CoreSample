@@ -2,7 +2,6 @@ package fr.coppernic.samples.core.ui
 
 import android.util.Patterns.*
 
-
 class NetPresenter {
 
     val regexIp: Regex = IP_ADDRESS.toRegex()
@@ -52,5 +51,5 @@ class NetPresenter {
         }
         return null
     }
-
 }
+
