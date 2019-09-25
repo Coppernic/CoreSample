@@ -7,7 +7,6 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
-import android.view.View
 import fr.coppernic.samples.core.ui.*
 import fr.coppernic.sdk.utils.helpers.OsHelper
 import kotlinx.android.synthetic.main.activity_main.*
@@ -69,11 +68,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
-        val id = item.itemId
 
-        when (id) {
+        when (item.itemId) {
             R.id.nav_hdk_cone -> displayFragment(HdkConeFragment::class.java.name)
             R.id.nav_hdk_cone_2 -> displayFragment(HdkCone2Fragment::class.java.name)
             R.id.nav_hdk_cizi -> displayFragment(HdkCiziFragment::class.java.name)

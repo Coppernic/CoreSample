@@ -70,6 +70,7 @@ dependencies {
     kapt 'com.jakewharton:butterknife-compiler:8.8.1'
 
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+    implementation 'com.github.quickpermissions:quickpermissions-kotlin:0.4.0'
 
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'

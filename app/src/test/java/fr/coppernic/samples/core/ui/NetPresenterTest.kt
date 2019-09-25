@@ -41,14 +41,14 @@ class NetPresenterTest : RobolectricTest() {
 
     @Test
     fun fromMasktoPrefix() {
-        assertEquals(null, presenter.fromMasktoPrefix("random string"))
-        assertEquals(null, presenter.fromMasktoPrefix("-1"))
-        assertEquals(0, presenter.fromMasktoPrefix("0"))
-        assertEquals(1, presenter.fromMasktoPrefix("1"))
-        assertEquals(9, presenter.fromMasktoPrefix("9"))
-        assertEquals(10, presenter.fromMasktoPrefix("10"))
-        assertEquals(24, presenter.fromMasktoPrefix("24"))
-        assertEquals(32, presenter.fromMasktoPrefix("32"))
+        assertEquals(null, presenter.fromMaskPrefix("random string"))
+        assertEquals(null, presenter.fromMaskPrefix("-1"))
+        assertEquals(0, presenter.fromMaskPrefix("0"))
+        assertEquals(1, presenter.fromMaskPrefix("1"))
+        assertEquals(9, presenter.fromMaskPrefix("9"))
+        assertEquals(10, presenter.fromMaskPrefix("10"))
+        assertEquals(24, presenter.fromMaskPrefix("24"))
+        assertEquals(32, presenter.fromMaskPrefix("32"))
 
     }
 }

@@ -25,6 +25,7 @@ allprojects {
         mavenCentral()
         maven { url "https://artifactory.coppernic.fr/artifactory/libs-release" }
         mavenLocal()
+        maven { url "http://jitpack.io/" }
     }
 }
 
