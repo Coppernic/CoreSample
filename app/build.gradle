@@ -76,7 +76,7 @@ dependencies {
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 
     implementation 'fr.coppernic.sdk.cpcutils:CpcUtilsLib:6.18.4'
-    implementation "fr.coppernic.sdk.core:CpcCore:1.8.16"
+    implementation "fr.coppernic.sdk.core:CpcCore:ethernetforAll"
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.hamcrest:hamcrest-all:1.3'
