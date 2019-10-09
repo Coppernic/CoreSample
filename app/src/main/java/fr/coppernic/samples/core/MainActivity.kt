@@ -17,7 +17,6 @@ private const val KEY_LAST_TAG = "last_tag"
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-
     private var lastTag = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {

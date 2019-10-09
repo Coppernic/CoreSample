@@ -1,6 +1,7 @@
 package fr.coppernic.samples.core.ui
 
 import android.util.Patterns.*
+import kotlin.NullPointerException
 
 class NetPresenter {
 
@@ -35,7 +36,7 @@ class NetPresenter {
      * @return Mask String to Prefix Int
      */
 
-    fun fromMaskPrefix(mask: String): Int? {
+    fun fromMaskPrefix(mask: String): Int {
         val m = IP_ADDRESS.matcher(mask)
         if (m.find()) {
             for (i in 0..m.groupCount()) {
@@ -49,7 +50,7 @@ class NetPresenter {
         } else if (mask.matches(regexPrefix)) {
             return mask.toInt()
         }
-        return null
+        throw NullPointerException()
     }
 }
 
