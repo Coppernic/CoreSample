@@ -78,6 +78,11 @@ dependencies {
     implementation 'fr.coppernic.sdk.cpcutils:CpcUtilsLib:6.18.4'
     implementation "fr.coppernic.sdk.core:CpcCore:ethernetforAll"
 
+    // Timber
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation 'fr.bipi.treessence:treessence:0.3.0'
+    implementation 'com.arcao:slf4j-timber:3.1'
+
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.hamcrest:hamcrest-all:1.3'
     testImplementation 'org.awaitility:awaitility:3.0.0'

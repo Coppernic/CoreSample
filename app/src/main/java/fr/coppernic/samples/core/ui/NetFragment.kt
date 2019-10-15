@@ -6,16 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import fr.coppernic.sdk.net.cone2.StaticIpConfig
-import fr.coppernic.sdk.utils.helpers.OsHelper
-import kotlinx.android.synthetic.main.fragment_net.*
-import fr.coppernic.samples.core.utils.RegexTextWatcher
-import fr.coppernic.sdk.utils.helpers.CpcNet
 import fr.coppernic.samples.core.R
+import fr.coppernic.samples.core.utils.RegexTextWatcher
 import fr.coppernic.samples.core.utils.addTo
+import fr.coppernic.sdk.net.cone2.StaticIpConfig
 import fr.coppernic.sdk.net.ethernet.EthernetConnector
 import fr.coppernic.sdk.net.ethernet.EthernetServiceManager
+import fr.coppernic.sdk.utils.helpers.CpcNet
+import fr.coppernic.sdk.utils.helpers.OsHelper
 import io.reactivex.disposables.CompositeDisposable
+import kotlinx.android.synthetic.main.fragment_net.*
 import timber.log.Timber
 import java.security.InvalidParameterException
 
@@ -50,7 +50,6 @@ class NetFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         toggleEthernet.isEnabled = false
         toggleEthernet.isChecked = CpcNet.isEthernetConnected(context)
-
         toggleEthernet.setOnCheckedChangeListener { _, isChecked ->
             connector?.enableEthernet(isChecked)
             toggleCradleEthernet.isEnabled = isChecked
@@ -112,7 +111,6 @@ class NetFragment : Fragment() {
         super.onStart()
         manager.get().getConnector(context).subscribe({
             connector = it
-
             toggleEthernet.isEnabled = true
         }, {
             Timber.e("Ethernet manager is not supported on this device")
