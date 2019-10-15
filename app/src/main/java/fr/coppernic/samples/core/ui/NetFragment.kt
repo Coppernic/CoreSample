@@ -12,8 +12,12 @@ import kotlinx.android.synthetic.main.fragment_net.*
 import fr.coppernic.samples.core.utils.RegexTextWatcher
 import fr.coppernic.sdk.utils.helpers.CpcNet
 import fr.coppernic.samples.core.R
-import fr.coppernic.samples.core.service.net.ethernet.EthernetServiceManager
+import fr.coppernic.samples.core.utils.addTo
+import fr.coppernic.sdk.net.ethernet.EthernetConnector
+import fr.coppernic.sdk.net.ethernet.EthernetServiceManager
+import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
+import java.security.InvalidParameterException
 
 /**
  * A simple [Fragment] subclass.
@@ -22,6 +26,19 @@ import timber.log.Timber
 class NetFragment : Fragment() {
 
     private val presenter = NetPresenter()
+    private val manager = EthernetServiceManager()
+    private var connector: EthernetConnector? = null
+
+    /**
+     * Backing field for public var. Always provides a disposable that can be disposed.
+     */
+    private var disposables = CompositeDisposable()
+        get() {
+            if (field.isDisposed) {
+                field = CompositeDisposable()
+            }
+            return field
+        }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -32,10 +49,21 @@ class NetFragment : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
         toggleEthernet.isEnabled = false
-        toggleCradleEthernet.isChecked = false
-        toggleCradleEthernet.isEnabled = CpcNet.isEthernetConnected(context)
-        toggleCradleEthernet.visibility = View.INVISIBLE
-        btnIp.isEnabled = false
+        toggleEthernet.isChecked = CpcNet.isEthernetConnected(context)
+
+        toggleEthernet.setOnCheckedChangeListener { _, isChecked ->
+            connector?.enableEthernet(isChecked)
+            toggleCradleEthernet.isEnabled = isChecked
+            if (!isChecked) {
+                toggleCradleEthernet.isChecked = false
+            }
+        }
+
+        toggleCradleEthernet.isEnabled = toggleEthernet.isChecked
+        toggleCradleEthernet.visibility = if (OsHelper.isConeV2()) View.VISIBLE else View.INVISIBLE
+        toggleCradleEthernet.setOnCheckedChangeListener { _, isChecked ->
+            connector?.enableCradle(isChecked)
+        }
 
         edtIp.addTextChangedListener(RegexTextWatcher(
                 regex = android.util.Patterns.IP_ADDRESS.toRegex(),
@@ -58,49 +86,42 @@ class NetFragment : Fragment() {
                 message = getString(R.string.alert_wrong_DNS2),
                 layout = textInputLayout5))
 
-        val disposable = EthernetServiceManager().get().getConnector(context).subscribe({
-            toggleEthernet.isEnabled = true
-            toggleEthernet.isChecked = false
-            toggleEthernet.setOnCheckedChangeListener { _, isEthernetChecked ->
-                it.enableEthernet(true)
-                if (isEthernetChecked) {
-                    toggleCradleEthernet.isEnabled = true; btnIp.isEnabled = true
-                } else {
-                    it.enableEthernet(false)
-                    btnIp.isEnabled = false
-                    toggleCradleEthernet.isChecked = false
-                    toggleCradleEthernet.isEnabled = false
-                }
-            }
-            if (OsHelper.isConeV2()) {
-                toggleCradleEthernet.visibility = View.VISIBLE
-                toggleCradleEthernet.setOnCheckedChangeListener { _, isCradleChecked ->
-                    if (isCradleChecked) it.enableEthernetThroughDocking(true)
-                    else it.enableEthernetThroughDocking(false)
-                }
-            }
-            btnIp.setOnClickListener {
-                if (presenter.isValidIp(edtIp.text.toString())
-                        && presenter.isValidIp(edtDns1.text.toString())
-                        && presenter.isValidIp(edtGateway.text.toString())
-                        && presenter.isValidIp(edtDns2.text.toString())
-                        && presenter.isValidMask(edtMask.text.toString())) {
+        btnIp.setOnClickListener {
+            if (presenter.isValidIp(edtIp.text.toString())
+                    && presenter.isValidIp(edtDns1.text.toString())
+                    && presenter.isValidIp(edtGateway.text.toString())
+                    && presenter.isValidIp(edtDns2.text.toString())
+                    && presenter.isValidMask(edtMask.text.toString())) {
+
+                try {
                     val prefix = presenter.fromMaskPrefix(edtMask.text.toString())
-                    try {
-                        StaticIpConfig.configureStaticIp(view.context,
-                                edtIp.text.toString(),
-                                prefix,
-                                edtDns1.text.toString(),
-                                edtDns2.text.toString())
-                        Toast.makeText(context, R.string.static_ip, Toast.LENGTH_SHORT).show()
-                    } catch (e: NullPointerException) {
-                        e.printStackTrace()
-                        Toast.makeText(context, R.string.error_Edt, Toast.LENGTH_SHORT).show()
-                    }
+                    StaticIpConfig.configureStaticIp(view.context,
+                            edtIp.text.toString(),
+                            prefix,
+                            edtDns1.text.toString(),
+                            edtDns2.text.toString())
+                    Toast.makeText(context, R.string.static_ip, Toast.LENGTH_SHORT).show()
+                } catch (e: InvalidParameterException) {
+                    Toast.makeText(context, R.string.error_Edt, Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        manager.get().getConnector(context).subscribe({
+            connector = it
+
+            toggleEthernet.isEnabled = true
         }, {
-            Timber.d("Ethernet manager is not supported on this device")
-        })
+            Timber.e("Ethernet manager is not supported on this device")
+            Timber.w(it)
+        }).addTo(disposables)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        connector?.close()
     }
 }
