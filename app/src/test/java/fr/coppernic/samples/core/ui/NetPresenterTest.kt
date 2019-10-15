@@ -1,9 +1,10 @@
 package fr.coppernic.samples.core.ui
 
 import fr.coppernic.test.robolectric.RobolectricTest
-import org.junit.Test
 import org.junit.Assert.*
 import org.junit.Before
+import org.junit.Test
+import java.security.InvalidParameterException
 
 class NetPresenterTest : RobolectricTest() {
 
@@ -41,14 +42,22 @@ class NetPresenterTest : RobolectricTest() {
 
     @Test
     fun fromMasktoPrefix() {
-        assertEquals(null, presenter.fromMaskPrefix("random string"))
-        assertEquals(null, presenter.fromMaskPrefix("-1"))
+
+        try {
+            presenter.fromMaskPrefix("random string")
+            fail()
+        } catch (e: InvalidParameterException) {}
+
+        try {
+            presenter.fromMaskPrefix("-1")
+            fail()
+        } catch (e: InvalidParameterException) {}
+
         assertEquals(0, presenter.fromMaskPrefix("0"))
         assertEquals(1, presenter.fromMaskPrefix("1"))
         assertEquals(9, presenter.fromMaskPrefix("9"))
         assertEquals(10, presenter.fromMaskPrefix("10"))
         assertEquals(24, presenter.fromMaskPrefix("24"))
         assertEquals(32, presenter.fromMaskPrefix("32"))
-
     }
 }
