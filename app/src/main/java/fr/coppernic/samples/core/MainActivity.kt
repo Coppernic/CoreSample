@@ -17,7 +17,6 @@ private const val KEY_LAST_TAG = "last_tag"
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-
     private var lastTag = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,11 +67,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
-        val id = item.itemId
 
-        when (id) {
+        when (item.itemId) {
             R.id.nav_hdk_cone -> displayFragment(HdkConeFragment::class.java.name)
             R.id.nav_hdk_cone_2 -> displayFragment(HdkCone2Fragment::class.java.name)
             R.id.nav_hdk_cizi -> displayFragment(HdkCiziFragment::class.java.name)
