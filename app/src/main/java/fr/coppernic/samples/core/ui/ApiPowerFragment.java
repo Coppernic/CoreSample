@@ -21,7 +21,7 @@ import fr.coppernic.sdk.power.api.peripheral.Peripheral;
 import fr.coppernic.sdk.power.impl.cizi.CiziPeripheral;
 import fr.coppernic.sdk.power.impl.cone.ConePeripheral;
 import fr.coppernic.sdk.power.impl.idplatform.IdPlatformPeripheral;
-import fr.coppernic.sdk.utils.helpers.CpcOs;
+import fr.coppernic.sdk.utils.helpers.OsHelper;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,11 +58,11 @@ public class ApiPowerFragment extends Fragment {
 
     private List<Peripheral> getPeripheralList() {
         List<Peripheral> list = new ArrayList<>();
-        if (CpcOs.isCone()) {
+        if (OsHelper.isCone()) {
             list.addAll(Arrays.asList(ConePeripheral.values()));
-        } else if (CpcOs.isCizi()) {
+        } else if (OsHelper.isCizi()) {
             list.addAll(Arrays.asList(CiziPeripheral.values()));
-        } else if (CpcOs.isIdPlatform()) {
+        } else if (OsHelper.isIdPlatform()) {
             list.addAll(Arrays.asList(IdPlatformPeripheral.values()));
         }
         return list;
