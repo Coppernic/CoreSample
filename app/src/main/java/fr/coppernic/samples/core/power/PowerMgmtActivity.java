@@ -3,12 +3,14 @@ package fr.coppernic.samples.core.power;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.coppernic.samples.core.R;
+import fr.coppernic.samples.core.utils.Definitions;
 import fr.coppernic.sdk.powermgmt.PowerMgmt;
 import fr.coppernic.sdk.powermgmt.PowerMgmtFactory;
 import fr.coppernic.sdk.powermgmt.PowerUtilsNotifier;
@@ -61,8 +63,14 @@ public class PowerMgmtActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        powerMgmt = PowerMgmtFactory.get().setContext(this).setNotifier(notifier).build();
-
+        try {
+            powerMgmt = PowerMgmtFactory.get().setContext(this).setNotifier(notifier).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this.getApplicationContext(), "Not supported on " + Definitions.getDeviceName(),
+                           Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 
     @Override

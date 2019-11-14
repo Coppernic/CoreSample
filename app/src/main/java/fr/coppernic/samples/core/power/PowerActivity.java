@@ -23,6 +23,8 @@ public class PowerActivity extends AppCompatActivity {
     @BindView(R.id.textView10)
     TextView tvStatus;
     private final PowerListener powerListener = new PowerListener() {
+        //FIXME this hides an instance of activity and can lead to activity leak.
+
         @Override
         public void onPowerUp(RESULT res, final Peripheral peripheral) {
             tvStatus.setText("Powered up : " + res);
