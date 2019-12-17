@@ -31,5 +31,5 @@ dependencies {
 
 ## More documentation
 
-[wiki](https://github.com/Coppernic/CoreSample/wiki)
+[developer.coppernic.fr](https://developer.coppernic.fr)
 
