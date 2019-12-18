@@ -12,6 +12,12 @@ apply plugin: 'fr.coppernic.extensions'
 copper {
     projectName = "CoreSample"
 
+    options {
+        outputNameHook = { project, variant, output ->
+            output.outputFileName
+        }
+    }
+
     publications {
         artiConfig = project.hasProperty('artiServer') ? project.artiServer : "arti01"
     }
