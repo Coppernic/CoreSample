@@ -254,6 +254,8 @@ public class HdkCone2Fragment extends Fragment {
     void askUsbAuth() {
         int vid = integerFromCS(edtVid.getText(), -1);
         int pid = integerFromCS(edtPid.getText(), -1);
+        rxUsbHelper.setPermissionTimeout(5, TimeUnit.SECONDS);
+        rxUsbHelper.setConnectionTimeout(1, TimeUnit.SECONDS);
         rxUsbHelper.getUsbPermission(getContext(), vid, pid)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DisposableSingleObserver<UsbDevice>() {
@@ -264,6 +266,7 @@ public class HdkCone2Fragment extends Fragment {
 
                     @Override
                     public void onError(Throwable e) {
+                        e.printStackTrace();
                         Toast.makeText(getContext(), "Permission error : " + e, Toast.LENGTH_SHORT).show();
                     }
                 });
