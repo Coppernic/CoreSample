@@ -53,9 +53,6 @@ class NetFragment : Fragment() {
         toggleEthernet.setOnCheckedChangeListener { _, isChecked ->
             connector?.enableEthernet(isChecked)
             toggleCradleEthernet.isEnabled = isChecked
-            if (!isChecked) {
-                toggleCradleEthernet.isChecked = false
-            }
         }
 
         toggleCradleEthernet.isEnabled = toggleEthernet.isChecked
