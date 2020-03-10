@@ -52,10 +52,8 @@ class NetFragment : Fragment() {
         toggleEthernet.isChecked = CpcNet.isEthernetConnected(context)
         toggleEthernet.setOnCheckedChangeListener { _, isChecked ->
             connector?.enableEthernet(isChecked)
-            toggleCradleEthernet.isEnabled = isChecked
         }
 
-        toggleCradleEthernet.isEnabled = toggleEthernet.isChecked
         toggleCradleEthernet.visibility = if (OsHelper.isConeV2()) View.VISIBLE else View.INVISIBLE
         toggleCradleEthernet.setOnCheckedChangeListener { _, isChecked ->
             connector?.enableCradle(isChecked)
