@@ -66,6 +66,7 @@
     <string name="error_service_not_found">Please install System Services application available on F-Droid. You can contact support@coppernic.fr.</string>
     <string name="nav_other">Other</string>
     <string name="nav_net">Net</string>
+    <string name="nav_mapping">Mapping</string>
     <string name="hint_ip">IP</string>
     <string name="hint_mask">Mask</string>
     <string name="hint_gateway">Gateway</string>
@@ -86,6 +87,8 @@
     <string name="ethernet_cradle">Cradle</string>
     <string name="ethernet">Ethernet</string>
     <string name="network_error">No Network available</string>
-
-
+    <string name="select_to_assign">Select to assign a different key event or shorcut</string>
+    <string name="img_delete">Delete</string>
+    <string name="label_key">Key</string>
+    <string name="label_shortcut">Shortcut</string>
 </resources>

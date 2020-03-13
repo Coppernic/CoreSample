@@ -78,6 +78,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_power -> displayFragment(ApiPowerFragment::class.java.name)
             R.id.nav_powermgmt -> displayFragment(ApiPowerMgmtFragment::class.java.name)
             R.id.nav_net -> displayFragment(NetFragment::class.java.name)
+            R.id.nav_mapping -> displayFragment(ApiMappingFragment::class.java.name)
         }
 
         drawer.closeDrawer(GravityCompat.START)
@@ -106,6 +107,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             ApiPowerMgmtFragment::class.java.name -> ApiPowerMgmtFragment()
             HdkCone2Fragment::class.java.name -> HdkCone2Fragment()
             NetFragment::class.java.name -> NetFragment()
+            ApiMappingFragment::class.java.name -> ApiMappingFragment()
             else -> HdkConeFragment()
         }
     }
