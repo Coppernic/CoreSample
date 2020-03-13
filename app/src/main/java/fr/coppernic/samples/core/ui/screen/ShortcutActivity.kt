@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import fr.coppernic.samples.core.R
 import fr.coppernic.samples.core.ui.ApiMappingFragment
 import fr.coppernic.samples.core.ui.shortcut.ShortcutAdapter
@@ -15,6 +16,8 @@ import fr.coppernic.sdk.mapping.cone2.MapperImpl
 import kotlinx.android.synthetic.main.activity_shortcut.*
 
 class ShortcutActivity : AppCompatActivity() {
+
+    private val TAG = "ShortcutActivity"
 
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
@@ -29,7 +32,7 @@ class ShortcutActivity : AppCompatActivity() {
         MapperImpl.Manager.get().getConnector(applicationContext).subscribe({
             mapper = it
         }, {
-            throw it
+            Log.e(TAG, it.message)
         })
     }
 

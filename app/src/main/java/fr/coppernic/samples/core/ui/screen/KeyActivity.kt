@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import fr.coppernic.samples.core.R
 import fr.coppernic.samples.core.ui.ApiMappingFragment
 import fr.coppernic.samples.core.ui.key.KeyAdapter
@@ -15,6 +16,8 @@ import fr.coppernic.sdk.mapping.cone2.MapperImpl
 import kotlinx.android.synthetic.main.activity_key.*
 
 class KeyActivity : AppCompatActivity() {
+
+    private val TAG = "KeyActivity"
 
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
@@ -29,7 +32,7 @@ class KeyActivity : AppCompatActivity() {
         MapperImpl.Manager.get().getConnector(applicationContext).subscribe({
             mapper = it
         }, {
-            throw it
+            Log.e(TAG, it.message)
         })
     }
 
@@ -38,15 +41,15 @@ class KeyActivity : AppCompatActivity() {
         viewAdapter = KeyAdapter(KeyContent().items.sortedBy { it.name }, object : KeyAdapter.OnKeyAdapterListener {
             override fun onKeyChosen(item: KeyItem) {
                 when (intent.getStringExtra(ApiMappingFragment.KEY)) {
-                    ApiMappingFragment.P1 -> {
+                    "P1" -> {
                         mapper.mapKey(Mapper.ProgKey.P1, item.code)
                         onBackPressed()
                     }
-                    ApiMappingFragment.P2 -> {
+                    "P2" -> {
                         mapper.mapKey(Mapper.ProgKey.P2, item.code)
                         onBackPressed()
                     }
-                    ApiMappingFragment.P3 -> {
+                    "P3" -> {
                         mapper.mapKey(Mapper.ProgKey.P3, item.code)
                         onBackPressed()
                     }
