@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:tools="http://schemas.android.com/tools"
-    package="fr.coppernic.samples.core"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="fr.coppernic.samples.core">
 
-    <uses-feature android:name="android.hardware.usb.host"/>
+    <uses-feature android:name="android.hardware.usb.host" />
 
     <uses-permission android:name="fr.coppernic.permission.SMART_CARD" />
     <uses-permission android:name="fr.coppernic.permission.RFID" />
     <uses-permission android:name="fr.coppernic.permission.FINGER_PRINT" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.USB_PERMISSION"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS"
+    <uses-permission android:name="android.permission.USB_PERMISSION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.INTERACT_ACROSS_USERS"
         tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL"
-        tools:ignore="ProtectedPermissions"/>
+    <uses-permission
+        android:name="android.permission.INTERACT_ACROSS_USERS_FULL"
+        tools:ignore="ProtectedPermissions" />
 
     <application
         android:name=".App"
@@ -24,28 +26,31 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".ui.screen.ShortcutActivity"></activity>
+        <activity android:name=".ui.screen.KeyActivity" />
         <activity
             android:name="fr.coppernic.lib.splash.PermissionSplashScreen"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <meta-data
                 android:name="activity"
                 android:value="fr.coppernic.samples.core.MainActivity" />
         </activity>
         <activity
-            android:name="fr.coppernic.samples.core.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"/>
+                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
             </intent-filter>
         </activity>
-        <activity android:name=".power.PowerActivity">
-        </activity>
-        <activity android:name=".power.PowerMgmtActivity">
-        </activity>
+        <activity android:name=".power.PowerActivity" />
+        <activity android:name=".power.PowerMgmtActivity" />
     </application>
+
 </manifest>

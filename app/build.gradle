@@ -73,6 +73,7 @@ dependencies {
     implementation 'fr.bipi.treessence:treessence:0.3.0'
 
     implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
     kapt 'com.jakewharton:butterknife-compiler:8.8.1'
 
     //noinspection GradleDependency
@@ -84,8 +85,8 @@ dependencies {
 
     implementation 'fr.coppernic.sdk.cpcutils:CpcUtilsLib:6.18.4'
     implementation "fr.coppernic.sdk.core:CpcCore:1.8.18"
-    implementation ('fr.coppernic.lib:splash:0.2.1') {
-        exclude group:'com.android.support'
+    implementation('fr.coppernic.lib:splash:0.2.1') {
+        exclude group: 'com.android.support'
     }
 
     // Timber
