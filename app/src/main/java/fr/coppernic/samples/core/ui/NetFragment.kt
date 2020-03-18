@@ -1,7 +1,7 @@
 package fr.coppernic.samples.core.ui
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +23,7 @@ import java.security.InvalidParameterException
  * A simple [Fragment] subclass.
  *
  */
-class NetFragment : Fragment() {
+class NetFragment : androidx.fragment.app.Fragment() {
 
     private val presenter = NetPresenter()
     private val manager = EthernetServiceManager()

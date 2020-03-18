@@ -1,6 +1,6 @@
 package fr.coppernic.samples.core.ui.key
 
-import android.support.annotation.NonNull
+import androidx.annotation.NonNull
 import java.io.Serializable
 
 /**
