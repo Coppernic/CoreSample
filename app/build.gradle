@@ -33,7 +33,7 @@ repositories {
 }
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
 
     defaultConfig {
         applicationId "fr.coppernic.samples.core"
@@ -41,7 +41,7 @@ android {
         targetSdkVersion 27
         versionCode versioning.info.versionCode
         versionName versioning.info.display
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         vectorDrawables.useSupportLibrary = true
     }
@@ -58,23 +58,26 @@ android {
         exclude 'META-INF/main.kotlin_module'
         exclude 'META-INF/lib_release.kotlin_module'
     }
+    compileOptions {
+        targetCompatibility = 1.8
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation "com.android.support:support-v4:$support"
-    implementation "com.android.support:appcompat-v7:$support"
-    implementation "com.android.support:design:$support"
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    implementation 'com.jakewharton:butterknife:8.8.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.jakewharton:butterknife:10.2.0'
     implementation 'com.jakewharton.timber:timber:4.7.1'
     implementation 'fr.bipi.treessence:treessence:0.3.0'
 
-    implementation 'com.android.support:support-v4:27.1.1'
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    kapt 'com.jakewharton:butterknife-compiler:8.8.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    kapt 'com.jakewharton:butterknife-compiler:10.2.0'
 
     //noinspection GradleDependency
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
@@ -102,6 +105,6 @@ dependencies {
     //noinspection GradleDependency
     testImplementation 'org.robolectric:robolectric:3.8'
 
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 }
