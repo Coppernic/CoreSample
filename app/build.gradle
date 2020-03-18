@@ -58,6 +58,7 @@ android {
         exclude 'META-INF/main.kotlin_module'
         exclude 'META-INF/lib_release.kotlin_module'
     }
+    
     compileOptions {
         targetCompatibility = 1.8
     }
