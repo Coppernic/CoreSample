@@ -17,6 +17,8 @@
     <uses-permission
         android:name="android.permission.INTERACT_ACROSS_USERS_FULL"
         tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="com.askey.mapping.permission.SET_MAPPING" />
+    <uses-permission android:name="com.askey.mapping.permission.GET_MAPPING" />
 
     <application
         android:name=".App"
@@ -28,6 +30,7 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity android:name=".ui.screen.ShortcutActivity"></activity>
         <activity android:name=".ui.screen.KeyActivity" />
+        <activity android:name=".ui.screen.TriggerActivity" />
         <activity
             android:name="fr.coppernic.lib.splash.PermissionSplashScreen"
             android:theme="@style/SplashTheme">

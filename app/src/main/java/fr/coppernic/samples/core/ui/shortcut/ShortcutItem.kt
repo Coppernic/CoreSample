@@ -56,6 +56,7 @@ class ShortcutItem : Parcelable {
 
     companion object {
         val NONE = ShortcutItem("NONE", Intent())
+
         @JvmField
         val CREATOR: Parcelable.Creator<ShortcutItem?> = object : Parcelable.Creator<ShortcutItem?> {
             override fun createFromParcel(`in`: Parcel): ShortcutItem? {

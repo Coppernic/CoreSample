@@ -1,24 +1,23 @@
 package fr.coppernic.samples.core.ui
 
 import android.content.Intent
-import android.nfc.Tag
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import androidx.fragment.app.Fragment
+import com.askey.mapping.utils.IconUtils
 import fr.coppernic.samples.core.R
 import fr.coppernic.samples.core.ui.key.KeyContent
 import fr.coppernic.samples.core.ui.key.KeyItem
 import fr.coppernic.samples.core.ui.screen.KeyActivity
 import fr.coppernic.samples.core.ui.screen.ShortcutActivity
+import fr.coppernic.samples.core.ui.screen.TriggerActivity
 import fr.coppernic.sdk.mapping.Mapper
-import fr.coppernic.sdk.mapping.cone2.MapperImpl
 import kotlinx.android.synthetic.main.fragment_api_mapping.*
-import java.util.function.Consumer
 
 /**
  * A simple [Fragment] subclass.
@@ -46,12 +45,14 @@ class ApiMappingFragment : androidx.fragment.app.Fragment() {
     }
 
     private fun loadMapper() {
-        MapperImpl.Manager.get().getConnector(context).subscribe({
-            mapper = it
-            refresh()
-        }, {
-            Log.e(TAG, it.message)
-        })
+        Mapper.Factory
+                .getKeyMapperSingle(context)
+                .subscribe({
+                    mapper = it
+                    refresh()
+                }, {
+                    Log.e(TAG, it.message)
+                })
     }
 
     private fun loadFromMapper(progKey: Mapper.ProgKey) {
@@ -65,9 +66,9 @@ class ApiMappingFragment : androidx.fragment.app.Fragment() {
         }
 
         when (progKey) {
-            Mapper.ProgKey.P1 -> tv_p1.text = "${progKey.name} - ${type.name} - ${actionName}"
-            Mapper.ProgKey.P2 -> tv_p2.text = "${progKey.name} - ${type.name} - ${actionName}"
-            Mapper.ProgKey.P3 -> tv_p3.text = "${progKey.name} - ${type.name} - ${actionName}"
+            Mapper.ProgKey.P1 -> tv_p1.text = "${progKey.name} - ${actionName}"
+            Mapper.ProgKey.P2 -> tv_p2.text = "${progKey.name} - ${actionName}"
+            Mapper.ProgKey.P3 -> tv_p3.text = "${progKey.name} - ${actionName}"
         }
     }
 
@@ -98,6 +99,16 @@ class ApiMappingFragment : androidx.fragment.app.Fragment() {
             }
         }
 
+        var trigPos = 1
+        listOf<Button>(btnTrigger1, btnTrigger2, btnTrigger3).forEach {
+            val pNameTrig = "P${trigPos++}"
+            it.setOnClickListener {
+                val intent = Intent(context, TriggerActivity::class.java)
+                intent.putExtra(TRIGGER, pNameTrig)
+                startActivity(intent)
+            }
+        }
+
         var delPos = 1
         listOf<ImageButton>(img_btn_deleteP1, img_btn_deleteP2, img_btn_deleteP3).forEach {
             val pNameDel = "P${delPos++}"
@@ -121,6 +132,9 @@ class ApiMappingFragment : androidx.fragment.app.Fragment() {
     }
 
     private fun refresh() {
+        img1.visibility = View.GONE
+        img2.visibility = View.GONE
+        img3.visibility = View.GONE
         loadFromMapper(Mapper.ProgKey.P1)
         loadFromMapper(Mapper.ProgKey.P2)
         loadFromMapper(Mapper.ProgKey.P3)
@@ -130,6 +144,7 @@ class ApiMappingFragment : androidx.fragment.app.Fragment() {
     companion object {
         const val KEY = "key"
         const val SHORTCUT = "shortcut"
+        const val TRIGGER = "trigger"
         const val P1 = "P1"
         const val P2 = "P2"
         const val P3 = "P3"

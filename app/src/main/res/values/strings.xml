@@ -91,4 +91,7 @@
     <string name="img_delete">Delete</string>
     <string name="label_key">Key</string>
     <string name="label_shortcut">Shortcut</string>
+    <string name="label_trigger">Trigger</string>
+    <string name="label_trig_barcode">Trig barcode scan using %1$s</string>
+    <string name="label_trig_rfid">Trig rfid read using %1$s</string>
 </resources>

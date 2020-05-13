@@ -2,8 +2,6 @@ package fr.coppernic.samples.core.ui.screen
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import fr.coppernic.samples.core.R
@@ -12,15 +10,14 @@ import fr.coppernic.samples.core.ui.key.KeyAdapter
 import fr.coppernic.samples.core.ui.key.KeyContent
 import fr.coppernic.samples.core.ui.key.KeyItem
 import fr.coppernic.sdk.mapping.Mapper
-import fr.coppernic.sdk.mapping.cone2.MapperImpl
 import kotlinx.android.synthetic.main.activity_key.*
 
 class KeyActivity : AppCompatActivity() {
 
     private val TAG = "KeyActivity"
 
-    private lateinit var viewAdapter: androidx.recyclerview.widget.RecyclerView.Adapter<*>
-    private lateinit var viewManager: androidx.recyclerview.widget.RecyclerView.LayoutManager
+    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewManager: RecyclerView.LayoutManager
     lateinit var mapper: Mapper
 
 
@@ -29,11 +26,14 @@ class KeyActivity : AppCompatActivity() {
         setContentView(R.layout.activity_key)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         initializeRecyclerView()
-        MapperImpl.Manager.get().getConnector(applicationContext).subscribe({
-            mapper = it
-        }, {
-            Log.e(TAG, it.message)
-        })
+
+        Mapper.Factory
+                .getKeyMapperSingle(applicationContext)
+                .subscribe({
+                    mapper = it
+                }, {
+                    Log.e(TAG, it.message)
+                })
     }
 
     private fun initializeRecyclerView() {
