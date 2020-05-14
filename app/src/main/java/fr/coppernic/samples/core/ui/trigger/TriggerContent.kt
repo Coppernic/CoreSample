@@ -63,8 +63,6 @@ internal class TriggerContent(context: Context) {
         private const val TAG = "TriggerContent"
         private const val REGEX_BARCODE = ".*barcode.*"
         private const val REGEX_RFID = ".*rfid.*"
-        private const val LABEL_BARCODE = "Barcode"
-        private const val LABEL_RFID = "Rfid"
     }
 
     init {

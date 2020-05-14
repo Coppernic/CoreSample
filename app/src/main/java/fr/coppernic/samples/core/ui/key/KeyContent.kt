@@ -2,10 +2,9 @@ package fr.coppernic.samples.core.ui.key
 
 import android.content.Context
 import android.util.SparseArray
-import fr.coppernic.samples.core.R
+import com.askey.mapping.utils.KeyUtils.getKeyMap
 import fr.coppernic.sdk.mapping.utils.MapperUtils
 import java.util.*
-import kotlin.math.min
 
 /**
  * Helper class for providing sample content for user interfaces created by
@@ -13,11 +12,12 @@ import kotlin.math.min
  *
  *
  */
-class KeyContent() {
+class KeyContent(context: Context?) {
     /**
      * An array of sample (dummy) items.
      */
     val items: MutableList<KeyItem> = ArrayList()
+
     /**
      * A map of sample (dummy) items, by ID.
      */
@@ -29,8 +29,8 @@ class KeyContent() {
     }
 
     init {
-       for ( (k,v) in MapperUtils.KEY_MAP){
-            addItem(KeyItem(k,v))
+        for ((k, v) in MapperUtils.getKeyMap(context)) {
+            addItem(KeyItem(k, v))
         }
         addItem(KeyItem("BARCODE_SCAN", MapperUtils.getBarcodeMappingKeyCode()))
     }

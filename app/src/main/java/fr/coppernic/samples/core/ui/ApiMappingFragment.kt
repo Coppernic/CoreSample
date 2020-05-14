@@ -73,7 +73,7 @@ class ApiMappingFragment : androidx.fragment.app.Fragment() {
     }
 
     private fun loadKey(key: Int): String {
-        val keyContent = KeyContent()
+        val keyContent = KeyContent(context)
         val item = keyContent.itemMap.get(key, KeyItem.NONE)
         return item.name
     }

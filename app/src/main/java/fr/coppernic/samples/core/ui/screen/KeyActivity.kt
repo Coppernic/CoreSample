@@ -38,7 +38,8 @@ class KeyActivity : AppCompatActivity() {
 
     private fun initializeRecyclerView() {
         viewManager = androidx.recyclerview.widget.LinearLayoutManager(this)
-        viewAdapter = KeyAdapter(KeyContent().items.sortedBy { it.name }, object : KeyAdapter.OnKeyAdapterListener {
+        viewAdapter = KeyAdapter(KeyContent(applicationContext).items.sortedBy { it.name }, object : KeyAdapter
+        .OnKeyAdapterListener {
             override fun onKeyChosen(item: KeyItem) {
                 when (intent.getStringExtra(ApiMappingFragment.KEY)) {
                     "P1" -> {
