@@ -2,7 +2,6 @@ package fr.coppernic.samples.core.ui.key
 
 import android.content.Context
 import android.util.SparseArray
-import com.askey.mapping.utils.KeyUtils.getKeyMap
 import fr.coppernic.sdk.mapping.utils.MapperUtils
 import java.util.*
 
