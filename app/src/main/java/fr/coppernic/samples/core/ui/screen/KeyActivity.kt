@@ -27,7 +27,7 @@ class KeyActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         initializeRecyclerView()
 
-        Mapper.Factory
+        val d = Mapper.Factory
                 .getKeyMapperSingle(applicationContext)
                 .subscribe({
                     mapper = it

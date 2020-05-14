@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.askey.mapping.utils.IconUtils
 import fr.coppernic.samples.core.R
@@ -17,6 +18,7 @@ import fr.coppernic.samples.core.ui.screen.KeyActivity
 import fr.coppernic.samples.core.ui.screen.ShortcutActivity
 import fr.coppernic.samples.core.ui.screen.TriggerActivity
 import fr.coppernic.sdk.mapping.Mapper
+import fr.coppernic.sdk.mapping.utils.MapperUtils
 import kotlinx.android.synthetic.main.fragment_api_mapping.*
 
 /**
@@ -40,12 +42,8 @@ class ApiMappingFragment : androidx.fragment.app.Fragment() {
         return inflater.inflate(R.layout.fragment_api_mapping, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
     private fun loadMapper() {
-        Mapper.Factory
+        val d = Mapper.Factory
                 .getKeyMapperSingle(context)
                 .subscribe({
                     mapper = it
@@ -66,9 +64,34 @@ class ApiMappingFragment : androidx.fragment.app.Fragment() {
         }
 
         when (progKey) {
-            Mapper.ProgKey.P1 -> tv_p1.text = "${progKey.name} - ${actionName}"
-            Mapper.ProgKey.P2 -> tv_p2.text = "${progKey.name} - ${actionName}"
-            Mapper.ProgKey.P3 -> tv_p3.text = "${progKey.name} - ${actionName}"
+            Mapper.ProgKey.P1 -> {
+                tv_p1.text = String.format("%s - %s", progKey.name, actionName)
+                loadIcon(img1, actionName)
+            }
+            Mapper.ProgKey.P2 -> {
+                tv_p2.text = String.format("%s - %s", progKey.name, actionName)
+                loadIcon(img2, actionName)
+            }
+            Mapper.ProgKey.P3 -> {
+                tv_p3.text = String.format("%s - %s", progKey.name, actionName)
+                loadIcon(img3, actionName)
+            }
+        }
+    }
+
+    private fun loadIcon(img: ImageView, app: String) {
+        context?.let {
+            val uri: String?
+            val pack: String?
+            if (!app.contains('.')) {//not a package name
+                pack = MapperUtils.fromAppNameToApplicationId(it, app)
+                uri = MapperUtils.fromAppIdToIntent(it, pack)?.toUri(Intent.URI_INTENT_SCHEME)
+            } else {
+                uri = MapperUtils.fromAppIdToIntent(it, app)?.toUri(Intent.URI_INTENT_SCHEME)
+            }
+            var icon = context?.resources?.getDrawable(R.drawable.appwidget_item_bg_normal)
+            icon = IconUtils.getIconFromStringUri(context, uri.toString(), icon)
+            img.setImageDrawable(icon)
         }
     }
 
@@ -79,7 +102,7 @@ class ApiMappingFragment : androidx.fragment.app.Fragment() {
     }
 
     private fun loadScreen() {
-        var keyPos = 1;
+        var keyPos = 1
         listOf<Button>(btnKey1, btnKey2, btnKey3).forEach {
             val pNameKey = "P${keyPos++}"
             it.setOnClickListener {
@@ -132,9 +155,6 @@ class ApiMappingFragment : androidx.fragment.app.Fragment() {
     }
 
     private fun refresh() {
-        img1.visibility = View.GONE
-        img2.visibility = View.GONE
-        img3.visibility = View.GONE
         loadFromMapper(Mapper.ProgKey.P1)
         loadFromMapper(Mapper.ProgKey.P2)
         loadFromMapper(Mapper.ProgKey.P3)

@@ -29,7 +29,7 @@ class ShortcutActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         initializeRecyclerView()
 
-        Mapper.Factory
+        val d = Mapper.Factory
                 .getKeyMapperSingle(applicationContext)
                 .subscribe({
                     mapper = it
@@ -55,14 +55,18 @@ class ShortcutActivity : AppCompatActivity() {
                     ApiMappingFragment.P2 -> {
                         item.let {
                             mapper.mapIntent(Mapper.ProgKey.P2,
-                                    it.launchIntent, KeyEvent.ACTION_DOWN, IntentType.ACTIVITY, it.label.toString())
+                                    it.launchIntent, KeyEvent.ACTION_DOWN, IntentType.ACTIVITY, it
+                                    .label
+                                    .toString())
                         }
                         onBackPressed()
                     }
                     ApiMappingFragment.P3 -> {
                         item.let {
                             mapper.mapIntent(Mapper.ProgKey.P3,
-                                    it.launchIntent, KeyEvent.ACTION_DOWN, IntentType.ACTIVITY, it.label.toString())
+                                    it.launchIntent, KeyEvent.ACTION_DOWN, IntentType.ACTIVITY, it
+                                    .label
+                                    .toString())
                         }
                         onBackPressed()
                     }

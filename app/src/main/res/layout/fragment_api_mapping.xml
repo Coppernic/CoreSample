@@ -21,15 +21,17 @@
 
         <ImageView
             android:id="@+id/img1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@+id/textView13"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
+            app:srcCompat="@android:drawable/screen_background_light"
+            tools:ignore="ContentDescription"
+            tools:srcCompat="@android:drawable/screen_background_light" />
 
         <TextView
             android:id="@+id/tv_p1"
@@ -119,20 +121,23 @@
 
         <ImageView
             android:id="@+id/img2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@+id/textView14"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
+            app:srcCompat="@android:drawable/screen_background_light"
+            tools:ignore="ContentDescription"
+            tools:srcCompat="@android:drawable/screen_background_light" />
 
         <TextView
             android:id="@+id/tv_p2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/img2"
@@ -215,20 +220,23 @@
 
         <ImageView
             android:id="@+id/img3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@+id/textView15"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
+            app:srcCompat="@android:drawable/screen_background_light"
+            tools:ignore="ContentDescription"
+            tools:srcCompat="@android:drawable/screen_background_light" />
 
         <TextView
             android:id="@+id/tv_p3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/img3"
