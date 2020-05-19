@@ -55,7 +55,7 @@ class ApiMappingFragment : androidx.fragment.app.Fragment() {
 
     private fun loadFromMapper(progKey: Mapper.ProgKey) {
         val type = mapper.getMappingType(progKey)
-        var actionName = "";
+        var actionName = ""
 
         when (type) {
             Mapper.MappingType.KEY -> actionName = loadKey(mapper.getKeyMapping(progKey))
