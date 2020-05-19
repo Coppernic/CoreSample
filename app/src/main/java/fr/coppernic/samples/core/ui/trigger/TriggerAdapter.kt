@@ -42,8 +42,4 @@ val listener: OnTriggerAdapterListener) : RecyclerView.Adapter<TriggerAdapter.Vi
         }
 
     }
-
-    companion object {
-        private const val TAG = "TriggerAdapter"
-    }
 }

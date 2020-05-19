@@ -23,7 +23,7 @@ class ShortcutAdapter internal constructor(private val mValues: List<ShortcutIte
         if (holder.item.icon != null) {
             holder.icon.setImageDrawable(holder.item.icon)
         }
-        holder.itemView.setOnClickListener{ listener.onShortcutChosen(holder.item) }
+        holder.itemView.setOnClickListener { listener.onShortcutChosen(holder.item) }
     }
 
     override fun getItemCount() = mValues.size
@@ -36,15 +36,10 @@ class ShortcutAdapter internal constructor(private val mValues: List<ShortcutIte
         val tvLabel: TextView = view.findViewById(R.id.content)
         val icon: ImageView = view.findViewById(R.id.icon)
         lateinit var item: ShortcutItem
+
         @NonNull
         override fun toString(): String {
             return super.toString() + " '" + tvLabel.text + "'"
         }
-
     }
-
-    companion object {
-        private const val TAG = "ShortcutAdapter"
-    }
-
 }

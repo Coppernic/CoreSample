@@ -65,15 +65,15 @@ class ApiMappingFragment : androidx.fragment.app.Fragment() {
 
         when (progKey) {
             Mapper.ProgKey.P1 -> {
-                tv_p1.text = String.format("%s - %s", progKey.name, actionName)
+                tv_p1.text = getString(R.string.mapping_display, progKey.name, actionName)
                 loadIcon(img1, actionName)
             }
             Mapper.ProgKey.P2 -> {
-                tv_p2.text = String.format("%s - %s", progKey.name, actionName)
+                tv_p2.text = getString(R.string.mapping_display, progKey.name, actionName)
                 loadIcon(img2, actionName)
             }
             Mapper.ProgKey.P3 -> {
-                tv_p3.text = String.format("%s - %s", progKey.name, actionName)
+                tv_p3.text = getString(R.string.mapping_display, progKey.name, actionName)
                 loadIcon(img3, actionName)
             }
         }
