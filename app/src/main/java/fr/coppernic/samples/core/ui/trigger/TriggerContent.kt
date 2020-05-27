@@ -9,6 +9,10 @@ import fr.coppernic.samples.core.BuildConfig.DEBUG
 import fr.coppernic.samples.core.R
 import java.util.*
 
+private const val TAG = "TriggerContent"
+private const val REGEX_BARCODE = ".*barcode.*"
+private const val REGEX_RFID = ".*rfid.*"
+
 internal class TriggerContent(context: Context) {
     /**
      * An array of sample (dummy) items.
@@ -57,12 +61,6 @@ internal class TriggerContent(context: Context) {
                 }
             }
         }
-    }
-
-    companion object {
-        private const val TAG = "TriggerContent"
-        private const val REGEX_BARCODE = ".*barcode.*"
-        private const val REGEX_RFID = ".*rfid.*"
     }
 
     init {
