@@ -8,15 +8,15 @@ import android.view.KeyEvent
 import com.askey.mapping.model.IntentType
 import fr.coppernic.samples.core.R
 import fr.coppernic.samples.core.ui.ApiMappingFragment
-import fr.coppernic.samples.core.ui.shortcut.ShortcutAdapter
-import fr.coppernic.samples.core.ui.shortcut.ShortcutContent
-import fr.coppernic.samples.core.ui.shortcut.ShortcutItem
+import fr.coppernic.samples.core.ui.trigger.TriggerAdapter
+import fr.coppernic.samples.core.ui.trigger.TriggerContent
+import fr.coppernic.samples.core.ui.trigger.TriggerItem
 import fr.coppernic.sdk.mapping.Mapper
-import kotlinx.android.synthetic.main.activity_shortcut.*
+import kotlinx.android.synthetic.main.activity_trigger.*
 
-class ShortcutActivity : AppCompatActivity() {
+class TriggerActivity : AppCompatActivity() {
 
-    private val TAG = "ShortcutActivity"
+    private val TAG = "TriggerActivity"
 
     private lateinit var viewAdapter: androidx.recyclerview.widget.RecyclerView.Adapter<*>
     private lateinit var viewManager: androidx.recyclerview.widget.RecyclerView.LayoutManager
@@ -25,7 +25,7 @@ class ShortcutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_shortcut)
+        setContentView(R.layout.activity_trigger)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         initializeRecyclerView()
 
@@ -40,14 +40,18 @@ class ShortcutActivity : AppCompatActivity() {
 
     private fun initializeRecyclerView() {
         viewManager = LinearLayoutManager(this)
-        viewAdapter = ShortcutAdapter(ShortcutContent(applicationContext).items, object : ShortcutAdapter.OnShortcutAdapterListener {
-            override fun onShortcutChosen(item: ShortcutItem) {
-                when (intent.getStringExtra(ApiMappingFragment.SHORTCUT)) {
+        viewAdapter = TriggerAdapter(TriggerContent(applicationContext).items, object :
+                TriggerAdapter
+                .OnTriggerAdapterListener {
+            override fun onTriggerChosen(item: TriggerItem) {
+                when (intent.getStringExtra(ApiMappingFragment.TRIGGER)) {
                     ApiMappingFragment.P1 -> {
                         item.let {
                             mapper.mapIntent(Mapper.ProgKey.P1,
-                                    it.launchIntent, KeyEvent.ACTION_DOWN, IntentType.ACTIVITY, it
-                                    .label
+                                    it.intentDown, KeyEvent.ACTION_DOWN, IntentType.BROADCAST, it.label
+                                    .toString())
+                            mapper.mapIntent(Mapper.ProgKey.P1,
+                                    it.intentUp, KeyEvent.ACTION_UP, IntentType.BROADCAST, it.label
                                     .toString())
                         }
                         onBackPressed()
@@ -55,8 +59,10 @@ class ShortcutActivity : AppCompatActivity() {
                     ApiMappingFragment.P2 -> {
                         item.let {
                             mapper.mapIntent(Mapper.ProgKey.P2,
-                                    it.launchIntent, KeyEvent.ACTION_DOWN, IntentType.ACTIVITY, it
-                                    .label
+                                    it.intentDown, KeyEvent.ACTION_DOWN, IntentType.BROADCAST, it.label
+                                    .toString())
+                            mapper.mapIntent(Mapper.ProgKey.P2,
+                                    it.intentUp, KeyEvent.ACTION_UP, IntentType.BROADCAST, it.label
                                     .toString())
                         }
                         onBackPressed()
@@ -64,8 +70,10 @@ class ShortcutActivity : AppCompatActivity() {
                     ApiMappingFragment.P3 -> {
                         item.let {
                             mapper.mapIntent(Mapper.ProgKey.P3,
-                                    it.launchIntent, KeyEvent.ACTION_DOWN, IntentType.ACTIVITY, it
-                                    .label
+                                    it.intentDown, KeyEvent.ACTION_DOWN, IntentType.BROADCAST, it.label
+                                    .toString())
+                            mapper.mapIntent(Mapper.ProgKey.P3,
+                                    it.intentUp, KeyEvent.ACTION_UP, IntentType.BROADCAST, it.label
                                     .toString())
                         }
                         onBackPressed()
@@ -73,7 +81,7 @@ class ShortcutActivity : AppCompatActivity() {
                 }
             }
         })
-        rv_shortcut.apply {
+        rv_trigger.apply {
             setHasFixedSize(true)
             layoutManager = viewManager
             addItemDecoration(androidx.recyclerview.widget.DividerItemDecoration(context, LinearLayoutManager.VERTICAL))

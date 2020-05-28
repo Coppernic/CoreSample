@@ -1,24 +1,25 @@
 package fr.coppernic.samples.core.ui
 
 import android.content.Intent
-import android.nfc.Tag
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
+import androidx.fragment.app.Fragment
+import com.askey.mapping.utils.IconUtils
 import fr.coppernic.samples.core.R
 import fr.coppernic.samples.core.ui.key.KeyContent
 import fr.coppernic.samples.core.ui.key.KeyItem
 import fr.coppernic.samples.core.ui.screen.KeyActivity
 import fr.coppernic.samples.core.ui.screen.ShortcutActivity
+import fr.coppernic.samples.core.ui.screen.TriggerActivity
 import fr.coppernic.sdk.mapping.Mapper
-import fr.coppernic.sdk.mapping.cone2.MapperImpl
+import fr.coppernic.sdk.mapping.utils.MapperUtils
 import kotlinx.android.synthetic.main.fragment_api_mapping.*
-import java.util.function.Consumer
 
 /**
  * A simple [Fragment] subclass.
@@ -41,22 +42,20 @@ class ApiMappingFragment : androidx.fragment.app.Fragment() {
         return inflater.inflate(R.layout.fragment_api_mapping, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
     private fun loadMapper() {
-        MapperImpl.Manager.get().getConnector(context).subscribe({
-            mapper = it
-            refresh()
-        }, {
-            Log.e(TAG, it.message)
-        })
+        val d = Mapper.Factory
+                .getKeyMapperSingle(context)
+                .subscribe({
+                    mapper = it
+                    refresh()
+                }, {
+                    Log.e(TAG, it.message)
+                })
     }
 
     private fun loadFromMapper(progKey: Mapper.ProgKey) {
         val type = mapper.getMappingType(progKey)
-        var actionName = "";
+        var actionName = ""
 
         when (type) {
             Mapper.MappingType.KEY -> actionName = loadKey(mapper.getKeyMapping(progKey))
@@ -65,20 +64,45 @@ class ApiMappingFragment : androidx.fragment.app.Fragment() {
         }
 
         when (progKey) {
-            Mapper.ProgKey.P1 -> tv_p1.text = "${progKey.name} - ${type.name} - ${actionName}"
-            Mapper.ProgKey.P2 -> tv_p2.text = "${progKey.name} - ${type.name} - ${actionName}"
-            Mapper.ProgKey.P3 -> tv_p3.text = "${progKey.name} - ${type.name} - ${actionName}"
+            Mapper.ProgKey.P1 -> {
+                tv_p1.text = getString(R.string.mapping_display, progKey.name, actionName)
+                loadIcon(img1, actionName)
+            }
+            Mapper.ProgKey.P2 -> {
+                tv_p2.text = getString(R.string.mapping_display, progKey.name, actionName)
+                loadIcon(img2, actionName)
+            }
+            Mapper.ProgKey.P3 -> {
+                tv_p3.text = getString(R.string.mapping_display, progKey.name, actionName)
+                loadIcon(img3, actionName)
+            }
+        }
+    }
+
+    private fun loadIcon(img: ImageView, app: String) {
+        context?.let {
+            val uri: String?
+            val pack: String?
+            if (!app.contains('.')) {//not a package name
+                pack = MapperUtils.fromAppNameToApplicationId(it, app)
+                uri = MapperUtils.fromAppIdToIntent(it, pack)?.toUri(Intent.URI_INTENT_SCHEME)
+            } else {
+                uri = MapperUtils.fromAppIdToIntent(it, app)?.toUri(Intent.URI_INTENT_SCHEME)
+            }
+            var icon = context?.resources?.getDrawable(R.drawable.appwidget_item_bg_normal)
+            icon = IconUtils.getIconFromStringUri(context, uri.toString(), icon)
+            img.setImageDrawable(icon)
         }
     }
 
     private fun loadKey(key: Int): String {
-        val keyContent = KeyContent()
+        val keyContent = KeyContent(context)
         val item = keyContent.itemMap.get(key, KeyItem.NONE)
         return item.name
     }
 
     private fun loadScreen() {
-        var keyPos = 1;
+        var keyPos = 1
         listOf<Button>(btnKey1, btnKey2, btnKey3).forEach {
             val pNameKey = "P${keyPos++}"
             it.setOnClickListener {
@@ -94,6 +118,16 @@ class ApiMappingFragment : androidx.fragment.app.Fragment() {
             it.setOnClickListener {
                 val intent = Intent(context, ShortcutActivity::class.java)
                 intent.putExtra(SHORTCUT, pNameShort)
+                startActivity(intent)
+            }
+        }
+
+        var trigPos = 1
+        listOf<Button>(btnTrigger1, btnTrigger2, btnTrigger3).forEach {
+            val pNameTrig = "P${trigPos++}"
+            it.setOnClickListener {
+                val intent = Intent(context, TriggerActivity::class.java)
+                intent.putExtra(TRIGGER, pNameTrig)
                 startActivity(intent)
             }
         }
@@ -130,6 +164,7 @@ class ApiMappingFragment : androidx.fragment.app.Fragment() {
     companion object {
         const val KEY = "key"
         const val SHORTCUT = "shortcut"
+        const val TRIGGER = "trigger"
         const val P1 = "P1"
         const val P2 = "P2"
         const val P3 = "P3"

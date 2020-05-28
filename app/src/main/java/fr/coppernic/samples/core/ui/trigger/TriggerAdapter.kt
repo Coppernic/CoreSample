@@ -1,19 +1,19 @@
-package fr.coppernic.samples.core.ui.shortcut
+package fr.coppernic.samples.core.ui.trigger
 
-import androidx.annotation.NonNull
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import fr.coppernic.samples.core.R
 
-class ShortcutAdapter internal constructor(private val mValues: List<ShortcutItem>, private val listener: OnShortcutAdapterListener) : RecyclerView.Adapter<ShortcutAdapter.ViewHolder>() {
-    @NonNull
+class TriggerAdapter internal constructor(private val mValues: List<TriggerItem>, private
+val listener: OnTriggerAdapterListener) : RecyclerView.Adapter<TriggerAdapter.ViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view: View = LayoutInflater.from(parent.context)
-                .inflate(R.layout.list_item_shortcut, parent, false)
+                .inflate(R.layout.list_item_trigger, parent, false)
         return ViewHolder(view)
     }
 
@@ -23,23 +23,23 @@ class ShortcutAdapter internal constructor(private val mValues: List<ShortcutIte
         if (holder.item.icon != null) {
             holder.icon.setImageDrawable(holder.item.icon)
         }
-        holder.itemView.setOnClickListener { listener.onShortcutChosen(holder.item) }
+        holder.itemView.setOnClickListener { listener?.onTriggerChosen(holder.item) }
     }
 
     override fun getItemCount() = mValues.size
 
-    internal interface OnShortcutAdapterListener {
-        fun onShortcutChosen(item: ShortcutItem)
+
+    internal interface OnTriggerAdapterListener {
+        fun onTriggerChosen(item: TriggerItem)
     }
 
-    inner class ViewHolder internal constructor(view: View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder internal constructor(view: View) : RecyclerView.ViewHolder(view) {
         val tvLabel: TextView = view.findViewById(R.id.content)
         val icon: ImageView = view.findViewById(R.id.icon)
-        lateinit var item: ShortcutItem
-
-        @NonNull
+        lateinit var item: TriggerItem
         override fun toString(): String {
             return super.toString() + " '" + tvLabel.text + "'"
         }
+
     }
 }

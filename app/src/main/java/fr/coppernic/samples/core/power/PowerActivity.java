@@ -83,5 +83,4 @@ public class PowerActivity extends AppCompatActivity {
         return p;
     }
 
-
 }
