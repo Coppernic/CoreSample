@@ -8,6 +8,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import fr.coppernic.samples.core.ui.*
+import fr.coppernic.samples.core.ui.hardwareTools.HdwrTestConeFragment
 import fr.coppernic.sdk.utils.helpers.OsHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -79,6 +80,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_powermgmt -> displayFragment(ApiPowerMgmtFragment::class.java.name)
             R.id.nav_net -> displayFragment(NetFragment::class.java.name)
             R.id.nav_mapping -> displayFragment(ApiMappingFragment::class.java.name)
+            R.id.nav_tools -> displayFragment(HdwrTestConeFragment::class.java.name)
         }
 
         drawer.closeDrawer(GravityCompat.START)
@@ -108,6 +110,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             HdkCone2Fragment::class.java.name -> HdkCone2Fragment()
             NetFragment::class.java.name -> NetFragment()
             ApiMappingFragment::class.java.name -> ApiMappingFragment()
+            HdwrTestConeFragment::class.java.name -> HdwrTestConeFragment()
             else -> HdkConeFragment()
         }
     }

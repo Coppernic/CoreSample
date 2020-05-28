@@ -95,4 +95,11 @@
     <string name="label_trig_barcode">Trig barcode scan using %1$s</string>
     <string name="label_trig_rfid">Trig rfid read using %1$s</string>
     <string name="mapping_display">%1$s - %2$s</string>
+    <string name="test_exp_port">test_exp_port</string>
+    <string name="launch_test">Launch test</string>
+    <string name="result">Test result :</string>
+    <string name="dial_positive">Continue</string>
+    <string name="dial_negative">Cancel</string>
+    <string name="test_progress">Test is in progress</string>
+    <string name="nav_tools">Tools</string>
 </resources>

@@ -36,6 +36,10 @@
                 android:id="@+id/nav_mapping"
                 android:title="@string/nav_mapping"
                 />
+            <item
+                android:id="@+id/nav_tools"
+                android:title="@string/nav_tools"
+                />
         </menu>
     </item>
 </menu>
