@@ -101,5 +101,37 @@
     <string name="dial_positive">Continue</string>
     <string name="dial_negative">Cancel</string>
     <string name="test_progress">Test is in progress</string>
-    <string name="nav_tools">Tools</string>
+    <string name="auto_test">Auto Test</string>
+    <string name="terminal">Terminal</string>
+    <string name="btn_open">Open</string>
+    <string name="btn_close">Close</string>
+    <string name="send">Send</string>
+    <string name="dial_opt">Options</string>
+
+    <string-array name="baudrates">
+        <item>921600</item>
+        <item>460800</item>
+        <item>230400</item>
+        <item>115200</item>
+        <item>57600</item>
+        <item>38400</item>
+        <item>19200</item>
+        <item>9600</item>
+        <item>4800</item>
+        <item>2400</item>
+        <item>1200</item>
+        <item>600</item>
+        <item>300</item>
+    </string-array>
+    <string-array name="port_names">
+        <item>/dev/ttyHSL1</item>
+        <item>/dev/ttyUSB0</item>
+    </string-array>
+    <string-array name="array_opt_term">
+        <item>Set RTS</item>
+        <item>Set CTS</item>
+        <item>Clear screen</item>
+        <item>Refresh devices</item>
+        <item>Clear history</item>
+    </string-array>
 </resources>

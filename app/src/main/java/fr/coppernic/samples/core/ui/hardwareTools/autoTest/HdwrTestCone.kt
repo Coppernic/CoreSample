@@ -1,4 +1,4 @@
-package fr.coppernic.samples.core.ui.hardwareTools
+package fr.coppernic.samples.core.ui.hardwareTools.autoTest
 
 import android.content.Context
 import android.os.SystemClock
@@ -10,12 +10,8 @@ import fr.coppernic.sdk.serial.SerialFactory
 import fr.coppernic.sdk.utils.core.CpcBytes
 import fr.coppernic.sdk.utils.core.CpcResult.RESULT
 import fr.coppernic.sdk.utils.io.InstanceListener
-import fr.coppernic.sdk.utils.io.Interruptables
 import fr.coppernic.sdk.utils.usb.UsbHelper
 import io.reactivex.Completable
-import io.reactivex.SingleObserver
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import java.util.*
@@ -54,24 +50,6 @@ class ExpansionPortTest(ctx: Context?, man: FragmentManager,
 //                }
 //            }
 //        };
-
-    //        private BroadcastReceiver mUsbDevicePermissions = new BroadcastReceiver() {
-    //            public void onReceive(Context context, Intent intent) {
-    //                String action = intent.getAction();
-    //                if (UsbHelper.ACTION_USB_PERMISSION.equals(action)) {
-    //                    UsbDevice device = intent
-    //                            .getParcelableExtra("device");
-    //                    if (!intent.getBooleanExtra("permission", false)) {
-    //                        Timber.d("permission denied for device %s", device);
-    //                        postError("[FAILED] : Permission denied for USB device");
-    //                    } else {
-    //                        mResult = RESULT.OK;
-    //                    }
-    //                    semUsb.release();
-    //                }
-    //            }
-    //        };
-
 
     override fun setUp(): Completable? {
         Timber.d("setUp")
@@ -208,7 +186,7 @@ class ExpansionPortTest(ctx: Context?, man: FragmentManager,
         Log.d(TAG, "usb device " + UsbHelper.getUsbDeviceListLog(mCtx))
         when (deviceConnected) {
             RESULT.OK -> {
-                SystemClock.sleep(1200)
+                SystemClock.sleep(2000)
                 val devices = ftdiSerial.listDevices()
                 if (devices == null || devices.isEmpty()) {
                     Log.e(TAG, "Ftdi is off")

@@ -2,13 +2,13 @@ package fr.coppernic.samples.core
 
 import android.os.Bundle
 import com.google.android.material.navigation.NavigationView
-import androidx.fragment.app.Fragment
 import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import fr.coppernic.samples.core.ui.*
-import fr.coppernic.samples.core.ui.hardwareTools.HdwrTestConeFragment
+import fr.coppernic.samples.core.ui.hardwareTools.autoTest.HdwrTestConeFragment
+import fr.coppernic.samples.core.ui.hardwareTools.terminal.TerminalFragment
 import fr.coppernic.sdk.utils.helpers.OsHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -80,7 +80,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_powermgmt -> displayFragment(ApiPowerMgmtFragment::class.java.name)
             R.id.nav_net -> displayFragment(NetFragment::class.java.name)
             R.id.nav_mapping -> displayFragment(ApiMappingFragment::class.java.name)
-            R.id.nav_tools -> displayFragment(HdwrTestConeFragment::class.java.name)
+            R.id.nav_auto_test -> displayFragment(HdwrTestConeFragment::class.java.name)
+            R.id.nav_terminal -> displayFragment(TerminalFragment::class.java.name)
         }
 
         drawer.closeDrawer(GravityCompat.START)
@@ -111,6 +112,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             NetFragment::class.java.name -> NetFragment()
             ApiMappingFragment::class.java.name -> ApiMappingFragment()
             HdwrTestConeFragment::class.java.name -> HdwrTestConeFragment()
+            TerminalFragment::class.java.name -> TerminalFragment()
             else -> HdkConeFragment()
         }
     }

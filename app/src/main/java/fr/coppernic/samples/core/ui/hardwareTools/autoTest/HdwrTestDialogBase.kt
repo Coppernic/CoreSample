@@ -1,9 +1,12 @@
-package fr.coppernic.samples.core.ui.hardwareTools
+package fr.coppernic.samples.core.ui.hardwareTools.autoTest
 
 
 import android.content.Context
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
+import fr.coppernic.samples.core.ui.hardwareTools.autoTest.ErrorAlertDialogFragment
+import fr.coppernic.samples.core.ui.hardwareTools.autoTest.HdwrErrorAlertDialogListener
+import fr.coppernic.samples.core.ui.hardwareTools.autoTest.HdwrTestBase
 import io.reactivex.Completable
 import timber.log.Timber
 import java.util.concurrent.Semaphore

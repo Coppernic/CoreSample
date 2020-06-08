@@ -13,6 +13,8 @@ copper {
     projectName = "CoreSample"
 
     options {
+        //system true
+        //showDebugKey true // add this to see key for os debug
         outputNameHook = { project, variant, output ->
             output.outputFileName
         }
@@ -29,6 +31,7 @@ repositories {
     google()
     jcenter()
     maven { url 'https://artifactory.coppernic.fr/artifactory/libs-release' }
+//    maven { url 'http://arti-01.coppernic.local:8081/artifactory/libs-release' }
     mavenLocal()
 }
 
@@ -58,9 +61,10 @@ android {
         exclude 'META-INF/main.kotlin_module'
         exclude 'META-INF/lib_release.kotlin_module'
     }
-    
+
     compileOptions {
         targetCompatibility = 1.8
+        sourceCompatibility = 1.8
     }
 }
 
@@ -88,7 +92,7 @@ dependencies {
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 
     implementation 'fr.coppernic.sdk.cpcutils:CpcUtilsLib:6.19.1'
-    implementation "fr.coppernic.sdk.core:CpcCore:1.10.1"
+    implementation 'fr.coppernic.sdk.core:CpcCore:1.10.2'
     implementation('fr.coppernic.lib:splash:0.2.1') {
         exclude group: 'com.android.support'
     }

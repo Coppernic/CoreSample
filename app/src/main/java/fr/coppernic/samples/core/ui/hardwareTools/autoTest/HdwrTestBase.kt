@@ -1,8 +1,6 @@
-package fr.coppernic.samples.core.ui.hardwareTools
+package fr.coppernic.samples.core.ui.hardwareTools.autoTest
 
 import android.content.Context
-import android.os.AsyncTask
-import android.util.Log
 import fr.coppernic.sdk.utils.core.CpcResult.RESULT
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers

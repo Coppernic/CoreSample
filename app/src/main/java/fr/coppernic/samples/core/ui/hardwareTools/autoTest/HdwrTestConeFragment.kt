@@ -1,4 +1,4 @@
-package fr.coppernic.samples.core.ui.hardwareTools
+package fr.coppernic.samples.core.ui.hardwareTools.autoTest
 
 import android.os.Bundle
 import android.view.LayoutInflater
