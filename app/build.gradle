@@ -88,7 +88,7 @@ dependencies {
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 
     implementation 'fr.coppernic.sdk.cpcutils:CpcUtilsLib:6.19.1'
-    implementation "fr.coppernic.sdk.core:CpcCore:1.10.1"
+    implementation "fr.coppernic.sdk.core:CpcCore:1.11.2"
     implementation('fr.coppernic.lib:splash:0.2.1') {
         exclude group: 'com.android.support'
     }
