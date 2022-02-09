@@ -40,9 +40,9 @@ class ShortcutItem : Parcelable {
     @NonNull
     override fun toString(): String {
         return "KeyItem{" +
-                "name='" + label + '\'' +
-                ", launchIntent='" + launchIntent + '\'' +
-                '}'
+            "name='" + label + '\'' +
+            ", launchIntent='" + launchIntent + '\'' +
+            '}'
     }
 
     override fun describeContents(): Int {

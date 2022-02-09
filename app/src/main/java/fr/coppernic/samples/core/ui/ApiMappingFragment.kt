@@ -83,7 +83,7 @@ class ApiMappingFragment : androidx.fragment.app.Fragment() {
         context?.let {
             val uri: String?
             val pack: String?
-            if (!app.contains('.')) {//not a package name
+            if (!app.contains('.')) { // not a package name
                 pack = MapperUtils.fromAppNameToApplicationId(it, app)
                 uri = MapperUtils.fromAppIdToIntent(it, pack)?.toUri(Intent.URI_INTENT_SCHEME)
             } else {

@@ -1,17 +1,16 @@
 package fr.coppernic.samples.core.ui.key
 
-import androidx.recyclerview.widget.RecyclerView
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import fr.coppernic.samples.core.R
 
 class KeyAdapter internal constructor(private val mValues: List<KeyItem>, private val mListener: OnKeyAdapterListener) : RecyclerView.Adapter<KeyAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view: View = LayoutInflater.from(parent.context)
-                .inflate(R.layout.list_item_key, parent, false)
+            .inflate(R.layout.list_item_key, parent, false)
         return ViewHolder(view)
     }
 
@@ -29,11 +28,9 @@ class KeyAdapter internal constructor(private val mValues: List<KeyItem>, privat
         override fun toString(): String {
             return super.toString() + " '" + mContentView.text + "'"
         }
-
     }
 
     internal interface OnKeyAdapterListener {
         fun onKeyChosen(item: KeyItem)
     }
-
 }

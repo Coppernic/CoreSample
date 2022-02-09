@@ -10,13 +10,12 @@ class KeyItem internal constructor(val name: String, val code: Int) : Serializab
     @NonNull
     override fun toString(): String {
         return "KeyItem{" +
-                "name='" + name + '\'' +
-                ", code='" + code + '\'' +
-                '}'
+            "name='" + name + '\'' +
+            ", code='" + code + '\'' +
+            '}'
     }
 
     companion object {
         val NONE = KeyItem("UNKNOWN", 0)
     }
-
 }

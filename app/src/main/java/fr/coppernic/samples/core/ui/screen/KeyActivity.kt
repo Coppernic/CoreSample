@@ -1,9 +1,9 @@
 package fr.coppernic.samples.core.ui.screen
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import android.util.Log
 import fr.coppernic.samples.core.R
 import fr.coppernic.samples.core.ui.ApiMappingFragment
 import fr.coppernic.samples.core.ui.key.KeyAdapter
@@ -20,7 +20,6 @@ class KeyActivity : AppCompatActivity() {
     private lateinit var viewManager: RecyclerView.LayoutManager
     lateinit var mapper: Mapper
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_key)
@@ -28,35 +27,41 @@ class KeyActivity : AppCompatActivity() {
         initializeRecyclerView()
 
         val d = Mapper.Factory
-                .getKeyMapperSingle(applicationContext)
-                .subscribe({
+            .getKeyMapperSingle(applicationContext)
+            .subscribe(
+                {
                     mapper = it
-                }, {
+                },
+                {
                     Log.e(TAG, it.message)
-                })
+                }
+            )
     }
 
     private fun initializeRecyclerView() {
         viewManager = androidx.recyclerview.widget.LinearLayoutManager(this)
-        viewAdapter = KeyAdapter(KeyContent(applicationContext).items.sortedBy { it.name }, object : KeyAdapter
-        .OnKeyAdapterListener {
-            override fun onKeyChosen(item: KeyItem) {
-                when (intent.getStringExtra(ApiMappingFragment.KEY)) {
-                    "P1" -> {
-                        mapper.mapKey(Mapper.ProgKey.P1, item.code)
-                        onBackPressed()
-                    }
-                    "P2" -> {
-                        mapper.mapKey(Mapper.ProgKey.P2, item.code)
-                        onBackPressed()
-                    }
-                    "P3" -> {
-                        mapper.mapKey(Mapper.ProgKey.P3, item.code)
-                        onBackPressed()
+        viewAdapter = KeyAdapter(
+            KeyContent(applicationContext).items.sortedBy { it.name },
+            object : KeyAdapter
+                .OnKeyAdapterListener {
+                override fun onKeyChosen(item: KeyItem) {
+                    when (intent.getStringExtra(ApiMappingFragment.KEY)) {
+                        "P1" -> {
+                            mapper.mapKey(Mapper.ProgKey.P1, item.code)
+                            onBackPressed()
+                        }
+                        "P2" -> {
+                            mapper.mapKey(Mapper.ProgKey.P2, item.code)
+                            onBackPressed()
+                        }
+                        "P3" -> {
+                            mapper.mapKey(Mapper.ProgKey.P3, item.code)
+                            onBackPressed()
+                        }
                     }
                 }
             }
-        })
+        )
         rv_key.apply {
             setHasFixedSize(true)
             layoutManager = viewManager

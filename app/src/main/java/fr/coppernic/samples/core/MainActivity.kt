@@ -67,7 +67,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
 
@@ -115,7 +114,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun displayFragment(tag: String) {
         lastTag = tag
         supportFragmentManager.beginTransaction()
-                .replace(R.id.container, getFragmentFromTag(lastTag), lastTag)
-                .commit()
+            .replace(R.id.container, getFragmentFromTag(lastTag), lastTag)
+            .commit()
     }
 }
