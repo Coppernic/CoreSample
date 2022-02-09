@@ -21,7 +21,7 @@ abstract class RobolectricTest {
         @BeforeClass
         @JvmStatic
         fun beforeClass() {
-            //Configure robolectric
+            // Configure robolectric
             Timber.plant(SystemLogTree())
             ShadowLog.stream = System.out
         }
@@ -41,7 +41,6 @@ abstract class RobolectricTest {
         } catch (e: InterruptedException) {
             e.printStackTrace()
         }
-
     }
 
     fun unblock() {
@@ -55,5 +54,4 @@ abstract class RobolectricTest {
     fun doNotGoHere() {
         assertTrue(false)
     }
-
 }
