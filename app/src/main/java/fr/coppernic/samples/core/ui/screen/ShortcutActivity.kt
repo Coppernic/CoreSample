@@ -7,12 +7,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.askey.mapping.model.IntentType
 import fr.coppernic.samples.core.R
+import fr.coppernic.samples.core.databinding.ActivityShortcutBinding
 import fr.coppernic.samples.core.ui.ApiMappingFragment
 import fr.coppernic.samples.core.ui.shortcut.ShortcutAdapter
 import fr.coppernic.samples.core.ui.shortcut.ShortcutContent
 import fr.coppernic.samples.core.ui.shortcut.ShortcutItem
 import fr.coppernic.sdk.mapping.Mapper
-import kotlinx.android.synthetic.main.activity_shortcut.*
 
 class ShortcutActivity : AppCompatActivity() {
 
@@ -22,9 +22,16 @@ class ShortcutActivity : AppCompatActivity() {
     private lateinit var viewManager: androidx.recyclerview.widget.RecyclerView.LayoutManager
     lateinit var mapper: Mapper
 
+    private lateinit var binding: ActivityShortcutBinding
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_shortcut)
+
+        binding = ActivityShortcutBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         initializeRecyclerView()
 
@@ -35,7 +42,7 @@ class ShortcutActivity : AppCompatActivity() {
                     mapper = it
                 },
                 {
-                    Log.e(TAG, it.message)
+                    it.message?.let { it1 -> Log.e(TAG, it1) }
                 }
             )
     }
@@ -87,7 +94,7 @@ class ShortcutActivity : AppCompatActivity() {
                 }
             }
         )
-        rv_shortcut.apply {
+       binding.rvShortcut.apply {
             setHasFixedSize(true)
             layoutManager = viewManager
             addItemDecoration(androidx.recyclerview.widget.DividerItemDecoration(context, LinearLayoutManager.VERTICAL))

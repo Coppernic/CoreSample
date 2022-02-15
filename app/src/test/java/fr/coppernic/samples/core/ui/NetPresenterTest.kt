@@ -8,7 +8,6 @@ import java.security.InvalidParameterException
 
 class NetPresenterTest : RobolectricTest() {
 
-
     lateinit var presenter: NetPresenter
 
     @Before
@@ -37,7 +36,6 @@ class NetPresenterTest : RobolectricTest() {
         assertTrue(presenter.isValidMask("255.255.255.255"))
         assertTrue(presenter.isValidMask("1.0.0.0"))
         assertTrue(presenter.isValidMask("1.1.1.1"))
-
     }
 
     @Test

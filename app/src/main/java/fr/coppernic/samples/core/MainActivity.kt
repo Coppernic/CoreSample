@@ -1,17 +1,18 @@
 package fr.coppernic.samples.core
 
 import android.os.Bundle
-import com.google.android.material.navigation.NavigationView
-import androidx.fragment.app.Fragment
-import androidx.core.view.GravityCompat
+import android.view.MenuItem
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import android.view.MenuItem
+import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
+import com.google.android.material.navigation.NavigationView
+import fr.coppernic.samples.core.databinding.ActivityMainBinding
+import fr.coppernic.samples.core.databinding.AppBarMainBinding
 import fr.coppernic.samples.core.ui.*
 import fr.coppernic.sdk.utils.helpers.OsHelper
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.nav_header_main.view.*
+import timber.log.Timber
 
 private const val KEY_LAST_TAG = "last_tag"
 
@@ -19,26 +20,42 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private var lastTag = ""
 
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var bindingToolBar: AppBarMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        bindingToolBar = AppBarMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-        setSupportActionBar(toolbar)
+        Timber.v("onCreate")
 
-        val toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer.addDrawerListener(toggle)
+        setSupportActionBar(bindingToolBar.toolbar)
+
+        val toggle = ActionBarDrawerToggle(
+            this, binding.drawer, bindingToolBar.toolbar, R.string.navigation_drawer_open,
+            R.string
+                .navigation_drawer_close
+        )
+        binding.drawer.addDrawerListener(toggle)
         toggle.syncState()
 
-        nav.setNavigationItemSelectedListener(this)
-        nav.getHeaderView(0).tvVersion.text = getString(R.string.version,
-                BuildConfig.VERSION_NAME + if (BuildConfig.DEBUG) " debug" else "")
+        binding.nav.setNavigationItemSelectedListener(this)
+        binding.nav.getHeaderView(0).findViewById<TextView>(R.id.tvVersion).text = getString(
+            R.string.version,
+            BuildConfig.VERSION_NAME + if (BuildConfig.DEBUG) " debug" else ""
+        )
 
         restoreState(savedInstanceState)
+
+        Timber.v("end onCreate")
     }
 
     override fun onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START)
+        if (binding.drawer.isDrawerOpen(GravityCompat.START)) {
+            binding.drawer.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
         }
@@ -80,7 +97,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_mapping -> displayFragment(ApiMappingFragment::class.java.name)
         }
 
-        drawer.closeDrawer(GravityCompat.START)
+        binding.drawer.closeDrawer(GravityCompat.START)
         return true
     }
 

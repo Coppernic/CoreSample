@@ -5,12 +5,12 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import fr.coppernic.samples.core.R
+import fr.coppernic.samples.core.databinding.ActivityKeyBinding
 import fr.coppernic.samples.core.ui.ApiMappingFragment
 import fr.coppernic.samples.core.ui.key.KeyAdapter
 import fr.coppernic.samples.core.ui.key.KeyContent
 import fr.coppernic.samples.core.ui.key.KeyItem
 import fr.coppernic.sdk.mapping.Mapper
-import kotlinx.android.synthetic.main.activity_key.*
 
 class KeyActivity : AppCompatActivity() {
 
@@ -20,9 +20,15 @@ class KeyActivity : AppCompatActivity() {
     private lateinit var viewManager: RecyclerView.LayoutManager
     lateinit var mapper: Mapper
 
+    private lateinit var binding: ActivityKeyBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_key)
+        binding = ActivityKeyBinding.inflate(layoutInflater)
+        val view = binding.root
+
+        setContentView(view)
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         initializeRecyclerView()
 
@@ -33,7 +39,7 @@ class KeyActivity : AppCompatActivity() {
                     mapper = it
                 },
                 {
-                    Log.e(TAG, it.message)
+                    it.message?.let { it1 -> Log.e(TAG, it1) }
                 }
             )
     }
@@ -62,7 +68,7 @@ class KeyActivity : AppCompatActivity() {
                 }
             }
         )
-        rv_key.apply {
+        binding.rvKey.apply {
             setHasFixedSize(true)
             layoutManager = viewManager
             addItemDecoration(androidx.recyclerview.widget.DividerItemDecoration(context, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL))

@@ -13,7 +13,6 @@ import fr.coppernic.samples.core.ui.trigger.TriggerAdapter
 import fr.coppernic.samples.core.ui.trigger.TriggerContent
 import fr.coppernic.samples.core.ui.trigger.TriggerItem
 import fr.coppernic.sdk.mapping.Mapper
-import kotlinx.android.synthetic.main.activity_trigger.*
 
 class TriggerActivity : AppCompatActivity() {
 
@@ -23,11 +22,14 @@ class TriggerActivity : AppCompatActivity() {
     private lateinit var viewManager: androidx.recyclerview.widget.RecyclerView.LayoutManager
     lateinit var mapper: Mapper
 
+    private lateinit var mRecyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trigger)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        mRecyclerView = findViewById<RecyclerView>(R.id.rv_trigger)
+
         initializeRecyclerView()
 
         val d = Mapper.Factory
@@ -35,9 +37,11 @@ class TriggerActivity : AppCompatActivity() {
             .subscribe(
                 {
                     mapper = it
-                }, {
-                    Log.e(TAG, it.message)
-                })
+                },
+                {
+                    it.message?.let { it1 -> Log.e(TAG, it1) }
+                }
+            )
     }
 
     private fun initializeRecyclerView() {
@@ -103,8 +107,9 @@ class TriggerActivity : AppCompatActivity() {
                     }
                 }
             }
-        })
-        rv_trigger.apply {
+        )
+
+        mRecyclerView.apply {
             setHasFixedSize(true)
             layoutManager = viewManager
             addItemDecoration(androidx.recyclerview.widget.DividerItemDecoration(context, LinearLayoutManager.VERTICAL))

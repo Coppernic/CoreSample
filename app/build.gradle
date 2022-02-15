@@ -4,7 +4,6 @@ plugins {
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 apply plugin: 'fr.coppernic.extensions'
@@ -27,23 +26,25 @@ apply plugin: 'fr.coppernic.android'
 
 repositories {
     google()
-    jcenter()
     maven { url 'https://artifactory.coppernic.fr/artifactory/libs-release' }
     mavenLocal()
 }
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 31
 
     defaultConfig {
         applicationId "fr.coppernic.samples.core"
-        minSdkVersion 17
-        targetSdkVersion 27
+        minSdkVersion 23
+        targetSdkVersion 31
         versionCode versioning.info.versionCode
         versionName versioning.info.display
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         vectorDrawables.useSupportLibrary = true
+
+        multiDexEnabled true
+
     }
 
     buildTypes {
@@ -52,6 +53,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    buildFeatures {
+        dataBinding = true
+        viewBinding true
     }
 
     packagingOptions {
@@ -69,43 +75,40 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'com.google.android.material:material:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     implementation 'com.jakewharton:butterknife:10.2.0'
     implementation 'com.jakewharton.timber:timber:4.7.1'
-    implementation 'fr.bipi.treessence:treessence:0.3.0'
+    implementation 'com.github.bastienpaulfr:Treessence:1.0.5'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
     kapt 'com.jakewharton:butterknife-compiler:10.2.0'
 
     //noinspection GradleDependency
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
-    implementation 'com.github.quickpermissions:quickpermissions-kotlin:0.4.0'
 
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 
     implementation 'fr.coppernic.sdk.cpcutils:CpcUtilsLib:6.19.1'
-    implementation "fr.coppernic.sdk.core:CpcCore:1.11.2"
-    implementation('fr.coppernic.lib:splash:0.2.1') {
-        exclude group: 'com.android.support'
-    }
+    implementation "fr.coppernic.sdk.core:CpcCore:2.0.5"
+    implementation 'com.github.coppernic:splash:0.4.1@aar'
 
     // Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
-    implementation 'fr.bipi.treessence:treessence:0.3.0'
+    implementation 'com.github.bastienpaulfr:Treessence:1.0.5'
     implementation 'com.arcao:slf4j-timber:3.1'
 
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.hamcrest:hamcrest-all:1.3'
     //noinspection GradleDependency
     testImplementation 'org.awaitility:awaitility:3.0.0'
-    testImplementation 'org.mockito:mockito-core:2.23.4'
+    testImplementation 'org.mockito:mockito-core:3.12.4'
     //noinspection GradleDependency
     testImplementation 'org.robolectric:robolectric:3.8'
 
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
