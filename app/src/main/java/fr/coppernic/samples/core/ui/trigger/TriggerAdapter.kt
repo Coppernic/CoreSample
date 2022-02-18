@@ -8,12 +8,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import fr.coppernic.samples.core.R
 
-class TriggerAdapter internal constructor(private val mValues: List<TriggerItem>, private
-val listener: OnTriggerAdapterListener) : RecyclerView.Adapter<TriggerAdapter.ViewHolder>() {
+class TriggerAdapter internal constructor(
+    private val mValues: List<TriggerItem>,
+    private    
+    val listener: OnTriggerAdapterListener
+) : RecyclerView.Adapter<TriggerAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view: View = LayoutInflater.from(parent.context)
-                .inflate(R.layout.list_item_trigger, parent, false)
+            .inflate(R.layout.list_item_trigger, parent, false)
         return ViewHolder(view)
     }
 
@@ -28,7 +31,6 @@ val listener: OnTriggerAdapterListener) : RecyclerView.Adapter<TriggerAdapter.Vi
 
     override fun getItemCount() = mValues.size
 
-
     internal interface OnTriggerAdapterListener {
         fun onTriggerChosen(item: TriggerItem)
     }
@@ -40,6 +42,5 @@ val listener: OnTriggerAdapterListener) : RecyclerView.Adapter<TriggerAdapter.Vi
         override fun toString(): String {
             return super.toString() + " '" + tvLabel.text + "'"
         }
-
     }
 }

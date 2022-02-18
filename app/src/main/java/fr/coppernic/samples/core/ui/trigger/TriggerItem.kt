@@ -21,10 +21,12 @@ class TriggerItem : Parcelable {
     @Transient
     var icon: Drawable? = null
 
-    internal constructor(label: CharSequence,
-                         intentUp: Intent,
-                         intentDown: Intent,
-                         icon: Drawable?) {
+    internal constructor(
+        label: CharSequence,
+        intentUp: Intent,
+        intentDown: Intent,
+        icon: Drawable?
+    ) {
         this.label = label
         this.intentUp = intentUp
         this.intentDown = intentDown
@@ -42,11 +44,11 @@ class TriggerItem : Parcelable {
 
     override fun toString(): String {
         return "TriggerItem{" +
-                "intentUp=" + intentUp +
-                ", intentDown=" + intentDown +
-                ", label=" + label +
-                ", icon=" + icon +
-                '}'
+            "intentUp=" + intentUp +
+            ", intentDown=" + intentDown +
+            ", label=" + label +
+            ", icon=" + icon +
+            '}'
     }
 
     override fun describeContents(): Int {

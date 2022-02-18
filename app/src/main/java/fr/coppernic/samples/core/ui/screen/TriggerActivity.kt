@@ -1,10 +1,11 @@
 package fr.coppernic.samples.core.ui.screen
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.KeyEvent
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.askey.mapping.model.IntentType
 import fr.coppernic.samples.core.R
 import fr.coppernic.samples.core.ui.ApiMappingFragment
@@ -12,7 +13,6 @@ import fr.coppernic.samples.core.ui.trigger.TriggerAdapter
 import fr.coppernic.samples.core.ui.trigger.TriggerContent
 import fr.coppernic.samples.core.ui.trigger.TriggerItem
 import fr.coppernic.sdk.mapping.Mapper
-import kotlinx.android.synthetic.main.activity_trigger.*
 
 class TriggerActivity : AppCompatActivity() {
 
@@ -22,66 +22,94 @@ class TriggerActivity : AppCompatActivity() {
     private lateinit var viewManager: androidx.recyclerview.widget.RecyclerView.LayoutManager
     lateinit var mapper: Mapper
 
+    private lateinit var mRecyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trigger)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        mRecyclerView = findViewById<RecyclerView>(R.id.rv_trigger)
+
         initializeRecyclerView()
 
         val d = Mapper.Factory
-                .getKeyMapperSingle(applicationContext)
-                .subscribe({
+            .getKeyMapperSingle(applicationContext)
+            .subscribe(
+                {
                     mapper = it
-                }, {
-                    Log.e(TAG, it.message)
-                })
+                },
+                {
+                    it.message?.let { it1 -> Log.e(TAG, it1) }
+                }
+            )
     }
 
     private fun initializeRecyclerView() {
         viewManager = LinearLayoutManager(this)
-        viewAdapter = TriggerAdapter(TriggerContent(applicationContext).items, object :
+        viewAdapter = TriggerAdapter(
+            TriggerContent(applicationContext).items,
+            object :
                 TriggerAdapter
                 .OnTriggerAdapterListener {
-            override fun onTriggerChosen(item: TriggerItem) {
-                when (intent.getStringExtra(ApiMappingFragment.TRIGGER)) {
-                    ApiMappingFragment.P1 -> {
-                        item.let {
-                            mapper.mapIntent(Mapper.ProgKey.P1,
-                                    it.intentDown, KeyEvent.ACTION_DOWN, IntentType.BROADCAST, it.label
-                                    .toString())
-                            mapper.mapIntent(Mapper.ProgKey.P1,
-                                    it.intentUp, KeyEvent.ACTION_UP, IntentType.BROADCAST, it.label
-                                    .toString())
+                override fun onTriggerChosen(item: TriggerItem) {
+                    when (intent.getStringExtra(ApiMappingFragment.TRIGGER)) {
+                        ApiMappingFragment.P1 -> {
+                            item.let {
+                                mapper.mapIntent(
+                                    Mapper.ProgKey.P1,
+                                    it.intentDown, KeyEvent.ACTION_DOWN, IntentType.BROADCAST,
+                                    it.label
+                                        .toString()
+                                )
+                                mapper.mapIntent(
+                                    Mapper.ProgKey.P1,
+                                    it.intentUp, KeyEvent.ACTION_UP, IntentType.BROADCAST,
+                                    it.label
+                                        .toString()
+                                )
+                            }
+                            onBackPressed()
                         }
-                        onBackPressed()
-                    }
-                    ApiMappingFragment.P2 -> {
-                        item.let {
-                            mapper.mapIntent(Mapper.ProgKey.P2,
-                                    it.intentDown, KeyEvent.ACTION_DOWN, IntentType.BROADCAST, it.label
-                                    .toString())
-                            mapper.mapIntent(Mapper.ProgKey.P2,
-                                    it.intentUp, KeyEvent.ACTION_UP, IntentType.BROADCAST, it.label
-                                    .toString())
+                        ApiMappingFragment.P2 -> {
+                            item.let {
+                                mapper.mapIntent(
+                                    Mapper.ProgKey.P2,
+                                    it.intentDown, KeyEvent.ACTION_DOWN, IntentType.BROADCAST,
+                                    it.label
+                                        .toString()
+                                )
+                                mapper.mapIntent(
+                                    Mapper.ProgKey.P2,
+                                    it.intentUp, KeyEvent.ACTION_UP, IntentType.BROADCAST,
+                                    it.label
+                                        .toString()
+                                )
+                            }
+                            onBackPressed()
                         }
-                        onBackPressed()
-                    }
-                    ApiMappingFragment.P3 -> {
-                        item.let {
-                            mapper.mapIntent(Mapper.ProgKey.P3,
-                                    it.intentDown, KeyEvent.ACTION_DOWN, IntentType.BROADCAST, it.label
-                                    .toString())
-                            mapper.mapIntent(Mapper.ProgKey.P3,
-                                    it.intentUp, KeyEvent.ACTION_UP, IntentType.BROADCAST, it.label
-                                    .toString())
+                        ApiMappingFragment.P3 -> {
+                            item.let {
+                                mapper.mapIntent(
+                                    Mapper.ProgKey.P3,
+                                    it.intentDown, KeyEvent.ACTION_DOWN, IntentType.BROADCAST,
+                                    it.label
+                                        .toString()
+                                )
+                                mapper.mapIntent(
+                                    Mapper.ProgKey.P3,
+                                    it.intentUp, KeyEvent.ACTION_UP, IntentType.BROADCAST,
+                                    it.label
+                                        .toString()
+                                )
+                            }
+                            onBackPressed()
                         }
-                        onBackPressed()
                     }
                 }
             }
-        })
-        rv_trigger.apply {
+        )
+
+        mRecyclerView.apply {
             setHasFixedSize(true)
             layoutManager = viewManager
             addItemDecoration(androidx.recyclerview.widget.DividerItemDecoration(context, LinearLayoutManager.VERTICAL))

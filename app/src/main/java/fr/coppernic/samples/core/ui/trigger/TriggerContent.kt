@@ -26,7 +26,8 @@ internal class TriggerContent(context: Context) {
     fun getActivityList(context: Context) {
         val pm = context.packageManager
         val pInfos = pm.getInstalledPackages(
-                PackageManager.GET_INTENT_FILTERS or PackageManager.GET_RECEIVERS)
+            PackageManager.GET_INTENT_FILTERS or PackageManager.GET_RECEIVERS
+        )
         for (pInfo in pInfos) {
             if (DEBUG) {
                 Log.d(TAG, "Package " + pInfo.packageName)
@@ -42,9 +43,13 @@ internal class TriggerContent(context: Context) {
                         val intentDown = Intent(KeyDefines.INTENT_ACTION_BARCODE_START)
                         intentDown.setClassName(aInfo.packageName, aInfo.name)
                         val icon = aInfo.loadIcon(pm)
-                        addItem(TriggerItem(context.getString(R.string.label_trig_barcode, aInfo.loadLabel(pm)),
+                        addItem(
+                            TriggerItem(
+                                context.getString(R.string.label_trig_barcode, aInfo.loadLabel(pm)),
                                 intentUp, intentDown,
-                                icon))
+                                icon
+                            )
+                        )
                     } else if (aInfo.name.matches(REGEX_RFID.toRegex())) {
                         if (DEBUG) {
                             Log.v(TAG, "Got rfid receiver " + aInfo.packageName + "/" + aInfo.name)
@@ -54,9 +59,13 @@ internal class TriggerContent(context: Context) {
                         val intentDown = Intent(KeyDefines.INTENT_ACTION_TRIG_START)
                         intentDown.setClassName(aInfo.packageName, aInfo.name)
                         val icon = aInfo.loadIcon(pm)
-                        addItem(TriggerItem(context.getString(R.string.label_trig_rfid, aInfo.loadLabel(pm)),
+                        addItem(
+                            TriggerItem(
+                                context.getString(R.string.label_trig_rfid, aInfo.loadLabel(pm)),
                                 intentUp, intentDown,
-                                icon))
+                                icon
+                            )
+                        )
                     }
                 }
             }

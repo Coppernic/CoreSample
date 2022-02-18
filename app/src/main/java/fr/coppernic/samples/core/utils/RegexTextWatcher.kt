@@ -1,13 +1,14 @@
 package fr.coppernic.samples.core.utils
 
-import com.google.android.material.textfield.TextInputLayout
 import android.text.Editable
 import android.text.TextWatcher
+import com.google.android.material.textfield.TextInputLayout
 
-class RegexTextWatcher(private val regex: Regex,
-                       private val message: String,
-                       private val layout: TextInputLayout) : TextWatcher {
-
+class RegexTextWatcher(
+    private val regex: Regex,
+    private val message: String,
+    private val layout: TextInputLayout
+) : TextWatcher {
 
     override fun afterTextChanged(s: Editable) {
     }

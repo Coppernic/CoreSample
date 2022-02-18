@@ -6,11 +6,13 @@ import java.security.InvalidParameterException
 class NetPresenter {
 
     private val regexIp: Regex = IP_ADDRESS.toRegex()
-    internal val regexMask: Regex = ("(((255\\.){3}(255|254|252|248|240|224|192|128|0+))|" +
+    internal val regexMask: Regex = (
+        "(((255\\.){3}(255|254|252|248|240|224|192|128|0+))|" +
             "((255\\.){2}(255|254|252|248|240|224|192|128|0+)\\.0)|" +
             "((255\\.)(255|254|252|248|240|224|192|128|0+)(\\.0+){2})|" +
             "((255|254|252|248|240|224|192|128|0+)(\\.0+){3}" +
-            "|(([0-9])|(1[0-9])|(2[0-4]))))").toRegex()
+            "|(([0-9])|(1[0-9])|(2[0-4]))))"
+        ).toRegex()
     private val regexPrefix: Regex = "[0-9]|^[0-9]{2}\$".toRegex()
 
     fun isValidIp(ip: String): Boolean = ip.matches(regexIp)

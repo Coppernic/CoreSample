@@ -1,19 +1,19 @@
 package fr.coppernic.samples.core.ui.shortcut
 
-import androidx.annotation.NonNull
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.NonNull
+import androidx.recyclerview.widget.RecyclerView
 import fr.coppernic.samples.core.R
 
 class ShortcutAdapter internal constructor(private val mValues: List<ShortcutItem>, private val listener: OnShortcutAdapterListener) : RecyclerView.Adapter<ShortcutAdapter.ViewHolder>() {
     @NonNull
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view: View = LayoutInflater.from(parent.context)
-                .inflate(R.layout.list_item_shortcut, parent, false)
+            .inflate(R.layout.list_item_shortcut, parent, false)
         return ViewHolder(view)
     }
 

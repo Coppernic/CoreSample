@@ -22,7 +22,7 @@ internal class ShortcutContent(context: Context) {
 
     private fun addItem(item: ShortcutItem) {
         items.add(item)
-        //itemMap.put(item.label.toString(), item);
+        // itemMap.put(item.label.toString(), item);
     }
 
     fun getActivityList(context: Context) {
@@ -41,10 +41,13 @@ internal class ShortcutContent(context: Context) {
             launchIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             launchIntent.addCategory(Intent.CATEGORY_LAUNCHER)
             if (DEBUG) {
-                Log.v(TAG, label
-                        .toString() + "\n    icon : " + icon
-                        + "\n    " + cName
-                        + "\n    " + launchIntent)
+                Log.v(
+                    TAG,
+                    label
+                        .toString() + "\n    icon : " + icon +
+                        "\n    " + cName +
+                        "\n    " + launchIntent
+                )
             }
             addItem(ShortcutItem(label, launchIntent, icon))
         }
@@ -57,7 +60,7 @@ internal class ShortcutContent(context: Context) {
     /**
      * A map of sample (dummy) items, by ID.
      */
-//public final HashMap<String, ShortcutItem> itemMap = new HashMap<>();
+// public final HashMap<String, ShortcutItem> itemMap = new HashMap<>();
     init {
         getActivityList(context)
     }
