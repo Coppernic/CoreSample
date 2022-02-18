@@ -49,10 +49,9 @@ class NetFragment : androidx.fragment.app.Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentNetBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onDestroyView() {
@@ -64,7 +63,7 @@ class NetFragment : androidx.fragment.app.Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
 
-        binding.apply {
+        with(binding) {
             toggleEthernet.isEnabled = false
             toggleEthernet.isChecked = CpcNet.isEthernetConnected(context)
             toggleEthernet.setOnCheckedChangeListener { _, isChecked ->

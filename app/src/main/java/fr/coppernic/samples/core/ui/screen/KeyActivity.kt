@@ -11,10 +11,9 @@ import fr.coppernic.samples.core.ui.key.KeyAdapter
 import fr.coppernic.samples.core.ui.key.KeyContent
 import fr.coppernic.samples.core.ui.key.KeyItem
 import fr.coppernic.sdk.mapping.Mapper
+import timber.log.Timber
 
 class KeyActivity : AppCompatActivity() {
-
-    private val TAG = "KeyActivity"
 
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
@@ -39,7 +38,7 @@ class KeyActivity : AppCompatActivity() {
                     mapper = it
                 },
                 {
-                    it.message?.let { it1 -> Log.e(TAG, it1) }
+                    it.message?.let { it1 -> Timber.e(it1) }
                 }
             )
     }
@@ -68,7 +67,7 @@ class KeyActivity : AppCompatActivity() {
                 }
             }
         )
-        binding.rvKey.apply {
+        with(binding.rvKey) {
             setHasFixedSize(true)
             layoutManager = viewManager
             addItemDecoration(androidx.recyclerview.widget.DividerItemDecoration(context, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL))

@@ -6,7 +6,6 @@ import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import fr.coppernic.samples.core.databinding.ActivityMainBinding
 import fr.coppernic.samples.core.databinding.AppBarMainBinding

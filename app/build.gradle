@@ -35,7 +35,7 @@ android {
 
     defaultConfig {
         applicationId "fr.coppernic.samples.core"
-        minSdkVersion 23
+        minSdkVersion 17
         targetSdkVersion 31
         versionCode versioning.info.versionCode
         versionName versioning.info.display
@@ -56,7 +56,6 @@ android {
     }
 
     buildFeatures {
-        dataBinding = true
         viewBinding true
     }
 

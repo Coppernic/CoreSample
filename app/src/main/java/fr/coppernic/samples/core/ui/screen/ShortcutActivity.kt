@@ -94,7 +94,7 @@ class ShortcutActivity : AppCompatActivity() {
                 }
             }
         )
-       binding.rvShortcut.apply {
+       with(binding.rvShortcut) {
             setHasFixedSize(true)
             layoutManager = viewManager
             addItemDecoration(androidx.recyclerview.widget.DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
