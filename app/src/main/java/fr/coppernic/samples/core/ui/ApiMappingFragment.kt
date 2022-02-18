@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment
 import com.askey.mapping.utils.IconUtils
 import fr.coppernic.samples.core.R
 import fr.coppernic.samples.core.databinding.FragmentApiMappingBinding
+import fr.coppernic.samples.core.ui.common.ViewBindingEnabled
+import fr.coppernic.samples.core.ui.common.ViewBindingHolder
 import fr.coppernic.samples.core.ui.key.KeyContent
 import fr.coppernic.samples.core.ui.key.KeyItem
 import fr.coppernic.samples.core.ui.screen.KeyActivity
@@ -23,32 +25,23 @@ import timber.log.Timber
 /**
  * A simple [Fragment] subclass.
  */
-class ApiMappingFragment : androidx.fragment.app.Fragment() {
+class ApiMappingFragment : androidx.fragment.app.Fragment(),
+    ViewBindingEnabled<FragmentApiMappingBinding> by ViewBindingHolder(FragmentApiMappingBinding::class) {
 
     lateinit var mapper: Mapper
-
-    private var _binding: FragmentApiMappingBinding? = null
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
 
     override fun onResume() {
         super.onResume()
         loadMapper()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentApiMappingBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        return inflate(inflater)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        deflate()
     }
     private fun loadMapper() {
         val d = Mapper.Factory
@@ -74,7 +67,7 @@ class ApiMappingFragment : androidx.fragment.app.Fragment() {
             else -> Timber.d( "Not supported yet")
         }
 
-        with(binding) {
+        with(viewBinding) {
             when (progKey) {
                 Mapper.ProgKey.P1 -> {
                     tvP1.text = getString(R.string.mapping_display, progKey.name, actionName)
@@ -114,7 +107,7 @@ class ApiMappingFragment : androidx.fragment.app.Fragment() {
         return item.name
     }
 
-    private fun loadScreen() = with(binding) {
+    private fun loadScreen() = with(viewBinding) {
         var keyPos = 1
         listOf(btnKey1, btnKey2, btnKey3).forEach {
             val pNameKey = "P${keyPos++}"

@@ -8,6 +8,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import fr.coppernic.samples.core.R
 import fr.coppernic.samples.core.databinding.FragmentNetBinding
+import fr.coppernic.samples.core.ui.common.ViewBindingEnabled
+import fr.coppernic.samples.core.ui.common.ViewBindingHolder
 import fr.coppernic.samples.core.utils.RegexTextWatcher
 import fr.coppernic.samples.core.utils.addTo
 import fr.coppernic.sdk.net.cone2.StaticIpConfig
@@ -23,16 +25,13 @@ import java.security.InvalidParameterException
  * A simple [Fragment] subclass.
  *
  */
-class NetFragment : androidx.fragment.app.Fragment() {
+class NetFragment : androidx.fragment.app.Fragment(),
+    ViewBindingEnabled<FragmentNetBinding> by ViewBindingHolder(FragmentNetBinding::class) {
+
 
     private val presenter = NetPresenter()
     private val manager = EthernetServiceManager()
     private var connector: EthernetConnector? = null
-
-    private var _binding: FragmentNetBinding? = null
-    // This property is only valid between onCreateView and
-// onDestroyView.
-    private val binding get() = _binding!!
 
     /**
      * Backing field for public var. Always provides a disposable that can be disposed.
@@ -45,25 +44,20 @@ class NetFragment : androidx.fragment.app.Fragment() {
             return field
         }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentNetBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        return inflate(inflater)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        deflate()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
 
-        with(binding) {
+        with(viewBinding) {
             toggleEthernet.isEnabled = false
             toggleEthernet.isChecked = CpcNet.isEthernetConnected(context)
             toggleEthernet.setOnCheckedChangeListener { _, isChecked ->
@@ -142,7 +136,7 @@ class NetFragment : androidx.fragment.app.Fragment() {
         manager.get().getConnector(context).subscribe(
             {
                 connector = it
-                binding.toggleEthernet.isEnabled = true
+                viewBinding.toggleEthernet.isEnabled = true
             },
             {
                 Timber.e("Ethernet manager is not supported on this device")
