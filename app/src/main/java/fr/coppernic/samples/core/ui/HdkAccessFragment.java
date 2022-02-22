@@ -34,13 +34,13 @@ public class HdkAccessFragment extends Fragment {
     public static final String TAG = "HdkAccessFragment";
     private final RxUsbHelper rxUsbHelper = new RxUsbHelper();
 
-    @BindView(R.id.toggle2VccEn)
+    @BindView(R.id.toggleVccEn)
     ToggleButton tbVccEn;
-    @BindView(R.id.toggle2IoEn)
+    @BindView(R.id.toggleIoEn)
     ToggleButton tbIoEn;
-    @BindView(R.id.toggle2Gpio1)
+    @BindView(R.id.toggleGpio1)
     ToggleButton tbGpio1;
-    @BindView(R.id.toggle2Gpio2)
+    @BindView(R.id.toggleGpio2)
     ToggleButton tbGpio2;
 
     private Disposable inputDisposable;
@@ -102,26 +102,26 @@ public class HdkAccessFragment extends Fragment {
         super.onStop();
     }
 
-    @OnClick(R.id.toggle2VccEn)
+    @OnClick(R.id.toggleVccEn)
     void toggleVccEn() {
         if (gpioPort != null) {
             showErr(gpioPort.setVccEn(tbVccEn.isChecked()));
         }
     }
 
-    @OnClick(R.id.toggle2IoEn)
+    @OnClick(R.id.toggleIoEn)
     void toggleIoEn() {
         if (gpioPort != null) {
             showErr(gpioPort.setIoEn(tbIoEn.isChecked()));
         }
     }
-    @OnClick(R.id.toggle2Gpio1)
+    @OnClick(R.id.toggleGpio1)
     void toggleGpio1() {
         if (gpioPort != null) {
             showErr(gpioPort.setGpio1(tbGpio1.isChecked()));
         }
     }
-    @OnClick(R.id.toggle2Gpio2)
+    @OnClick(R.id.toggleGpio2)
     void toggleGpio2() {
         if (gpioPort != null) {
             showErr(gpioPort.setGpio2(tbGpio2.isChecked()));
