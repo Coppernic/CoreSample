@@ -20,6 +20,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="cone_gpio">Gpio</string>
+    <string name="access_gpio">Gpio</string>
     <string name="toggle_on_pin1">Pin 1 on</string>
     <string name="toggle_off_pin1">Pin 1 off</string>
     <string name="toggle_on_pin2">Pin 2 on</string>
@@ -28,6 +29,19 @@
     <string name="toggle_off_pin3">Pin 3 off</string>
     <string name="toggle_on_pin4">Pin 4 on</string>
     <string name="toggle_off_pin4">Pin 4 off</string>
+    <string name="toggle_on_vcc_en">Vcc_En on</string>
+    <string name="toggle_off_vcc_en">Vcc_En off</string>
+
+    <string name="toggle_on_io_en">Io_En on</string>
+    <string name="toggle_off_io_en">Io_En off</string>
+
+    <string name="toggle_on_gpio1">Gpio1 on</string>
+    <string name="toggle_off_gpio1">Gpio1 off</string>
+
+    <string name="toggle_on_gpio2">Gpio2 on</string>
+    <string name="toggle_off_gpio2">Gpio2 off</string>
+
+    
     <string name="title_input">Input</string>
     <string name="input4">Input 4</string>
     <string name="toggle_on_polling">Polling on</string>
@@ -60,6 +74,7 @@
     <string name="toggle_off_usb_en">Usb en off</string>
     <string name="toggle_on_usb_en">Usb En on</string>
     <string name="nav_hdk_cone_2">Hdk C-One 2</string>
+    <string name="nav_hdk_access">Hdk Access</string>
     <string name="toggle_off_usb_id">Usb Id off</string>
     <string name="toggle_on_usb_id">Usb Id on</string>
     <string name="error">Error</string>

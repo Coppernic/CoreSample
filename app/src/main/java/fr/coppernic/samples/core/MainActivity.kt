@@ -77,6 +77,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 OsHelper.isConeV2() -> displayFragment(HdkCone2Fragment::class.java.name)
                 OsHelper.isCone() -> displayFragment(HdkConeFragment::class.java.name)
                 OsHelper.isCizi() -> displayFragment(HdkCiziFragment::class.java.name)
+                OsHelper.isAccess() -> displayFragment(HdkAccessFragment::class.java.name)
             }
         } else {
             displayFragment(lastTag)
@@ -89,6 +90,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.nav_hdk_cone -> displayFragment(HdkConeFragment::class.java.name)
             R.id.nav_hdk_cone_2 -> displayFragment(HdkCone2Fragment::class.java.name)
+            R.id.nav_hdk_access -> displayFragment(HdkAccessFragment::class.java.name)
             R.id.nav_hdk_cizi -> displayFragment(HdkCiziFragment::class.java.name)
             R.id.nav_power -> displayFragment(ApiPowerFragment::class.java.name)
             R.id.nav_powermgmt -> displayFragment(ApiPowerMgmtFragment::class.java.name)
@@ -121,6 +123,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             ApiPowerFragment::class.java.name -> ApiPowerFragment()
             ApiPowerMgmtFragment::class.java.name -> ApiPowerMgmtFragment()
             HdkCone2Fragment::class.java.name -> HdkCone2Fragment()
+            HdkAccessFragment::class.java.name -> HdkAccessFragment()
             NetFragment::class.java.name -> NetFragment()
             ApiMappingFragment::class.java.name -> ApiMappingFragment()
             else -> HdkConeFragment()
