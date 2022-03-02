@@ -14,8 +14,7 @@ import timber.log.Timber
 import java.util.concurrent.atomic.AtomicBoolean
 
 @RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class, sdk = [25])
-abstract class RobolectricTest {
+public abstract class RobolectricTest {
 
     companion object {
         @BeforeClass

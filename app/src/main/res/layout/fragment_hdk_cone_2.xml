@@ -321,7 +321,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/edtPid2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/edtPid2"
-        app:layout_constraintTop_toTopOf="@+id/edtVid"/>
+        app:layout_constraintTop_toTopOf="@+id/edtVid2"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
