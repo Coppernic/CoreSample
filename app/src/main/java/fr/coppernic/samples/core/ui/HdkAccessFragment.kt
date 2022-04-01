@@ -91,35 +91,6 @@ class HdkAccessFragment : androidx.fragment.app.Fragment(),
 
     }
 
-
-//    @OnClick(R.id.toggleVccEn)
-//    fun toggleVccEn() {
-//        if (gpioPort != null) {
-//            showErr(gpioPort!!.setVccEn(viewBinding.toggleVccEn.isChecked))
-//        }
-//    }
-//
-//    @OnClick(R.id.toggleIoEn)
-//    fun toggleIoEn() {
-//        if (gpioPort != null) {
-//            showErr(gpioPort!!.setIoEn(viewBinding.toggleIoEn.isChecked))
-//        }
-//    }
-//
-//    @OnClick(R.id.toggleGpio1)
-//    fun toggleGpio1() {
-//        if (gpioPort != null) {
-//            showErr(gpioPort!!.setGpio1(viewBinding.toggleGpio1.isChecked))
-//        }
-//    }
-//
-//    @OnClick(R.id.toggleGpio2)
-//    fun toggleGpio2() {
-//        if (gpioPort != null) {
-//            showErr(gpioPort!!.setGpio2(viewBinding.toggleGpio2.isChecked))
-//        }
-//    }
-
     private val onError: Consumer<Throwable> = Consumer { throwable ->
         if (throwable is ResultException) {
             if (throwable.result == RESULT.SERVICE_NOT_FOUND) {

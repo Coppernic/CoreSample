@@ -15,32 +15,29 @@
         android:layout_marginTop="8dp"
         android:text="@string/access_gpio"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ToggleButton
         android:id="@+id/toggleVccEn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:textOff="@string/toggle_off_vcc_en"
         android:textOn="@string/toggle_on_vcc_en"
+        android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/toggleIoEn"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvGpio"/>
+        app:layout_constraintTop_toBottomOf="@+id/tvGpio" />
 
     <ToggleButton
         android:id="@+id/toggleIoEn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:textOff="@string/toggle_off_io_en"
         android:textOn="@string/toggle_on_io_en"
+        android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/toggleGpio1"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/toggleVccEn"
         app:layout_constraintTop_toBottomOf="@+id/tvGpio"/>
 
