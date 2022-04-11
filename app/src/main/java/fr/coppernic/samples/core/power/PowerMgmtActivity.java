@@ -1,11 +1,11 @@
 package fr.coppernic.samples.core.power;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
