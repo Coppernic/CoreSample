@@ -165,28 +165,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4"/>
 
-    <ToggleButton
-        android:id="@+id/toggleWakeUp2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:textOff="@string/wake_down"
-        android:textOn="@string/wake_up"
-        app:layout_constraintStart_toEndOf="@+id/toggleBarcodePower2"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"/>
-
-    <ToggleButton
-        android:id="@+id/toggleTrigger2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:textOff="@string/trig_down"
-        android:textOn="@string/trig"
-        app:layout_constraintStart_toEndOf="@+id/toggleWakeUp2"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"/>
-
     <TextView
         android:id="@+id/tvUsbGpio"
         android:layout_width="wrap_content"

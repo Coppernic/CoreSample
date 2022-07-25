@@ -55,10 +55,6 @@ public class HdkCone2Fragment extends Fragment {
     RadioButton radioInput4;
     @BindView(R.id.toggleBarcodePower2)
     ToggleButton tbBarcodePower;
-    @BindView(R.id.toggleWakeUp2)
-    ToggleButton tbBarcodeWakeUp;
-    @BindView(R.id.toggleTrigger2)
-    ToggleButton tbBarcodeTrigger;
     @BindView(R.id.toggle2Usb1)
     ToggleButton tbUsb1;
     @BindView(R.id.toggle2Usb2)
@@ -213,20 +209,6 @@ public class HdkCone2Fragment extends Fragment {
                 ConePeripheral.FP_IB_COLOMBO_USB.off(getContext());
             }
             //showErr(gpioPort.setBarcodeScanPower(tbBarcodePower.isChecked()));
-        }
-    }
-
-    @OnClick(R.id.toggleWakeUp2)
-    void toggleBarcodeWakeUp() {
-        if (gpioPort != null) {
-            //showErr(gpioPort.setBarcodeScanWakeup(tbBarcodeWakeUp.isChecked()));
-        }
-    }
-
-    @OnClick(R.id.toggleTrigger2)
-    void toggleBarcodeTrigger() {
-        if (gpioPort != null) {
-            //showErr(gpioPort.setBarcodeScanTrigger(tbBarcodeTrigger.isChecked()));
         }
     }
 
