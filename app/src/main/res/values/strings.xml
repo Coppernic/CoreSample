@@ -11,7 +11,6 @@
 
     <string name="nav_title_hdk">Hdk</string>
     <string name="nav_hdk_cone">Hdk C-One</string>
-    <string name="nav_hdk_cizi">Hdk C-izi</string>
     <string name="nav_title_power">Power management</string>
     <string name="nav_power">API power</string>
     <string name="nav_powermgmt">API powermgmt</string>

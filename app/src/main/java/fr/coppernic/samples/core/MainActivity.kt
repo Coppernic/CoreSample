@@ -76,7 +76,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             when {
                 OsHelper.isConeV2() -> displayFragment(HdkCone2Fragment::class.java.name)
                 OsHelper.isCone() -> displayFragment(HdkConeFragment::class.java.name)
-                //OsHelper.isCizi() -> displayFragment(HdkCiziFragment::class.java.name)
                 OsHelper.isAccess() -> displayFragment(HdkAccessFragment::class.java.name)
             }
         } else {
@@ -91,7 +90,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_hdk_cone -> displayFragment(HdkConeFragment::class.java.name)
             R.id.nav_hdk_cone_2 -> displayFragment(HdkCone2Fragment::class.java.name)
             R.id.nav_hdk_access -> displayFragment(HdkAccessFragment::class.java.name)
-            R.id.nav_hdk_cizi -> displayFragment(HdkCiziFragment::class.java.name)
             R.id.nav_power -> displayFragment(ApiPowerFragment::class.java.name)
             R.id.nav_powermgmt -> displayFragment(ApiPowerMgmtFragment::class.java.name)
             R.id.nav_net -> displayFragment(NetFragment::class.java.name)
@@ -119,7 +117,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun createFragmentFromTag(tag: String): androidx.fragment.app.Fragment {
         return when (tag) {
             HdkConeFragment::class.java.name -> HdkConeFragment()
-            HdkCiziFragment::class.java.name -> HdkCiziFragment()
             ApiPowerFragment::class.java.name -> ApiPowerFragment()
             ApiPowerMgmtFragment::class.java.name -> ApiPowerMgmtFragment()
             HdkCone2Fragment::class.java.name -> HdkCone2Fragment()
