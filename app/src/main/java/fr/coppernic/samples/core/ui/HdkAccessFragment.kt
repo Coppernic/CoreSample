@@ -44,7 +44,11 @@ class HdkAccessFragment : androidx.fragment.app.Fragment(),
         disposable = GpioPort.GpioManager.get()
             .getGpioSingle(context)
             .observeOn(mainThread())
-            .subscribe({ g -> gpioPort = g; gpioPort?.let { updateButton(it) } }, onError)
+            .subscribe({ g ->
+                gpioPort = g
+                gpioPort?.let { updateButton(it) }
+                viewBinding.imgLed2.setColorFilter(if (gpioPort?.readGpio2() == true) Color.GREEN else Color.LTGRAY, android.graphics.PorterDuff.Mode.MULTIPLY)
+            }, onError)
     }
 
 
@@ -89,6 +93,7 @@ class HdkAccessFragment : androidx.fragment.app.Fragment(),
             toggleGpio2.setOnClickListener {
                 gpioPort?.let {
                     showErr(it.setGpio2(viewBinding.toggleGpio2.isChecked))
+                    viewBinding.imgLed2.setColorFilter(if (it.readGpio2()) Color.GREEN else Color.LTGRAY, android.graphics.PorterDuff.Mode.MULTIPLY)
                 }
             }
 
