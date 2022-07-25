@@ -19,9 +19,9 @@ public final class Definitions {
             return "C-five";
         } else if (OsHelper.isC8()) {
             return "C-eight";
-        } else if (OsHelper.isCizi()) {
+        } /*else if (OsHelper.isCizi()) {
             return "C-izi";
-        } else if (OsHelper.isIdPlatform()) {
+        } */else if (OsHelper.isIdPlatform()) {
             return "ID Platform";
         } else if (OsHelper.isTomTomBridge()) {
             return "Tom Tom ";

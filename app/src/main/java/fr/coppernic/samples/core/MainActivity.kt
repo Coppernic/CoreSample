@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             when {
                 OsHelper.isConeV2() -> displayFragment(HdkCone2Fragment::class.java.name)
                 OsHelper.isCone() -> displayFragment(HdkConeFragment::class.java.name)
-                OsHelper.isCizi() -> displayFragment(HdkCiziFragment::class.java.name)
+                //OsHelper.isCizi() -> displayFragment(HdkCiziFragment::class.java.name)
                 OsHelper.isAccess() -> displayFragment(HdkAccessFragment::class.java.name)
             }
         } else {

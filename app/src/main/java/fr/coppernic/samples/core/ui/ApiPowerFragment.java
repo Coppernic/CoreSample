@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
 import fr.coppernic.samples.core.R;
 import fr.coppernic.samples.core.ui.adapters.PowerAdapter;
 import fr.coppernic.sdk.power.api.peripheral.Peripheral;
-import fr.coppernic.sdk.power.impl.cizi.CiziPeripheral;
+//import fr.coppernic.sdk.power.impl.cizi.CiziPeripheral;
 import fr.coppernic.sdk.power.impl.cone.ConePeripheral;
 import fr.coppernic.sdk.power.impl.idplatform.IdPlatformPeripheral;
 import fr.coppernic.sdk.utils.helpers.OsHelper;
@@ -60,9 +60,9 @@ public class ApiPowerFragment extends Fragment {
         List<Peripheral> list = new ArrayList<>();
         if (OsHelper.isCone()) {
             list.addAll(Arrays.asList(ConePeripheral.values()));
-        } else if (OsHelper.isCizi()) {
+        } /*else if (OsHelper.isCizi()) {
             list.addAll(Arrays.asList(CiziPeripheral.values()));
-        } else if (OsHelper.isIdPlatform()) {
+        } */else if (OsHelper.isIdPlatform()) {
             list.addAll(Arrays.asList(IdPlatformPeripheral.values()));
         }
         return list;

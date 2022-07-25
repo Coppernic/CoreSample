@@ -219,14 +219,14 @@ public class HdkCone2Fragment extends Fragment {
     @OnClick(R.id.toggleWakeUp2)
     void toggleBarcodeWakeUp() {
         if (gpioPort != null) {
-            showErr(gpioPort.setBarcodeScanWakeup(tbBarcodeWakeUp.isChecked()));
+            //showErr(gpioPort.setBarcodeScanWakeup(tbBarcodeWakeUp.isChecked()));
         }
     }
 
     @OnClick(R.id.toggleTrigger2)
     void toggleBarcodeTrigger() {
         if (gpioPort != null) {
-            showErr(gpioPort.setBarcodeScanTrigger(tbBarcodeTrigger.isChecked()));
+            //showErr(gpioPort.setBarcodeScanTrigger(tbBarcodeTrigger.isChecked()));
         }
     }
 
