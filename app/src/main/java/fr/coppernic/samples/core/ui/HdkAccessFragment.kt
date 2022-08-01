@@ -1,6 +1,9 @@
 package fr.coppernic.samples.core.ui
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +17,8 @@ import fr.coppernic.sdk.hdk.access.GpioPort
 import fr.coppernic.sdk.utils.core.CpcResult.RESULT
 import fr.coppernic.sdk.utils.core.CpcResult.ResultException
 import fr.coppernic.sdk.utils.debug.L
-import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
+import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer
 
 /**
@@ -24,6 +28,7 @@ class HdkAccessFragment : androidx.fragment.app.Fragment(),
     ViewBindingEnabled<FragmentHdkAccessBinding> by ViewBindingHolder(FragmentHdkAccessBinding::class) {
 
     private var gpioPort: GpioPort? = null
+    private var disposable: Disposable? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflate(inflater)
@@ -36,10 +41,14 @@ class HdkAccessFragment : androidx.fragment.app.Fragment(),
 
     override fun onStart() {
         super.onStart()
-        val subscribe = GpioPort.GpioManager.get()
+        disposable = GpioPort.GpioManager.get()
             .getGpioSingle(context)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ g -> gpioPort = g; gpioPort?.let { updateButton(it) } }, onError)
+            .observeOn(mainThread())
+            .subscribe({ g ->
+                gpioPort = g
+                gpioPort?.let { updateButton(it) }
+                getGpiostates(gpioPort)
+            }, onError)
     }
 
 
@@ -53,9 +62,8 @@ class HdkAccessFragment : androidx.fragment.app.Fragment(),
     }
 
     override fun onStop() {
-        if (gpioPort != null) {
-            gpioPort!!.close()
-        }
+        disposable?.dispose()
+        gpioPort?.close()
         super.onStop()
     }
 
@@ -64,31 +72,35 @@ class HdkAccessFragment : androidx.fragment.app.Fragment(),
 
         with(viewBinding) {
             toggleVccEn.setOnClickListener {
-                if (gpioPort != null) {
-                    showErr(gpioPort!!.setVccEn(toggleVccEn.isChecked))
+                gpioPort?.let {
+                    showErr(it.setVccEn(toggleVccEn.isChecked))
                 }
             }
 
             toggleIoEn.setOnClickListener {
-                if (gpioPort != null) {
-                    showErr(gpioPort!!.setIoEn(viewBinding.toggleIoEn.isChecked))
+                gpioPort?.let {
+                    showErr(it.setIoEn(viewBinding.toggleIoEn.isChecked))
                 }
             }
 
             toggleGpio1.setOnClickListener {
-                if (gpioPort != null) {
-                    showErr(gpioPort!!.setGpio1(viewBinding.toggleGpio1.isChecked))
+                gpioPort?.let {
+                    showErr(it.setGpio1(viewBinding.toggleGpio1.isChecked))
+                    viewBinding.imgLed2.setColorFilter(if (it.readGpio2()) Color.GREEN else Color.LTGRAY, android.graphics.PorterDuff.Mode.MULTIPLY)
                 }
             }
 
             toggleGpio2.setOnClickListener {
-                if (gpioPort != null) {
-                    showErr(gpioPort!!.setGpio2(viewBinding.toggleGpio2.isChecked))
+                gpioPort?.let {
+                    showErr(it.setGpio2(viewBinding.toggleGpio2.isChecked))
+                    viewBinding.imgLed1.setColorFilter(if (it.readGpio1()) Color.GREEN else Color.LTGRAY, android.graphics.PorterDuff.Mode.MULTIPLY)
                 }
             }
 
+            btnRefresh.setOnClickListener {
+                getGpiostates(gpioPort)
+            }
         }
-
     }
 
     private val onError: Consumer<Throwable> = Consumer { throwable ->
@@ -104,9 +116,17 @@ class HdkAccessFragment : androidx.fragment.app.Fragment(),
     }
 
 
-    fun showErr(res: RESULT) {
+    private fun showErr(res: RESULT) {
         if (res != RESULT.OK) {
             Toast.makeText(context, L.getMethodName(3) + " : " + res, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    @SuppressLint("CheckResult")
+    private fun getGpiostates(port: GpioPort?) {
+        port?.let { port ->
+            viewBinding.imgLed1.setColorFilter(if (port.readGpio1()) Color.GREEN else Color.LTGRAY, android.graphics.PorterDuff.Mode.MULTIPLY)
+            viewBinding.imgLed2.setColorFilter(if (port.readGpio2()) Color.GREEN else Color.LTGRAY, android.graphics.PorterDuff.Mode.MULTIPLY)
         }
     }
 

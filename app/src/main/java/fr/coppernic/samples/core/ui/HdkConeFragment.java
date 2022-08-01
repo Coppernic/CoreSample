@@ -179,21 +179,21 @@ public class HdkConeFragment extends Fragment {
     @OnClick(R.id.toggleBarcodePower)
     void toggleBarcodePower() {
         if (gpioPort != null) {
-            showErr(gpioPort.setBarcodeScanPower(tbBarcodePower.isChecked()));
+            //showErr(gpioPort.setBarcodeScanPower(tbBarcodePower.isChecked()));
         }
     }
 
     @OnClick(R.id.toggleWakeUp)
     void toggleBarcodeWakeUp() {
         if (gpioPort != null) {
-            showErr(gpioPort.setBarcodeScanWakeup(tbBarcodeWakeUp.isChecked()));
+            //showErr(gpioPort.setBarcodeScanWakeup(tbBarcodeWakeUp.isChecked()));
         }
     }
 
     @OnClick(R.id.toggleTrigger)
     void toggleBarcodeTrigger() {
         if (gpioPort != null) {
-            showErr(gpioPort.setBarcodeScanTrigger(tbBarcodeTrigger.isChecked()));
+            //showErr(gpioPort.setBarcodeScanTrigger(tbBarcodeTrigger.isChecked()));
         }
     }
 

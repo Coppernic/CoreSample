@@ -8,12 +8,12 @@
     <!-- TODO: Update blank fragment layout -->
 
     <TextView
-        android:id="@+id/tvGpio"
+        android:id="@+id/tvPower"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/access_gpio"
+        android:text="@string/nav_title_power"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +28,7 @@
         android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/toggleIoEn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvGpio" />
+        app:layout_constraintTop_toBottomOf="@+id/tvPower" />
 
     <ToggleButton
         android:id="@+id/toggleIoEn"
@@ -37,9 +37,20 @@
         android:textOff="@string/toggle_off_io_en"
         android:textOn="@string/toggle_on_io_en"
         android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/toggleGpio1"
         app:layout_constraintStart_toEndOf="@+id/toggleVccEn"
-        app:layout_constraintTop_toBottomOf="@+id/tvGpio"/>
+        app:layout_constraintTop_toBottomOf="@+id/tvPower"/>
+
+    <TextView
+        android:id="@+id/tvGpioInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/access_gpio"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggleVccEn" />
 
     <ToggleButton
         android:id="@+id/toggleGpio1"
@@ -48,9 +59,8 @@
         android:textOff="@string/toggle_off_gpio1"
         android:textOn="@string/toggle_on_gpio1"
         android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/toggleGpio2"
-        app:layout_constraintStart_toEndOf="@+id/toggleIoEn"
-        app:layout_constraintTop_toBottomOf="@+id/tvGpio"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvGpioInput"/>
 
     <ToggleButton
         android:id="@+id/toggleGpio2"
@@ -59,8 +69,43 @@
         android:textOff="@string/toggle_off_gpio2"
         android:textOn="@string/toggle_on_gpio2"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/toggleGpio1"
-        app:layout_constraintTop_toBottomOf="@+id/tvGpio"/>
+        app:layout_constraintTop_toTopOf="@+id/toggleGpio1"/>
+
+    <ImageView
+        android:id="@+id/imgLed1"
+        android:layout_width="24dp"
+        android:layout_height="40dp"
+        android:src="@drawable/led_variant_on"
+        app:tint="@android:color/darker_gray"
+        app:layout_constraintStart_toStartOf="@+id/toggleGpio1"
+        app:layout_constraintEnd_toEndOf="@+id/toggleGpio1"
+        app:layout_constraintTop_toBottomOf="@+id/toggleGpio1"
+        />
+
+    <ImageView
+        android:id="@+id/imgLed2"
+        android:layout_width="24dp"
+        android:layout_height="40dp"
+        android:src="@drawable/led_variant_on"
+        app:tint="@android:color/darker_gray"
+        app:layout_constraintStart_toStartOf="@+id/toggleGpio2"
+        app:layout_constraintEnd_toEndOf="@+id/toggleGpio2"
+        app:layout_constraintTop_toBottomOf="@+id/toggleGpio2"
+        />
+
+
+    <Button
+        android:id="@+id/btnRefresh"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="Refresh"
+        android:layout_marginLeft="16dp"
+        android:drawableLeft="@drawable/ic_refresh"
+        android:padding="8dp"
+        app:layout_constraintStart_toEndOf="@+id/toggleGpio2"
+        app:layout_constraintTop_toTopOf="@+id/imgLed2"
+        app:layout_constraintBottom_toBottomOf="@+id/imgLed2"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
