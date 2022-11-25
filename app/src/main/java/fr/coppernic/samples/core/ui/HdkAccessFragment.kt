@@ -86,14 +86,16 @@ class HdkAccessFragment : androidx.fragment.app.Fragment(),
             toggleGpio1.setOnClickListener {
                 gpioPort?.let {
                     showErr(it.setGpio1(viewBinding.toggleGpio1.isChecked))
-                    viewBinding.imgLed2.setColorFilter(if (it.readGpio2()) Color.GREEN else Color.LTGRAY, android.graphics.PorterDuff.Mode.MULTIPLY)
+                    viewBinding.imgLed1.setColorFilter(if (it.gpio1) Color.GREEN else Color.LTGRAY, android.graphics.PorterDuff.Mode
+                        .MULTIPLY)
                 }
             }
 
             toggleGpio2.setOnClickListener {
                 gpioPort?.let {
                     showErr(it.setGpio2(viewBinding.toggleGpio2.isChecked))
-                    viewBinding.imgLed1.setColorFilter(if (it.readGpio1()) Color.GREEN else Color.LTGRAY, android.graphics.PorterDuff.Mode.MULTIPLY)
+                    viewBinding.imgLed2.setColorFilter(if (it.gpio2) Color.GREEN else Color.LTGRAY, android.graphics.PorterDuff.Mode
+                        .MULTIPLY)
                 }
             }
 
@@ -125,8 +127,8 @@ class HdkAccessFragment : androidx.fragment.app.Fragment(),
     @SuppressLint("CheckResult")
     private fun getGpiostates(port: GpioPort?) {
         port?.let { port ->
-            viewBinding.imgLed1.setColorFilter(if (port.readGpio1()) Color.GREEN else Color.LTGRAY, android.graphics.PorterDuff.Mode.MULTIPLY)
-            viewBinding.imgLed2.setColorFilter(if (port.readGpio2()) Color.GREEN else Color.LTGRAY, android.graphics.PorterDuff.Mode.MULTIPLY)
+            viewBinding.imgLed1.setColorFilter(if (port.gpio1) Color.GREEN else Color.LTGRAY, android.graphics.PorterDuff.Mode.MULTIPLY)
+            viewBinding.imgLed2.setColorFilter(if (port.gpio2) Color.GREEN else Color.LTGRAY, android.graphics.PorterDuff.Mode.MULTIPLY)
         }
     }
 
