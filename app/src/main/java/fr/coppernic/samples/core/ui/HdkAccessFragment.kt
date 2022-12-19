@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.afollestad.materialdialogs.MaterialDialog
 import fr.coppernic.samples.core.databinding.FragmentHdkAccessBinding
 import fr.coppernic.samples.core.ui.common.ViewBindingEnabled
@@ -20,6 +21,10 @@ import fr.coppernic.sdk.utils.debug.L
 import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
 /**
  * A simple [Fragment] subclass.
@@ -30,17 +35,8 @@ class HdkAccessFragment : androidx.fragment.app.Fragment(),
     private var gpioPort: GpioPort? = null
     private var disposable: Disposable? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        return inflate(inflater)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        deflate()
-    }
-
-    override fun onStart() {
-        super.onStart()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         disposable = GpioPort.GpioManager.get()
             .getGpioSingle(context)
             .observeOn(mainThread())
@@ -51,6 +47,22 @@ class HdkAccessFragment : androidx.fragment.app.Fragment(),
             }, onError)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        disposable?.dispose()
+//        gpioPort?.close()
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        return inflate(inflater)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        deflate()
+    }
+
+    var jobLedRead: Job? = null
 
     private fun updateButton(g: GpioPort) {
         with(viewBinding) {
@@ -59,12 +71,6 @@ class HdkAccessFragment : androidx.fragment.app.Fragment(),
             toggleGpio1.isChecked = g.gpio1
             toggleGpio2.isChecked = g.gpio2
         }
-    }
-
-    override fun onStop() {
-        disposable?.dispose()
-        gpioPort?.close()
-        super.onStop()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -102,6 +108,22 @@ class HdkAccessFragment : androidx.fragment.app.Fragment(),
             btnRefresh.setOnClickListener {
                 getGpiostates(gpioPort)
             }
+
+            btnHidConfCard.setOnClickListener {
+                if (viewBinding.btnHidConfCard.isChecked) {
+                    jobLedRead = lifecycleScope.launch {
+                        Timber.d("call to launch")
+                        while (true) {
+                            delay(50)
+                            // do something every second
+                            Timber.d("call to gpioPort")
+                            getGpiostates(gpioPort)
+                        }
+                    }
+                } else {
+                    jobLedRead?.cancel()
+                }
+            }
         }
     }
 
@@ -124,11 +146,16 @@ class HdkAccessFragment : androidx.fragment.app.Fragment(),
         }
     }
 
+    var previousgpio1: Boolean? = null
+    var previousgpio2: Boolean? = null
+
     @SuppressLint("CheckResult")
     private fun getGpiostates(port: GpioPort?) {
         port?.let { port ->
-            viewBinding.imgLed1.setColorFilter(if (port.gpio1) Color.GREEN else Color.LTGRAY, android.graphics.PorterDuff.Mode.MULTIPLY)
-            viewBinding.imgLed2.setColorFilter(if (port.gpio2) Color.GREEN else Color.LTGRAY, android.graphics.PorterDuff.Mode.MULTIPLY)
+            val gpio1 = port.readGpio1()
+            val gpio2 = port.readGpio2()
+            viewBinding.imgLed1.setColorFilter(if (gpio1) Color.GREEN else Color.LTGRAY, android.graphics.PorterDuff.Mode.MULTIPLY)
+            viewBinding.imgLed2.setColorFilter(if (gpio2) Color.GREEN else Color.LTGRAY, android.graphics.PorterDuff.Mode.MULTIPLY)
         }
     }
 

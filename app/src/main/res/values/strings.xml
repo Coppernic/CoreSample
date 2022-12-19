@@ -109,4 +109,6 @@
     <string name="label_trig_barcode">Trig barcode scan using %1$s</string>
     <string name="label_trig_rfid">Trig rfid read using %1$s</string>
     <string name="mapping_display">%1$s - %2$s</string>
+    <string name="hid_start_conf_card">HID start conf</string>
+    <string name="hid_stop_conf_card">HID stop conf</string>
 </resources>
