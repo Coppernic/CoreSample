@@ -3,7 +3,6 @@ package fr.coppernic.samples.core.ui
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +17,7 @@ import fr.coppernic.sdk.hdk.access.GpioPort
 import fr.coppernic.sdk.utils.core.CpcResult.RESULT
 import fr.coppernic.sdk.utils.core.CpcResult.ResultException
 import fr.coppernic.sdk.utils.debug.L
+import fr.coppernic.sdk.utils.sound.Sound
 import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer
@@ -25,6 +25,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
+
 
 /**
  * A simple [Fragment] subclass.
@@ -63,6 +64,8 @@ class HdkAccessFragment : androidx.fragment.app.Fragment(),
     }
 
     var jobLedRead: Job? = null
+    var checkHid = false
+
 
     private fun updateButton(g: GpioPort) {
         with(viewBinding) {
@@ -92,16 +95,20 @@ class HdkAccessFragment : androidx.fragment.app.Fragment(),
             toggleGpio1.setOnClickListener {
                 gpioPort?.let {
                     showErr(it.setGpio1(viewBinding.toggleGpio1.isChecked))
-                    viewBinding.imgLed1.setColorFilter(if (it.gpio1) Color.GREEN else Color.LTGRAY, android.graphics.PorterDuff.Mode
-                        .MULTIPLY)
+                    viewBinding.imgLed1.setColorFilter(
+                        if (it.gpio1) Color.GREEN else Color.LTGRAY, android.graphics.PorterDuff.Mode
+                            .MULTIPLY
+                    )
                 }
             }
 
             toggleGpio2.setOnClickListener {
                 gpioPort?.let {
                     showErr(it.setGpio2(viewBinding.toggleGpio2.isChecked))
-                    viewBinding.imgLed2.setColorFilter(if (it.gpio2) Color.GREEN else Color.LTGRAY, android.graphics.PorterDuff.Mode
-                        .MULTIPLY)
+                    viewBinding.imgLed2.setColorFilter(
+                        if (it.gpio2) Color.GREEN else Color.LTGRAY, android.graphics.PorterDuff.Mode
+                            .MULTIPLY
+                    )
                 }
             }
 
@@ -111,17 +118,42 @@ class HdkAccessFragment : androidx.fragment.app.Fragment(),
 
             btnHidConfCard.setOnClickListener {
                 if (viewBinding.btnHidConfCard.isChecked) {
+                    checkHid = true
                     jobLedRead = lifecycleScope.launch {
                         Timber.d("call to launch")
                         while (true) {
-                            delay(50)
+                            delay(40)
                             // do something every second
                             Timber.d("call to gpioPort")
                             getGpiostates(gpioPort)
                         }
                     }
+                    toggleVccEn.isEnabled = false
+                    toggleIoEn.isEnabled = false
+                    toggleGpio1.isEnabled = false
+                    toggleGpio2.isEnabled = false
+                    btnRefresh.isEnabled = false
+
+                    gpioPort?.let {
+                        it.vccEn = true
+                        it.setIoEn(true)
+                    }
                 } else {
+                    checkHid = false
                     jobLedRead?.cancel()
+                    toggleVccEn.isEnabled = true
+                    toggleIoEn.isEnabled = true
+                    toggleGpio1.isEnabled = true
+                    toggleGpio2.isEnabled = true
+                    btnRefresh.isEnabled = true
+
+                    toggleVccEn.isChecked = false
+                    toggleIoEn.isChecked = false
+
+                    gpioPort?.let {
+                        it.vccEn = false
+                        it.setIoEn(false)
+                    }
                 }
             }
         }
@@ -146,8 +178,43 @@ class HdkAccessFragment : androidx.fragment.app.Fragment(),
         }
     }
 
-    var previousgpio1: Boolean? = null
-    var previousgpio2: Boolean? = null
+    var previousGpio1: Boolean? = null
+    var previousGpio2: Boolean? = null
+
+    var gpio1AlreadyAtOne: Boolean = false
+
+    var gpio1AtOneTimeStart: Long = 0
+    var nbGpio1AtZero = 0
+
+    // On HID, the config card
+    private fun checkGpio1(gpio1: Boolean) {
+        // Checks if gpio has switched to one
+        if (!gpio1AlreadyAtOne) {
+            if (gpio1) {
+                gpio1AtOneTimeStart = System.currentTimeMillis()
+                // TODO : beep
+                beepFunction()
+            }
+        }
+        if (gpio1AlreadyAtOne) {
+            if ((gpio1AtOneTimeStart + 400) > System.currentTimeMillis()) {
+                // Wait 400ms before checking
+                return
+            }
+
+            // Wait at least 10 consecutive 0
+            if (!gpio1) {
+                nbGpio1AtZero++
+            } else {
+                nbGpio1AtZero = 0
+            }
+
+            if (nbGpio1AtZero >= 5) {
+                gpio1AlreadyAtOne = false
+            }
+        }
+    }
+
 
     @SuppressLint("CheckResult")
     private fun getGpiostates(port: GpioPort?) {
@@ -156,10 +223,25 @@ class HdkAccessFragment : androidx.fragment.app.Fragment(),
             val gpio2 = port.readGpio2()
             viewBinding.imgLed1.setColorFilter(if (gpio1) Color.GREEN else Color.LTGRAY, android.graphics.PorterDuff.Mode.MULTIPLY)
             viewBinding.imgLed2.setColorFilter(if (gpio2) Color.GREEN else Color.LTGRAY, android.graphics.PorterDuff.Mode.MULTIPLY)
+            if (checkHid) {
+                checkGpio1(gpio1)
+            }
         }
     }
 
     companion object {
         const val TAG = "HdkAccessFragment"
     }
+
+    private fun beepFunction() {
+        val sound = context?.let { Sound(it) }
+        sound?.playOk(200, this::callback)
+    }
+
+    private fun callback() {
+        //do something here
+        return Unit
+    }
+
+
 }
