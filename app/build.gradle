@@ -93,7 +93,7 @@ dependencies {
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 
     implementation 'fr.coppernic.sdk.cpcutils:CpcUtilsLib:6.19.1'
-    implementation "fr.coppernic.sdk.core:CpcCore:2.1.12"
+    implementation "fr.coppernic.sdk.core:CpcCore:2.1.13"
     implementation 'com.github.coppernic:splash:0.4.1@aar'
 
     // Timber
@@ -102,9 +102,10 @@ dependencies {
     implementation 'com.arcao:slf4j-timber:3.1'
 
     // Lifecycle
-    implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:2.5.0"
+    implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:2.5.1"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation "androidx.lifecycle:lifecycle-common-java8:2.5.0"
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
 
 
     testImplementation 'junit:junit:4.13.2'

@@ -107,5 +107,19 @@
         app:layout_constraintTop_toTopOf="@+id/imgLed2"
         app:layout_constraintBottom_toBottomOf="@+id/imgLed2"/>
 
+    <ToggleButton
+        android:id="@+id/btnHidConfCard"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:textOff="@string/hid_start_conf_card"
+        android:textOn="@string/hid_stop_conf_card"
+        android:layout_marginLeft="16dp"
+        android:drawableLeft="@drawable/ic_refresh"
+        android:padding="8dp"
+        app:layout_constraintStart_toEndOf="@+id/toggleGpio2"
+        app:layout_constraintTop_toBottomOf="@+id/imgLed2"
+        />
+<!--        app:layout_constraintBottom_toBottomOf="@+id/imgLed2"-->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
