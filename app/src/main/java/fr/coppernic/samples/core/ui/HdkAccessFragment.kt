@@ -30,12 +30,22 @@ import timber.log.Timber
 /**
  * A simple [Fragment] subclass.
  */
-class HdkAccessFragment : androidx.fragment.app.Fragment(),
+class HdkAccessFragment : Fragment(),
     ViewBindingEnabled<FragmentHdkAccessBinding> by ViewBindingHolder(FragmentHdkAccessBinding::class) {
 
     private var gpioPort: GpioPort? = null
     private var disposable: Disposable? = null
+    private var jobLedRead: Job? = null
+    private var checkHid = false
+    private var gpio1AlreadyAtOne: Boolean = false
+    private var gpio1AtOneTimeStart: Long = 0
+    private var nbGpio1AtZero = 0
 
+    companion object {
+        const val TAG = "HdkAccessFragment"
+    }
+
+    //region Lifecycle
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         disposable = GpioPort.GpioManager.get()
@@ -48,32 +58,8 @@ class HdkAccessFragment : androidx.fragment.app.Fragment(),
             }, onError)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        disposable?.dispose()
-//        gpioPort?.close()
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflate(inflater)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        deflate()
-    }
-
-    var jobLedRead: Job? = null
-    var checkHid = false
-
-
-    private fun updateButton(g: GpioPort) {
-        with(viewBinding) {
-            toggleIoEn.isChecked = g.ioEn
-            toggleVccEn.isChecked = g.vccEn
-            toggleGpio1.isChecked = g.gpio1
-            toggleGpio2.isChecked = g.gpio2
-        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -135,7 +121,7 @@ class HdkAccessFragment : androidx.fragment.app.Fragment(),
                     btnRefresh.isEnabled = false
 
                     gpioPort?.let {
-                        it.vccEn = true
+                        it.setVccEn(true)
                         it.setIoEn(true)
                     }
                 } else {
@@ -151,11 +137,34 @@ class HdkAccessFragment : androidx.fragment.app.Fragment(),
                     toggleIoEn.isChecked = false
 
                     gpioPort?.let {
-                        it.vccEn = false
+                        it.setVccEn(false)
                         it.setIoEn(false)
                     }
                 }
             }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        disposable?.dispose()
+//        gpioPort?.close()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        deflate()
+    }
+    //endregion
+
+
+    //region Methods
+    private fun updateButton(g: GpioPort) {
+        with(viewBinding) {
+            toggleIoEn.isChecked = g.ioEn
+            toggleVccEn.isChecked = g.vccEn
+            toggleGpio1.isChecked = g.gpio1
+            toggleGpio2.isChecked = g.gpio2
         }
     }
 
@@ -171,20 +180,11 @@ class HdkAccessFragment : androidx.fragment.app.Fragment(),
         }
     }
 
-
     private fun showErr(res: RESULT) {
         if (res != RESULT.OK) {
             Toast.makeText(context, L.getMethodName(3) + " : " + res, Toast.LENGTH_SHORT).show()
         }
     }
-
-    var previousGpio1: Boolean? = null
-    var previousGpio2: Boolean? = null
-
-    var gpio1AlreadyAtOne: Boolean = false
-
-    var gpio1AtOneTimeStart: Long = 0
-    var nbGpio1AtZero = 0
 
     // On HID, the config card
     private fun checkGpio1(gpio1: Boolean) {
@@ -215,7 +215,6 @@ class HdkAccessFragment : androidx.fragment.app.Fragment(),
         }
     }
 
-
     @SuppressLint("CheckResult")
     private fun getGpiostates(port: GpioPort?) {
         port?.let { port ->
@@ -229,19 +228,9 @@ class HdkAccessFragment : androidx.fragment.app.Fragment(),
         }
     }
 
-    companion object {
-        const val TAG = "HdkAccessFragment"
-    }
-
     private fun beepFunction() {
         val sound = context?.let { Sound(it) }
-        sound?.playOk(200, this::callback)
+        sound?.playOk(200){}
     }
-
-    private fun callback() {
-        //do something here
-        return Unit
-    }
-
-
+    //endregion
 }

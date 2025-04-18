@@ -12,8 +12,6 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:7.0.4'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "gradle.plugin.coppernic:android-config:0.6.0"
-        classpath 'com.noveogroup.android:check:1.2.5'
     }
 }
 
